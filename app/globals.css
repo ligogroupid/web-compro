@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Fonts */
+  --font-heading: var(--font-merriweather-sans);
+  --font-body: var(--font-inter);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Colors */
+  --color-white: #ffffff;
+  --color-gray-light: #f5f5f5;
+  --color-primary-blue: #1c3687;
+  --color-primary-red: #d71920;
+  --color-orange: #ec6626;
+
+  /* Font sizes */
+  --text-headline1: 2.6875rem;
+  --text-headline2: 1.875rem;
+  --text-headline3: 2.125rem;
+  --text-bodytext: 1rem;
+  --text-caption1: 0.6875rem;
+  --text-caption2: 1.125rem;
+
+  /* Line heights */
+  --leading-headline1: 3.5rem;
+  --leading-headline2: 2.75rem;
+  --leading-body: 1.625rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  color: var(--color-primary-blue);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.set-text-headline1 {
+  font-family: var(--font-merriweather-sans);
+  font-size: 2.6875rem;
+  line-height: 3.5rem;
+}
+
+.set-text-headline2 {
+  font-family: var(--font-merriweather-sans);
+  font-size: 1.875rem;
+  line-height: 2.75rem;
+}
+
+.set-text-bodytext {
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  line-height: 1.625rem;
+  letter-spacing: 0.01em;
+}
+
+.set-text-caption1 {
+  font-family: var(--font-inter);
+  font-size: 0.6875rem;
+  line-height: 1.625rem;
+  letter-spacing: 0.25em;
+  font-weight: 400;
+}
+
+.set-text-caption2 {
+  font-family: var(--font-inter);
+  font-size: 1.125rem;
+  line-height: 1.625rem;
+  letter-spacing: 0.02em;
+  font-weight: 700;
 }
