@@ -1,9 +1,18 @@
 @import "tailwindcss";
 
+body {
+  font-family: var(--font-body);
+  color: var(--color-primary-blue);
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 @theme inline {
-  /* Fonts */
+  /* Fonts — var() refs resolved at runtime by Next.js font injection */
   --font-heading: var(--font-merriweather-sans);
   --font-body: var(--font-inter);
+  --font-albert: var(--font-albert-sans);
 
   /* Colors */
   --color-white: #ffffff;
@@ -24,14 +33,6 @@
   --leading-headline1: 3.5rem;
   --leading-headline2: 2.75rem;
   --leading-body: 1.625rem;
-}
-
-body {
-  font-family: var(--font-body);
-  color: var(--color-primary-blue);
-  background-color: var(--color-white);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .set-text-headline1 {

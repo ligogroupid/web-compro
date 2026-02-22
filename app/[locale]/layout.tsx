@@ -18,7 +18,6 @@ const merriweatherSans = Merriweather_Sans({
 
 const albertSans = Albert_Sans({
   variable: "--font-albert-sans",
-  subsets: ["latin"],
   weight: ["400"],
 });
 

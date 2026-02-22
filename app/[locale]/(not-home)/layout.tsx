@@ -11,7 +11,7 @@ export default function NotHomeLayout({ children }: Props) {
     <>
       <HeaderGeneral />
       <Separator />
-      {children}
+      <main>{children}</main>
     </>
   );
 }

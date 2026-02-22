@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/navigation";
 import BurgerMenu from "./burger-menu";
 import Icon__LogoLigo from "./icon-logo-ligo";
 import LangSwitcher from "./lang-switcher";
@@ -8,7 +9,9 @@ export default function HeaderHome() {
       <div className="relative">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <div className="bg-white p-4">
-            <Icon__LogoLigo />
+            <Link href="/">
+              <Icon__LogoLigo />
+            </Link>
           </div>
           <div className="flex"></div>
         </div>

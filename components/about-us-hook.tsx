@@ -1,4 +1,6 @@
 import { useTranslations } from "next-intl";
+import ButtonBrand from "./button-brand";
+import { Link } from "@/i18n/navigation";
 
 export default function AboutUsHook() {
   const t = useTranslations("AboutUsHook");
@@ -14,6 +16,11 @@ export default function AboutUsHook() {
         <div>
           <div className="set-text-caption1">{t("label")}</div>
           <div className="mt-6 set-text-bodytext">{t("description")}</div>
+          <div className="mt-14">
+            <Link href="about-us">
+              <ButtonBrand>Read More</ButtonBrand>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

@@ -1,8 +1,13 @@
+import type { Locale } from "@/i18n/routing";
+
 import { setRequestLocale } from "next-intl/server";
 import ImageCover from "@/components/cover-images";
 import Separator from "@/components/separator";
 import AboutUsHook from "@/components/about-us-hook";
 import HeaderHome from "@/components/header-home";
+import CompanyList from "@/components/companies-list";
+import FeaturedBrandList from "@/components/featured-brands-list";
+import Achivements from "@/components/achivements";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -30,6 +35,9 @@ export default async function Home({ params }: Props) {
         />
         <Separator />
         <AboutUsHook />
+        <CompanyList locale={locale as Locale} />
+        <FeaturedBrandList locale={locale as Locale} />
+        <Achivements locale={locale as Locale} />
         <div className="h-64 bg-gray-light"></div>
       </main>
     </>
