@@ -4,7 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import ImageCover from "@/components/cover-images";
 import Separator from "@/components/separator";
 import AboutUsHook from "@/components/about-us-hook";
-import HeaderHome from "@/components/header-home";
+import Header from "@/components/header";
 import CompanyList from "@/components/companies-list";
 import FeaturedBrandList from "@/components/featured-brands-list";
 import Achivements from "@/components/achivements";
@@ -19,7 +19,7 @@ export default async function Home({ params }: Props) {
 
   return (
     <>
-      <HeaderHome />
+      <Header variant="home" />
       <main>
         <ImageCover
           images={[

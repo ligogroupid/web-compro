@@ -1,4 +1,4 @@
-import HeaderGeneral from "@/components/header-general";
+import Header from "@/components/header";
 import Separator from "@/components/separator";
 
 type Props = {
@@ -9,8 +9,10 @@ type Props = {
 export default function NotHomeLayout({ children }: Props) {
   return (
     <>
-      <HeaderGeneral />
-      <Separator />
+      <div className="sticky top-0 z-50">
+        <Header />
+        <Separator />
+      </div>
       <main>{children}</main>
     </>
   );

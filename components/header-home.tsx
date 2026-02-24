@@ -17,7 +17,6 @@ export default async function HeaderHome() {
               <Icon__LogoLigo />
             </Link>
           </div>
-          <div className="flex"></div>
         </div>
         <div className="absolute right-0 top-[50%] translate-y-[-50%] flex">
           <LangSwitcher />
