@@ -69,3 +69,39 @@ body {
   letter-spacing: 0.02em;
   font-weight: 700;
 }
+
+/* ─── Burger Menu: Company Preview Animations ─── */
+
+@keyframes company-panel-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes company-card-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+}
+
+.company-panel-enter {
+  animation: company-panel-slide-in 0.3s ease-out forwards;
+}
+
+.company-card-enter {
+  opacity: 0;
+  animation: company-card-reveal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: var(--card-delay, 0ms);
+}

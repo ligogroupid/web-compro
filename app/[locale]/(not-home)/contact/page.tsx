@@ -2,7 +2,7 @@ import ContactForm from "@/components/contact-form";
 
 export default function ContactPage() {
   return (
-    <div>
+    <>
       <section className="px-4 pt-14 pb-16">
         <div className="mx-auto max-w-7xl flex flex-col md:flex-row md:gap-20">
           {/*LEFT SECTION*/}
@@ -69,6 +69,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
