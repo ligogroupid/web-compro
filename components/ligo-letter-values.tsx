@@ -33,12 +33,12 @@ const LETTERS_BY_LOCALE: Record<string, LetterValue[]> = {
 };
 
 export default function LigoLetterValues({ locale }: { locale: Locale }) {
-  const { isInView, ref } = useInView({ once: true, rootMargin: "100px" });
+  const { isInView, ref } = useInView({ once: true, rootMargin: "0px" });
   const letters = LETTERS_BY_LOCALE[locale] ?? LETTERS_EN;
 
   return (
     <div
-      className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-8 xl:gap-16"
+      className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-8 xl:gap-16 overflow-hidden"
       ref={ref}
     >
       {letters.map((item, index) => (
@@ -55,14 +55,14 @@ export default function LigoLetterValues({ locale }: { locale: Locale }) {
           style={{ transitionDelay: `${(index + 1) * 300}ms` }}
         >
           {/* Accent bar — left on mobile, top on sm+ */}
-          <div
+          {/*<div
             className="
               absolute left-0 top-0 h-full w-1 bg-primary-red
               sm:left-0 sm:top-0 sm:h-1 sm:w-full
               transition-all duration-500 ease-out
             "
             style={{ transitionDelay: `${(index + 1) * 300 + 400}ms` }}
-          />
+          />*/}
 
           {/* Letter */}
           <div className="set-text-headline1 shrink-0 sm:shrink">

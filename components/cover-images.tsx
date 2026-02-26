@@ -26,20 +26,20 @@ export default function ImageCover({ images }: Props) {
   }
 
   return (
-    <div className="relative w-full aspect-[4/1.15]">
+    <div className="relative w-full aspect-[3/1.75] md:aspect-[4/1.15]">
       {images.length > 1 ? (
         <Swiper modules={[Autoplay]} autoplay={{ delay: 5000 }} loop>
           {images.map((n, i) => (
             <SwiperSlide
               key={`${i}${n.src}`}
-              className="relative aspect-[4/1.15] overflow-hidden"
+              className="relative border aspect-[3/1.75] md:aspect-[4/1.15] overflow-hidden"
             >
               {toImg(n, i)}
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
-        <div className="relative block aspect-[4/1.15] overflow-hidden">
+        <div className="relative block aspect-[3/1.75] md:aspect-[4/1.15] overflow-hidden">
           {images.map((n, i) => toImg(n, i))}
         </div>
       )}

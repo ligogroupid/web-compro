@@ -22,8 +22,8 @@ const REAL_MILESTONE: JourneyMilestone[] = [
       en: "LIGOKRIYASA MANDIRI",
     },
     description: {
-      id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
-      en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
+      id: "Ligo Group journey began with the establishment of PT. Ligokriyasa Mandiri (LKM) in 1986, focusing on the production of plastic bags for household and industrial needs in various sizes and material types. From the outset, the company specialized in meeting the demand for plastic bags across a wide range of businesses, building a strong reputation as a trusted partner in the plastic packaging industry.",
+      en: "Ligo Group journey began with the establishment of PT. Ligokriyasa Mandiri (LKM) in 1986, focusing on the production of plastic bags for household and industrial needs in various sizes and material types. From the outset, the company specialized in meeting the demand for plastic bags across a wide range of businesses, building a strong reputation as a trusted partner in the plastic packaging industry.",
     },
     logo: (
       <img
@@ -55,6 +55,30 @@ const REAL_MILESTONE: JourneyMilestone[] = [
       en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
     },
     logo: <img alt="Logo UKS" src="/journey/logo-uks.webp" />,
+  },
+  {
+    year: "2001",
+    companyName: {
+      id: "UKS",
+      en: "UKS",
+    },
+    description: {
+      id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
+      en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
+    },
+    logo: <img alt="Imaging 2001" src="/journey/imaging-2001.jpg" />,
+  },
+  {
+    year: "2001",
+    companyName: {
+      id: "UKS",
+      en: "UKS",
+    },
+    description: {
+      id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
+      en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
+    },
+    logo: <img alt="Imaging 2001" src="/journey/imaging-2001.jpg" />,
   },
   {
     year: "2001",
@@ -135,7 +159,7 @@ export default function OurJourney({ locale }: Props) {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    requestAnimationFrame(() => handleScroll());
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
@@ -179,15 +203,15 @@ export default function OurJourney({ locale }: Props) {
           <h2 className="set-text-caption1">OUR JOURNEY</h2>
 
           {/* ── Main layout: vertical timeline bar + content ── */}
-          <div className="flex items-center gap-8 md:gap-16 lg:gap-24 h-[70vh] mt-11">
+          <div className="flex items-center gap-8 md:gap-16 lg:gap-24 mt-11 min-h-[467px]">
             {/* ── Left Column: Vertical Timeline Bar ── */}
-            <div className="flex flex-col items-center h-full py-4 relative flex-shrink-0">
+            <div className="flex flex-col items-center h-full py-4 relative shrink-0">
               {/* Vertical line with notches */}
-              <div className="absolute left-0 top-0  h-full pl-1 py-14  flex flex-col justify-between border-l border-l-primary-blue">
+              <div className="absolute left-0 top-0  h-full pl-1 py-14  flex flex-col justify-center gap-11 border-l border-l-primary-blue">
                 {/* Arrow Up */}
                 <button
                   onClick={navigateUp}
-                  className={`absolute top-0 journey-nav-arrow group ${activeIndex === 0 ? "opacity-30 cursor-default" : "cursor-pointer"}`}
+                  className={`absolute left-4 top-2 journey-nav-arrow group ${activeIndex === 0 ? "opacity-30 cursor-default" : "cursor-pointer"}`}
                   disabled={activeIndex === 0}
                   aria-label="Previous milestone"
                 >
@@ -221,7 +245,7 @@ export default function OurJourney({ locale }: Props) {
                 {/* Arrow Down */}
                 <button
                   onClick={navigateDown}
-                  className={`absolute bottom-0 journey-nav-arrow group ${activeIndex === REAL_MILESTONE.length - 1 ? "opacity-30 cursor-default" : "cursor-pointer"}`}
+                  className={`absolute left-4 bottom-2 journey-nav-arrow group ${activeIndex === REAL_MILESTONE.length - 1 ? "opacity-30 cursor-default" : "cursor-pointer"}`}
                   disabled={activeIndex === REAL_MILESTONE.length - 1}
                   aria-label="Next milestone"
                 >

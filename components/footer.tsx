@@ -105,7 +105,7 @@ export default function Footer({ locale }: Props) {
             </div>
 
             {/*RIGHT SECTION*/}
-            <div className="flex flex-col items-end">
+            <div className="flex flex-col md:items-end">
               <div className="max-w-lg">
                 <div className="bg-primary-blue text-white py-6 px-8">
                   <div className="set-text-heading3 font-heading max-w-sm">
