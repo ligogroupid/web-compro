@@ -55,14 +55,14 @@ export default function LigoLetterValues({ locale }: { locale: Locale }) {
           style={{ transitionDelay: `${(index + 1) * 300}ms` }}
         >
           {/* Accent bar — left on mobile, top on sm+ */}
-          <div
+          {/*<div
             className="
               absolute left-0 top-0 h-full w-1 bg-primary-red
               sm:left-0 sm:top-0 sm:h-1 sm:w-full
               transition-all duration-500 ease-out
             "
             style={{ transitionDelay: `${(index + 1) * 300 + 400}ms` }}
-          />
+          />*/}
 
           {/* Letter */}
           <div className="set-text-headline1 shrink-0 sm:shrink">
