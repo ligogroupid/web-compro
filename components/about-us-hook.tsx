@@ -7,7 +7,7 @@ export default function AboutUsHook() {
 
   return (
     <section className="bg-gray-light px-4 py-[96px]">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 gap-10">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10">
         <div className="set-text-headline1 max-w-lg">
           {t("headline")}
           <br />

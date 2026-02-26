@@ -214,3 +214,19 @@ body {
     opacity: 0.3;
   }
 }
+
+/* ─── Recycle Process: Mobile Swiper ─── */
+
+.recycle-swiper .swiper-slide {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.recycle-swiper .swiper-slide:not(.swiper-slide-active) {
+  opacity: 0.55;
+  transform: scale(0.96);
+}
+
+.recycle-swiper .swiper-slide-active {
+  opacity: 1;
+  transform: scale(1);
+}

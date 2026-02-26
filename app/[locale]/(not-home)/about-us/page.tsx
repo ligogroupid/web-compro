@@ -111,7 +111,7 @@ export default async function Page__AboutUs({ params }: Props) {
 
       <section className="bg-gray-light px-4 py-16 relative">
         <div className="max-w-7xl mx-auto">
-          <div className="space-y-9 max-w-1/2">
+          <div className="space-y-9 md:max-w-1/2">
             <h2 className="set-text-caption1">BUSINESS MODEL</h2>
             <div className="set-text-headline1 mt-9">
               A cycle that drives our group from raw materials to recycling.
