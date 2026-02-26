@@ -187,7 +187,7 @@ export default function OurJourney({ locale }: Props) {
                 {/* Arrow Up */}
                 <button
                   onClick={navigateUp}
-                  className={`absolute top-0  journey-nav-arrow group ${activeIndex === 0 ? "text-gray-light" : "text-primary-blue"}`}
+                  className={`absolute top-0 journey-nav-arrow group ${activeIndex === 0 ? "opacity-30 cursor-default" : "cursor-pointer"}`}
                   disabled={activeIndex === 0}
                   aria-label="Previous milestone"
                 >
