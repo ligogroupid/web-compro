@@ -84,14 +84,14 @@ export default function Footer({ locale }: Props) {
     <footer className="">
       <div className="px-4 py-20">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/*LEFT SECTION*/}
             <div>
               <div className="w-[364px]">
                 <Icon__LogoLigo />
               </div>
-              <div className="mt-[94px]">
-                <div className="text-caption2 uppercase font-bold">
+              <div className="mt-6 md:mt-[94px]">
+                <div className="text-caption2 uppercase font-bold hidden md:block">
                   LIGO GROUP
                 </div>
                 <div className="font-bold mt-[34px]">{address.title}</div>
@@ -108,10 +108,10 @@ export default function Footer({ locale }: Props) {
             <div className="flex flex-col items-end">
               <div className="max-w-lg">
                 <div className="bg-primary-blue text-white py-6 px-8">
-                  <div className="text-headline3 leading-[1.2em] font-heading max-w-sm">
+                  <div className="set-text-heading3 font-heading max-w-sm">
                     {cta}
                   </div>
-                  <div className="pt-10 flex gap-9 items-center">
+                  <div className="pt-10 flex flex-col md:flex-row gap-4 md:gap-9 md:items-center">
                     <div className="">
                       <div>{contact.phone_office.title}</div>
                       <div className="mt-1 flex gap-2.5">
@@ -121,7 +121,7 @@ export default function Footer({ locale }: Props) {
                         </div>
                       </div>
                     </div>
-                    <div className="h-9 w-px bg-white" />
+                    <div className="h-px w-9 md:h-9 md:w-px bg-white" />
                     <div className="">
                       <div>{contact.email_office.title}</div>
                       <div className="mt-1 flex gap-2.5">

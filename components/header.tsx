@@ -18,7 +18,7 @@ export default async function Header({ variant = "general" }: Props) {
       className={
         isHome
           ? "fixed left-0 top-0 right-0 p-4 lg:p-10 pt-0 lg:pt-0 z-10"
-          : "sticky top-0 bg-white py-2 lg:py-4 px-4 lg:px-10 z-10"
+          : "sticky top-0 bg-white py-2 lg:py-4 px-4 lg:px-10 z-10 h-header"
       }
     >
       <div className="relative">

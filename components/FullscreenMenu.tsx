@@ -42,7 +42,7 @@ export default function FullscreenMenu({
 
   const NAV_ITEMS: NavItem[] = [
     { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
+    { label: "About Us", href: "/about-us" },
     { label: "Companies", href: "/company", hasSubmenu: true },
     { label: "Articles", href: "/article" },
     { label: "Contact", href: "/contact" },

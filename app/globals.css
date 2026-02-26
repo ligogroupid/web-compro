@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-inter);
   color: var(--color-primary-blue);
   background-color: var(--color-white);
   -webkit-font-smoothing: antialiased;
@@ -33,18 +33,30 @@ body {
   --leading-headline1: 3.5rem;
   --leading-headline2: 2.75rem;
   --leading-body: 1.625rem;
+
+  --spacing-header: 88px;
 }
 
 .set-text-headline1 {
   font-family: var(--font-merriweather-sans);
-  font-size: 2.6875rem;
-  line-height: 3.5rem;
+  font-size: 2rem;
+  line-height: 2.75rem;
+
+  @media (min-width: 768px) {
+    font-size: 2.6875rem;
+    line-height: 3.5rem;
+  }
 }
 
 .set-text-headline2 {
   font-family: var(--font-merriweather-sans);
-  font-size: 1.875rem;
-  line-height: 2.75rem;
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.875rem;
+    line-height: 2.75rem;
+  }
 }
 
 .set-text-bodytext {
@@ -64,10 +76,14 @@ body {
 
 .set-text-caption2 {
   font-family: var(--font-inter);
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.625rem;
   letter-spacing: 0.02em;
   font-weight: 700;
+
+  @media (min-width: 768px) {
+    font-size: 1.125rem;
+  }
 }
 
 /* ─── Burger Menu: Company Preview Animations ─── */
@@ -102,6 +118,99 @@ body {
 
 .company-card-enter {
   opacity: 0;
-  animation: company-card-reveal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: company-card-reveal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    forwards;
   animation-delay: var(--card-delay, 0ms);
+}
+
+.bg-sky-image {
+  background-image: url("/sky-image.webp");
+  background-position: center center;
+  background-size: cover;
+}
+
+/* ─── Our Journey: Timeline Section ─── */
+
+/* Mobile horizontal bar — tick mark above the track for active milestone */
+.journey-mobile-tick {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  width: 2px;
+  border-radius: 2px;
+  background-color: var(--color-primary-red);
+  transform: translateX(-50%);
+  transform-origin: bottom;
+  transition:
+    height 0.5s ease,
+    opacity 0.5s ease,
+    scale 0.5s ease;
+}
+
+.journey-label {
+  position: relative;
+}
+
+.journey-label::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-primary-red);
+}
+
+.journey-nav-arrow {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.journey-nav-arrow:hover:not(:disabled) {
+  background-color: rgba(28, 54, 135, 0.06);
+}
+
+.journey-year-bg {
+  display: block;
+  user-select: none;
+  line-height: 0.85;
+}
+
+.journey-year-fg {
+  line-height: 0.85;
+}
+
+/* Scroll indicator — mouse icon */
+.journey-scroll-indicator {
+  width: 20px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(28, 54, 135, 0.2);
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.journey-scroll-dot {
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background-color: var(--color-primary-red);
+  margin-top: 6px;
+  animation: journey-scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes journey-scroll-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.3;
+  }
 }
