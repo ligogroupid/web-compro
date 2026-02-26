@@ -95,13 +95,6 @@ export default async function Page__ArticleDetail({ params }: Props) {
                 className="article-prose prose prose-lg max-w-none mt-8 md:mt-12"
                 dangerouslySetInnerHTML={{ __html: article.content[loc] }}
               />
-
-              {/* Back button */}
-              <div className="md:hidden mt-12 md:mt-16">
-                <ButtonBrandLink href="/article" scroll={true}>
-                  {loc === "id" ? "Kembali ke Artikel" : "Back to Articles"}
-                </ButtonBrandLink>
-              </div>
             </div>
           </div>
 
