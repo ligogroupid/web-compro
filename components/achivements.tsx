@@ -12,7 +12,7 @@ function BlueSection() {
           </div>
         </div>
         <div className="bg-white h-px" />
-        <div className=" text-orange py-8 px-11">
+        <div className=" text-orange py-5 px-8 md:py-8 md:px-11">
           <div className="text-[50px]">800+</div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
             EMPLOYMENT OPPORTUNITIES CREATED
@@ -35,14 +35,14 @@ function BlueSection() {
 function LightSection() {
   return (
     <div>
-      <div className="bg-gray-light text-orange py-8 px-11 border-b border-b-[#7689C3]">
+      <div className="bg-gray-light text-orange py-5 px-8 md:py-8 md:px-11 border-b border-b-[#7689C3]">
         <div className="text-[50px]">114,000+</div>
         <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
           METER² OF FACTORY AREA
         </div>
       </div>
       <div className="grid grid-cols-2">
-        <div className="bg-white text-orange py-8 px-11">
+        <div className="bg-white text-orange py-5 px-8 md:py-8 md:px-11">
           <div className="text-[50px]">350+</div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
             TONS OF MATERIALS RECYCLED EACH YEAR
