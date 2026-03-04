@@ -38,7 +38,7 @@ export default async function Home({ params }: Props) {
         <CompanyList locale={locale as Locale} />
         <FeaturedBrandList locale={locale as Locale} />
         <Achivements locale={locale as Locale} />
-        <div className="h-64 bg-gray-light"></div>
+        <div className="hidden md:block h-64 bg-gray-light"></div>
       </main>
     </>
   );

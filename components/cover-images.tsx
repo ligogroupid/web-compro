@@ -32,7 +32,7 @@ export default function ImageCover({ images }: Props) {
           {images.map((n, i) => (
             <SwiperSlide
               key={`${i}${n.src}`}
-              className="relative border aspect-[3/1.75] md:aspect-[4/1.15] overflow-hidden"
+              className="relative aspect-[3/1.75] md:aspect-[4/1.15] overflow-hidden"
             >
               {toImg(n, i)}
             </SwiperSlide>

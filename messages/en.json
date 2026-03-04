@@ -4,5 +4,16 @@
     "headlineAccent": "Reliable Packaging solutions.",
     "label": "ABOUT US",
     "description": "As the demand for various plastic products to grow and industry competition become more intense, Ligo Group is committed to maintaining and improving product quality as part of our dedication to customers, Ligo Group also continues to innovate and deliver the best value for customers and all stakeholders, both now and in the future."
+  },
+  "CompanyDetail": {
+    "metaTitleSuffix": " — Ligo Group",
+    "certifications": "Certifications",
+    "whyChoose": "WHY CHOOSE",
+    "provenStrengths": "Our Proven Strengths",
+    "brandsOf": "Brands of",
+    "productsOf": "Products of",
+    "visitLocations": "Visit Our Locations",
+    "visitLocationsSubtitle": "Discover where we operate across the Indonesian archipelago",
+    "locationNotFound": "Company Not Found"
   }
 }

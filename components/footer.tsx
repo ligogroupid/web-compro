@@ -1,84 +1,32 @@
 import type { Locale } from "@/i18n/routing";
 
+import { getContacts } from "@/service/contact";
 import Icon__LogoLigo from "./icon-logo-ligo";
 
 type Props = {
   locale: Locale;
 };
 
-const data: Record<
-  Locale,
-  {
-    contact: {
-      phone_office: {
-        title: string;
-        initial: string;
-        value: string;
-        link: string;
-      };
-      email_office: {
-        title: string;
-        initial: string;
-        value: string;
-        link: string;
-      };
-    };
-    address: { title: string; address: string };
-    cta: string;
-  }
-> = {
-  en: {
-    contact: {
-      phone_office: {
-        title: "Jakarta Office",
-        initial: "T",
-        value: "+62 21 2255 9897",
-        link: "tel:622122559897",
-      },
-      email_office: {
-        title: "Leave us a message!",
-        initial: "E",
-        value: "info@ligogroup.com",
-        link: "mailto:info@ligogroup.com",
-      },
-    },
-    address: {
-      title: "Head Office",
-      address: `Komp. Jakarta Distribution Center (JDC)<br />
-      Jl. Kapuk Kamal Raya No. 40, Blok B No. 03<br />
-      Kel. Kamal Muara, Kec. Penjaringan<br />
-      Jakarta Utara 14470 - Indonesia`,
-    },
-    cta: "Feel free to contact us for more details.",
-  },
-  id: {
-    contact: {
-      phone_office: {
-        title: "Kantor Jakarta",
-        initial: "T",
-        value: "+62 21 2255 9897",
-        link: "tel:622122559897",
-      },
-      email_office: {
-        title: "Kirim pesan kepada kami!",
-        initial: "E",
-        value: "info@ligogroup.com",
-        link: "mailto:info@ligogroup.com",
-      },
-    },
-    address: {
-      title: "Kantor Pusat",
-      address: `Komp. Jakarta Distribution Center (JDC)<br />
-      Jl. Kapuk Kamal Raya No. 40, Blok B No. 03<br />
-      Kel. Kamal Muara, Kec. Penjaringan<br />
-      Jakarta Utara 14470 - Indonesia`,
-    },
-    cta: "Silakan hubungi kami untuk informasi lebih lanjut.",
-  },
+/** CTA text — the only remaining locale-specific static text. */
+const ctaText: Record<Locale, string> = {
+  en: "Feel free to contact us for more details.",
+  id: "Silakan hubungi kami untuk informasi lebih lanjut.",
 };
 
-export default function Footer({ locale }: Props) {
-  const { contact, address, cta } = data[locale];
+/**
+ * Derive a clickable link from a contact value.
+ * - Phone numbers → tel: link (strip spaces/dashes)
+ * - Email addresses → mailto: link
+ */
+function deriveLink(type: "phone" | "email", value: string): string {
+  if (type === "phone") {
+    return `tel:${value.replace(/[\s\-()]/g, "")}`;
+  }
+  return `mailto:${value}`;
+}
+
+export default async function Footer({ locale }: Props) {
+  const contacts = await getContacts();
 
   return (
     <footer className="">
@@ -94,11 +42,13 @@ export default function Footer({ locale }: Props) {
                 <div className="text-caption2 uppercase font-bold hidden md:block">
                   LIGO GROUP
                 </div>
-                <div className="font-bold mt-[34px]">{address.title}</div>
+                <div className="font-bold mt-[34px]">
+                  {contacts.address.label[locale]}
+                </div>
                 <div
                   className="set-text-bodytext w-[366px] mt-[22px]"
                   dangerouslySetInnerHTML={{
-                    __html: address.address,
+                    __html: contacts.address.value,
                   }}
                 />
               </div>
@@ -109,28 +59,30 @@ export default function Footer({ locale }: Props) {
               <div className="max-w-lg">
                 <div className="bg-primary-blue text-white py-6 px-8">
                   <div className="set-text-heading3 font-heading max-w-sm">
-                    {cta}
+                    {ctaText[locale]}
                   </div>
                   <div className="pt-10 flex flex-col md:flex-row gap-4 md:gap-9 md:items-center">
-                    <div className="">
-                      <div>{contact.phone_office.title}</div>
+                    <a
+                      href={deriveLink("phone", contacts.phone.value)}
+                      className="group"
+                    >
+                      <div>{contacts.phone.label[locale]}</div>
                       <div className="mt-1 flex gap-2.5">
-                        <div>{contact.phone_office.initial}.</div>
-                        <div className="font-bold">
-                          {contact.phone_office.value}
-                        </div>
+                        <div>T.</div>
+                        <div className="font-bold">{contacts.phone.value}</div>
                       </div>
-                    </div>
+                    </a>
                     <div className="h-px w-9 md:h-9 md:w-px bg-white" />
-                    <div className="">
-                      <div>{contact.email_office.title}</div>
+                    <a
+                      href={deriveLink("email", contacts.email.value)}
+                      className="group"
+                    >
+                      <div>{contacts.email.label[locale]}</div>
                       <div className="mt-1 flex gap-2.5">
-                        <div>{contact.email_office.initial}.</div>
-                        <div className="font-bold">
-                          {contact.email_office.value}
-                        </div>
+                        <div>E.</div>
+                        <div className="font-bold">{contacts.email.value}</div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 </div>
                 <div className="w-[46%] bg-primary-blue h-2"></div>

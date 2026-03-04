@@ -13,7 +13,7 @@ export default async function CompanyList({ locale }: Props) {
   return (
     <section className="px-4 py-12">
       <div className="mx-auto max-w-7xl">
-        <div className="md:max-w-[50%]">
+        <div className="md:max-w-[65%] xl:max-w-[50%]">
           <h2 className="text-caption1">OUR COMPANIES</h2>
           <div className="pt-10 set-text-headline1">
             Discover our companies that prioritize top performance and
