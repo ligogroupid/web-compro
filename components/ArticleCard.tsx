@@ -18,7 +18,7 @@ const VARIANT_STYLES = {
     thumbnail: "relative aspect-[281/144] w-full overflow-hidden bg-gray-light",
     imgHover:
       "size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105",
-    textWrapper: "py-10 px-6 pb-4",
+    textWrapper: "py-10 px-6 pb-4 bg-white",
     title: "mt-4 md:mt-8 text-headline2 leading-[1.3em] font-semibold",
     titleTag: "h3",
     revealDelay: (index: number) => index * 120,
@@ -29,7 +29,7 @@ const VARIANT_STYLES = {
       "relative aspect-[281/144] h-[144px] overflow-hidden bg-gray-light",
     imgHover:
       "size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110",
-    textWrapper: "flex-1 px-4 py-6",
+    textWrapper: "flex-1 px-4 py-6 bg-white",
     title:
       "mt-6 line-clamp-3 text-sm leading-[1.4] font-bold text-primary-blue sm:text-[0.9375rem] sm:leading-[1.35] pr-7",
     titleTag: "h4",

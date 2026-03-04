@@ -129,11 +129,13 @@ export default function FullscreenMenu({
                             style={{ transitionDelay: `${index * 60}ms` }}
                           >
                             <div className="aspect-[118/83] w-[118px] overflow-hidden border border-white/30">
-                              <img
-                                src={company.thumbnail}
-                                alt={company.name[locale]}
-                                className="w-full h-full object-cover"
-                              />
+                              {company.thumbnail && (
+                                <img
+                                  src={company.thumbnail}
+                                  alt={company.name[locale]}
+                                  className="w-full h-full object-cover"
+                                />
+                              )}
                             </div>
                           </Link>
                         ))}
