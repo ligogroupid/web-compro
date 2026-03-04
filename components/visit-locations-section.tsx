@@ -148,9 +148,7 @@ export default function VisitLocationsSection({
                               <path
                                 d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20c0-6.627-5.373-12-12-12z"
                                 fill={
-                                  isHovered
-                                    ? "#d71920"
-                                    : "rgba(215, 25, 32, 1)"
+                                  isHovered ? "#d71920" : "rgba(215, 25, 32, 1)"
                                 }
                                 className="transition-all duration-300"
                               />
@@ -190,14 +188,16 @@ export default function VisitLocationsSection({
                         key={idx}
                         className="location-card-reveal group relative overflow-hidden"
                         style={
-                          { "--card-delay": `${idx * 80}ms` } as React.CSSProperties
+                          {
+                            "--card-delay": `${idx * 80}ms`,
+                          } as React.CSSProperties
                         }
                         onMouseEnter={() => setHoveredIndex(idx)}
                         onMouseLeave={() => setHoveredIndex(null)}
                       >
                         {/* Map iframe */}
                         <div
-                          className="relative overflow-hidden rounded-t-lg transition-shadow duration-500"
+                          className="relative overflow-hidden transition-shadow duration-500"
                           style={{
                             boxShadow: isHovered_
                               ? "0 8px 32px rgba(0,0,0,0.25)"
@@ -210,9 +210,7 @@ export default function VisitLocationsSection({
                             style={{
                               background:
                                 "linear-gradient(90deg, #d71920, #ec6626)",
-                              transform: isHovered_
-                                ? "scaleX(1)"
-                                : "scaleX(0)",
+                              transform: isHovered_ ? "scaleX(1)" : "scaleX(0)",
                             }}
                           />
 
@@ -239,53 +237,8 @@ export default function VisitLocationsSection({
                         </div>
 
                         {/* Location name — below the map */}
-                        <div
-                          className="rounded-b-lg px-5 py-4 transition-all duration-300"
-                          style={{
-                            backgroundColor: isHovered_
-                              ? "rgba(255,255,255,0.1)"
-                              : "rgba(255,255,255,0.04)",
-                          }}
-                        >
+                        <div className="px-5 py-4 mx-6 lg:mx-10 transition-all duration-300 border border-white/50 border-l-0 border-r-0 mt-8">
                           <div className="flex items-center gap-3">
-                            {/* Pin icon */}
-                            <div
-                              className="flex-shrink-0 transition-transform duration-300"
-                              style={{
-                                transform: isHovered_
-                                  ? "translateY(-1px) scale(1.1)"
-                                  : "translateY(0) scale(1)",
-                              }}
-                            >
-                              <svg
-                                width="14"
-                                height="18"
-                                viewBox="0 0 24 32"
-                                className="transition-all duration-300"
-                              >
-                                <path
-                                  d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20c0-6.627-5.373-12-12-12z"
-                                  fill={
-                                    isHovered_
-                                      ? "#d71920"
-                                      : "rgba(255,255,255,0.4)"
-                                  }
-                                  className="transition-all duration-300"
-                                />
-                                <circle
-                                  cx="12"
-                                  cy="12"
-                                  r="5"
-                                  fill={
-                                    isHovered_
-                                      ? "white"
-                                      : "rgba(255,255,255,0.6)"
-                                  }
-                                  className="transition-all duration-300"
-                                />
-                              </svg>
-                            </div>
-
                             <p
                               className="font-heading text-sm font-bold tracking-wide transition-colors duration-300"
                               style={{

@@ -130,7 +130,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
             </div>
 
             {/* RIGHT PART */}
-            <div className="max-w-[600px]">
+            <div className="w-full max-w-[600px]">
               {/* NAME */}
               <h2 className="set-text-headline1">{company.name[loc]}</h2>
               {/* FULL DESCRIPTION */}
@@ -188,9 +188,9 @@ export default async function Page__CompanyDetails({ params }: Props) {
 
           {/* IMAGE COMPANY STRENGTH */}
           {company.strengths_image && (
-            <div className="relative md:absolute left-0 bottom-0 pointer-events-none max-w-2xl">
+            <div className="relative md:absolute left-0 bottom-0 pointer-events-none max-w-[40rem] aspect-[3/2.2] border border-dashed border-green-400">
               <img
-                className="block w-full"
+                className="size-full object-contain"
                 alt={`${company.name[loc]} strength`}
                 src={company.strengths_image}
               />
