@@ -21,19 +21,31 @@ type VisitLocationsSectionProps = {
   subtitle: string;
 };
 
+/**
+ * Compute responsive grid class for gmaps embeds:
+ *  - 1 location  → single column (full width)
+ *  - 2 locations → 2 columns on md+
+ *  - 3+ locations → 3 columns on lg+
+ */
+function gmapsGridClass(count: number): string {
+  if (count === 1) return "grid grid-cols-1";
+  if (count === 2) return "grid grid-cols-1 md:grid-cols-2";
+  return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+}
+
 export default function VisitLocationsSection({
   locations,
   locationDisplayType,
   title,
   subtitle,
 }: VisitLocationsSectionProps) {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   // Determine which mode to render
   const isProjection = locationDisplayType === "maps_projection";
   const isGmaps = locationDisplayType === "gmaps_embed";
 
-  // Filter locations by display type for projection mode
+  // Filter locations by display type
   const projectionLocations = locations.filter(
     (loc) =>
       loc.displayType === "maps_projection" &&
@@ -45,12 +57,12 @@ export default function VisitLocationsSection({
     (loc) => loc.displayType === "gmaps_embed" && loc.embedUrl,
   );
 
-  // Legacy locations (or fallback)
+  // Legacy locations (fallback)
   const legacyLocations = locations.filter(
     (loc) => loc.displayType === "legacy" || loc.displayType === undefined,
   );
 
-  // Choose which locations to display in the grid
+  // Choose which locations to display in the text grid
   const displayLocations = isProjection
     ? projectionLocations
     : isGmaps
@@ -61,231 +73,295 @@ export default function VisitLocationsSection({
 
   return (
     <section className="relative bg-primary-blue overflow-hidden">
-      {/* Subtle geometric pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        {/*<div className="absolute inset-0" style={{backgroundImage:"repeating-linear-gradient(45deg, transparent, transparent 40px, #fff 40px, #fff 41px)",}}/>*/}
-      </div>
+      {/* Diagonal accent line — subtle geometric detail */}
+      <div
+        className="absolute top-0 right-0 w-px opacity-[0.07]"
+        style={{
+          height: "120%",
+          background:
+            "linear-gradient(to bottom, transparent, #fff 30%, #fff 70%, transparent)",
+          transform: "rotate(12deg)",
+          transformOrigin: "top right",
+        }}
+      />
 
       <div className="relative px-4 py-20 md:py-28">
-        <div className="max-w-7xl mx-auto flex">
-          {/* Section Header */}
-          <div className="lg:w-1/4 mb-14 md:mb-20 space-y-3 text-white">
-            <div className="set-text-caption1">{title.toUpperCase()}</div>
-            <p className="set-text-headline1 max-w-lg">{subtitle}</p>
-          </div>
+        <div className="max-w-7xl mx-auto">
+          {/* ━━━ Section Header ━━━ */}
+          <div className="flex flex-col lg:flex-row lg:gap-20">
+            <div className="lg:w-1/4 mb-14 md:mb-20 space-y-3 text-white">
+              <div className="set-text-caption1">{title.toUpperCase()}</div>
+              <p className="set-text-headline1 max-w-lg">{subtitle}</p>
+            </div>
 
-          <div className="lg:w-3/4">
-            {/* Maps Projection Mode — SVG map + markers */}
-            {isProjection && projectionLocations.length > 0 && (
-              <div className="mb-16">
-                <div className="relative w-full">
-                  {/* Map Image */}
-                  <IndonesiaMap className="block w-full opacity-20" />
+            <div className="lg:w-3/4">
+              {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  MODE 1: Maps Projection — SVG map + pin markers
+                  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+              {isProjection && projectionLocations.length > 0 && (
+                <div className="mb-16">
+                  <div className="relative w-full">
+                    <IndonesiaMap className="block w-full opacity-20" />
 
-                  {/* Pin markers overlay — absolute positioned on the map */}
-                  {projectionLocations.map((loc, idx) => {
-                    if (
-                      loc.latitude === undefined ||
-                      loc.longitude === undefined
-                    )
-                      return null;
-                    const pos = latLongToXY(loc.latitude, loc.longitude);
-                    const isHovered = hoveredIndex === idx;
+                    {projectionLocations.map((loc, idx) => {
+                      if (
+                        loc.latitude === undefined ||
+                        loc.longitude === undefined
+                      )
+                        return null;
+                      const pos = latLongToXY(loc.latitude, loc.longitude);
+                      const isHovered = hoveredIndex === idx;
+
+                      return (
+                        <div
+                          key={idx}
+                          className="absolute -translate-x-1/2 -translate-y-full transition-all duration-500 ease-out"
+                          style={{
+                            left: `${pos.x}%`,
+                            top: `${pos.y}%`,
+                            zIndex: isHovered ? 20 : 10,
+                          }}
+                          onMouseEnter={() => setHoveredIndex(idx)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                        >
+                          <div className="relative flex flex-col items-center">
+                            {/* Pulse ring on hover */}
+                            <div
+                              className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full transition-all duration-500"
+                              style={{
+                                width: isHovered ? "32px" : "0px",
+                                height: isHovered ? "32px" : "0px",
+                                backgroundColor: "rgba(215, 25, 32, 0.2)",
+                                animation: isHovered
+                                  ? "marker-pulse 1.5s ease-in-out infinite"
+                                  : "none",
+                              }}
+                            />
+
+                            {/* Pin icon */}
+                            <svg
+                              width={isHovered ? 22 : 14}
+                              height={isHovered ? 30 : 20}
+                              viewBox="0 0 24 32"
+                              className="drop-shadow-lg transition-all duration-300"
+                            >
+                              <path
+                                d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20c0-6.627-5.373-12-12-12z"
+                                fill={
+                                  isHovered
+                                    ? "#d71920"
+                                    : "rgba(215, 25, 32, 1)"
+                                }
+                                className="transition-all duration-300"
+                              />
+                              <circle
+                                cx="12"
+                                cy="12"
+                                r="5"
+                                fill="white"
+                                className="transition-all duration-300"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  MODE 2: Google Maps Embed — responsive iframe grid
+                  1 loc → 1 col, 2 locs → 2 col, 3+ → 3 col (max)
+                  Each card: map on top, name below
+                  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+              {isGmaps && gmapsLocations.length > 0 && (
+                <div
+                  className={[
+                    gmapsGridClass(gmapsLocations.length),
+                    "gap-5 md:gap-6",
+                  ].join(" ")}
+                >
+                  {gmapsLocations.map((loc, idx) => {
+                    const isHovered_ = hoveredIndex === idx;
 
                     return (
                       <div
                         key={idx}
-                        className="absolute -translate-x-1/2 -translate-y-full transition-all duration-500 ease-out"
-                        style={{
-                          left: `${pos.x}%`,
-                          top: `${pos.y}%`,
-                          zIndex: isHovered ? 20 : 10,
-                        }}
+                        className="location-card-reveal group relative overflow-hidden"
+                        style={
+                          { "--card-delay": `${idx * 80}ms` } as React.CSSProperties
+                        }
                         onMouseEnter={() => setHoveredIndex(idx)}
                         onMouseLeave={() => setHoveredIndex(null)}
                       >
-                        <div className="relative flex flex-col items-center">
-                          {/* Pulse ring when hovered */}
+                        {/* Map iframe */}
+                        <div
+                          className="relative overflow-hidden rounded-t-lg transition-shadow duration-500"
+                          style={{
+                            boxShadow: isHovered_
+                              ? "0 8px 32px rgba(0,0,0,0.25)"
+                              : "0 2px 8px rgba(0,0,0,0.1)",
+                          }}
+                        >
+                          {/* Top accent line */}
                           <div
-                            className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full transition-all duration-500"
+                            className="absolute top-0 left-0 right-0 h-[3px] z-10 transition-transform duration-500 origin-left"
                             style={{
-                              width: isHovered ? "32px" : "0px",
-                              height: isHovered ? "32px" : "0px",
-                              backgroundColor: "rgba(215, 25, 32, 0.2)",
-                              animation: isHovered
-                                ? "marker-pulse 1.5s ease-in-out infinite"
-                                : "none",
+                              background:
+                                "linear-gradient(90deg, #d71920, #ec6626)",
+                              transform: isHovered_
+                                ? "scaleX(1)"
+                                : "scaleX(0)",
                             }}
                           />
 
-                          {/* Pin label — shows on hover or on larger screens */}
-                          {/*<div
-                            className="mb-1 whitespace-nowrap rounded-sm px-2 py-0.5 text-[10px] font-bold leading-tight shadow-lg transition-all duration-300 pointer-events-none"
-                            style={{
-                              backgroundColor: isHovered
-                                ? "#d71920"
-                                : "rgba(215, 25, 32, 0.85)",
-                              color: "#fff",
-                              transform: isHovered
-                                ? "scale(1.15) translateY(-4px)"
-                                : "scale(1) translateY(0)",
-                              opacity: isHovered ? 1 : 1,
-                            }}
+                          <div
+                            className={[
+                              "w-full",
+                              gmapsLocations.length === 1
+                                ? "aspect-[21/9]"
+                                : "aspect-[4/3]",
+                            ].join(" ")}
                           >
-                            {loc.name}
-                          </div>*/}
+                            <iframe
+                              src={loc.embedUrl}
+                              width="100%"
+                              height="100%"
+                              style={{ border: 0 }}
+                              allowFullScreen
+                              loading="lazy"
+                              referrerPolicy="no-referrer-when-downgrade"
+                              title={loc.name}
+                              className="block"
+                            />
+                          </div>
+                        </div>
 
-                          {/* Pin dot */}
-                          <svg
-                            width={isHovered ? 22 : 14}
-                            height={isHovered ? 30 : 20}
-                            viewBox="0 0 24 32"
-                            className="drop-shadow-lg transition-all duration-300"
-                          >
-                            <path
-                              d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20c0-6.627-5.373-12-12-12z"
-                              fill={
-                                isHovered ? "#d71920" : "rgba(215, 25, 32, 1)"
-                              }
-                              className="transition-all duration-300"
-                            />
-                            <circle
-                              cx="12"
-                              cy="12"
-                              r="5"
-                              fill="white"
-                              className="transition-all duration-300"
-                            />
-                          </svg>
+                        {/* Location name — below the map */}
+                        <div
+                          className="rounded-b-lg px-5 py-4 transition-all duration-300"
+                          style={{
+                            backgroundColor: isHovered_
+                              ? "rgba(255,255,255,0.1)"
+                              : "rgba(255,255,255,0.04)",
+                          }}
+                        >
+                          <div className="flex items-center gap-3">
+                            {/* Pin icon */}
+                            <div
+                              className="flex-shrink-0 transition-transform duration-300"
+                              style={{
+                                transform: isHovered_
+                                  ? "translateY(-1px) scale(1.1)"
+                                  : "translateY(0) scale(1)",
+                              }}
+                            >
+                              <svg
+                                width="14"
+                                height="18"
+                                viewBox="0 0 24 32"
+                                className="transition-all duration-300"
+                              >
+                                <path
+                                  d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20c0-6.627-5.373-12-12-12z"
+                                  fill={
+                                    isHovered_
+                                      ? "#d71920"
+                                      : "rgba(255,255,255,0.4)"
+                                  }
+                                  className="transition-all duration-300"
+                                />
+                                <circle
+                                  cx="12"
+                                  cy="12"
+                                  r="5"
+                                  fill={
+                                    isHovered_
+                                      ? "white"
+                                      : "rgba(255,255,255,0.6)"
+                                  }
+                                  className="transition-all duration-300"
+                                />
+                              </svg>
+                            </div>
+
+                            <p
+                              className="font-heading text-sm font-bold tracking-wide transition-colors duration-300"
+                              style={{
+                                color: isHovered_
+                                  ? "#ffffff"
+                                  : "rgba(255,255,255,0.8)",
+                              }}
+                            >
+                              {loc.name}
+                            </p>
+                          </div>
+
+                          {/* Address text if available */}
+                          {loc.location && (
+                            <p className="mt-1 ml-[26px] text-xs text-white/30 leading-relaxed transition-colors duration-300 group-hover:text-white/50">
+                              {loc.location}
+                            </p>
+                          )}
                         </div>
                       </div>
                     );
                   })}
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Google Maps Embed Mode */}
-            {isGmaps && gmapsLocations.length > 0 && (
-              <div className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-                {gmapsLocations.map((loc, idx) => (
-                  <div
-                    key={idx}
-                    className="group relative rounded-lg overflow-hidden border border-white/10 transition-all duration-300 hover:border-white/25"
-                    onMouseEnter={() => setHoveredIndex(idx)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                  >
-                    <div className="aspect-[16/9]">
-                      <iframe
-                        src={loc.embedUrl}
-                        width="100%"
-                        height="100%"
-                        style={{ border: 0 }}
-                        allowFullScreen
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        title={loc.name}
-                        className="block"
-                      />
-                    </div>
-                    <div className="bg-primary-blue/80 backdrop-blur-sm px-5 py-3 border-t border-white/10">
-                      <p className="font-heading text-sm font-bold text-white">
-                        {loc.name}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Location Grid — 3 columns */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-14">
-              {displayLocations.map((location, idx) => (
+              {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  Text-only Location Grid (both modes + legacy)
+                  Shown below map/embeds as a supplementary list
+                  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+              {!isGmaps && (
                 <div
-                  key={idx}
-                  className="group relative cursor-default border-t border-b border-t-white/50 border-b-white/50 hover:border-transparent duration-300 transition-all"
-                  onMouseEnter={() => setHoveredIndex(idx)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                  className={[
+                    "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+                    "gap-6 md:gap-10 lg:gap-14",
+                    isProjection || isGmaps ? "mt-10" : "",
+                  ].join(" ")}
                 >
-                  <div
-                    className="flex items-start gap-4 px-4 py-4 -mx-4 transition-all duration-300"
-                    style={{
-                      backgroundColor:
-                        hoveredIndex === idx
-                          ? "rgba(255, 255, 255, 0.06)"
-                          : "transparent",
-                    }}
-                  >
-                    {/* Marker icon */}
-                    {/*<div
-                      className="mt-0.5 flex-shrink-0 transition-all duration-300"
-                      style={{
-                        transform:
-                          hoveredIndex === idx
-                            ? "scale(1.2) translateY(-2px)"
-                            : "scale(1)",
-                      }}
+                  {displayLocations.map((location, idx) => (
+                    <div
+                      key={idx}
+                      className="group relative cursor-default border-t border-b border-t-white/50 border-b-white/50 hover:border-transparent duration-300 transition-all"
+                      onMouseEnter={() => setHoveredIndex(idx)}
+                      onMouseLeave={() => setHoveredIndex(null)}
                     >
-                      <svg
-                        width="16"
-                        height="22"
-                        viewBox="0 0 24 32"
-                        className="transition-all duration-300"
-                      >
-                        <path
-                          d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20s12-11 12-20c0-6.627-5.373-12-12-12z"
-                          fill={
-                            hoveredIndex === idx
-                              ? "#d71920"
-                              : "rgba(255, 255, 255, 0.3)"
-                          }
-                          className="transition-all duration-300"
-                        />
-                        <circle
-                          cx="12"
-                          cy="12"
-                          r="5"
-                          fill={
-                            hoveredIndex === idx
-                              ? "white"
-                              : "rgba(255, 255, 255, 0.5)"
-                          }
-                          className="transition-all duration-300"
-                        />
-                      </svg>
-                    </div>*/}
-
-                    {/* Location info */}
-                    <div className="min-w-0 flex-1">
-                      <h3
-                        className="font-heading text-base font-bold tracking-wide transition-colors duration-300"
+                      <div
+                        className="flex items-start gap-4 px-4 py-4 -mx-4 transition-all duration-300"
                         style={{
-                          color:
+                          backgroundColor:
                             hoveredIndex === idx
-                              ? "#ffffff"
-                              : "rgba(255, 255, 255, 0.85)",
+                              ? "rgba(255, 255, 255, 0.06)"
+                              : "transparent",
                         }}
                       >
-                        {location.name}
-                      </h3>
-                      {location.location && (
-                        <p className="mt-1 text-sm text-white/40 leading-relaxed transition-colors duration-300 group-hover:text-white/55">
-                          {location.location}
-                        </p>
-                      )}
+                        <div className="min-w-0 flex-1">
+                          <h3
+                            className="font-heading text-base font-bold tracking-wide transition-colors duration-300"
+                            style={{
+                              color:
+                                hoveredIndex === idx
+                                  ? "#ffffff"
+                                  : "rgba(255, 255, 255, 0.85)",
+                            }}
+                          >
+                            {location.name}
+                          </h3>
+                          {location.location && (
+                            <p className="mt-1 text-sm text-white/40 leading-relaxed transition-colors duration-300 group-hover:text-white/55">
+                              {location.location}
+                            </p>
+                          )}
+                        </div>
+                      </div>
                     </div>
-
-                    {/* Hover accent line */}
-                    {/*<div
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-primary-red transition-all duration-300"
-                      style={{
-                        height: hoveredIndex === idx ? "60%" : "0%",
-                        opacity: hoveredIndex === idx ? 1 : 0,
-                      }}
-                    />*/}
-                  </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>

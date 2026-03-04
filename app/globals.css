@@ -326,6 +326,25 @@ body {
   }
 }
 
+/* ─── Visit Locations: Gmaps Card Staggered Reveal ─── */
+
+@keyframes location-card-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.location-card-reveal {
+  opacity: 0;
+  animation: location-card-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--card-delay, 0ms);
+}
+
 /* ─── Utility: Hide Scrollbar ─── */
 
 @utility hide-scrollbar {
