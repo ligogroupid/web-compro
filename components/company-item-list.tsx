@@ -11,12 +11,12 @@ export default function CompanyItemList({ locale, ...company }: Props) {
   return (
     <Link
       href={`/company/${company.slug}`}
-      className="flex flex-col md:flex-row md:gap-20 items-end hover:bg-gray-light  group"
+      className="flex flex-col xl:flex-row gap-6 lg:gap-10 xl:gap-20 xl:items-end  group"
     >
       {/*LEFT SECTION*/}
-      <div className="flex-1 flex flex-row md:flex-col gap-20">
+      <div className="flex-1 flex flex-col items-start md:items-end xl:items-start md:flex-row xl:flex-col gap-4 md:gap-10 xl:gap-20">
         <div
-          className={`min-h-24 relative ${company.logo ? "" : "bg-gray-light"}`}
+          className={`max-w-[180px] lg:max-w-[204px] relative ${company.logo ? "" : "bg-gray-light"}`}
         >
           {company.logo && (
             <img
@@ -26,7 +26,7 @@ export default function CompanyItemList({ locale, ...company }: Props) {
             />
           )}
         </div>
-        <div className="font-albert leading-[1.3em]">
+        <div className="font-albert leading-[1.3em] md:max-w-[360px] xl:max-w-[285px]">
           {company.description[locale]}
         </div>
       </div>

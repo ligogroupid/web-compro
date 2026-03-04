@@ -1,6 +1,16 @@
-import ContactForm from "@/components/contact-form";
+import type { Locale } from "@/i18n/routing";
 
-export default function ContactPage() {
+import ContactForm from "@/components/contact-form";
+import { getContacts } from "@/service/contact";
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function ContactPage({ params }: Props) {
+  const { locale } = await params;
+  const contacts = await getContacts();
+
   return (
     <>
       <section className="px-4 pt-14 pb-16">
@@ -8,7 +18,7 @@ export default function ContactPage() {
           {/*LEFT SECTION*/}
           <div className="max-w-lg">
             <h2 className="set-text-caption1">CONTACT US</h2>
-            <div className="set-text-headline1 mt-8">Let’s Work Together</div>
+            <div className="set-text-headline1 mt-8">Let's Work Together</div>
             <div className="mt-12 set-text-bodytext">
               Supported by a wide distribution network, Ligo Group serves
               customers throughout Indonesia with trusted products and
@@ -17,30 +27,33 @@ export default function ContactPage() {
             <div className="h-px mt-14 bg-primary-blue" />
             <div className="hidden mt-24 md:flex flex-col gap-9">
               <div>
-                <div className="set-text-caption2">Head Office</div>
+                <div className="set-text-caption2">
+                  {contacts.address.label[locale as Locale]}
+                </div>
                 <div
                   className="set-text-bodytext !text-sm"
                   dangerouslySetInnerHTML={{
-                    __html: `Komp. Jakarta Distribution Center (JDC)<br />
-                Jl. Kapuk Kamal Raya No. 40, Blok B No. 03<br />
-                Kel. Kamal Muara, Kec. Penjaringan<br />
-                Jakarta Utara 14470 - Indonesia`,
+                    __html: contacts.address.value,
                   }}
-                ></div>
+                />
               </div>
               <div>
-                <div className="set-text-caption2">Telephone</div>
+                <div className="set-text-caption2">
+                  {contacts.phone.label[locale as Locale]}
+                </div>
                 <div className="set-text-bodytext !text-sm">
-                  +62 21 2255 9897
+                  {contacts.phone.value}
                 </div>
               </div>
               <div>
-                <div className="set-text-caption2">Email</div>
+                <div className="set-text-caption2">
+                  {contacts.email.label[locale as Locale]}
+                </div>
                 <div className="set-text-bodytext !text-sm">
-                  info@ligogroup.com
+                  {contacts.email.value}
                 </div>
               </div>
-              <div className="w-[286px] h-[320px] relative -mt-20  translate-y-[50%]">
+              <div className="w-[286px] h-[320px] relative -mt-20 translate-y-[50%]">
                 <img alt="Plastic Cup" src="/plastic-cup.webp" />
               </div>
             </div>
