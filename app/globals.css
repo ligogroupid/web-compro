@@ -345,6 +345,55 @@ body {
   animation-delay: var(--card-delay, 0ms);
 }
 
+/* ─── More Companies: Card Staggered Reveal ─── */
+
+@keyframes more-companies-card-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.more-companies-card-reveal {
+  opacity: 0;
+  animation: more-companies-card-reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+  animation-delay: var(--card-delay, 0ms);
+}
+
+/* Decorative corner accent lines — animate on section enter */
+@keyframes accent-line-h {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes accent-line-v {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.more-companies-accent-h {
+  transform-origin: left;
+  animation: accent-line-h 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+.more-companies-accent-v {
+  transform-origin: top;
+  animation: accent-line-v 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
 /* ─── Utility: Hide Scrollbar ─── */
 
 @utility hide-scrollbar {

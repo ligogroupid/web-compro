@@ -4,9 +4,10 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import ImageCover from "@/components/cover-images";
+import MoreCompanies from "@/components/MoreCompanies";
 import VisitLocationsSection from "@/components/visit-locations-section";
 import type { Locale } from "@/i18n/routing";
-import { getCompanyBySlug } from "@/service/company";
+import { getCompanyBySlug, getOtherCompanies } from "@/service/company";
 import type { TCompany } from "@/service/company";
 
 type Props = {
@@ -78,7 +79,10 @@ export default async function Page__CompanyDetails({ params }: Props) {
   const loc = locale as Locale;
   const t = await getTranslations({ locale, namespace: "CompanyDetail" });
 
-  const company = await getCompanyBySlug(slug);
+  const [company, otherCompanies] = await Promise.all([
+    getCompanyBySlug(slug),
+    getOtherCompanies(slug, 6),
+  ]);
   if (!company) notFound();
 
   return (
@@ -121,10 +125,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
                 <div className="aspect-[260/157] bg-gray-light" />
               )}
               <div className="hidden md:block mt-[200px]">
-                <Certificates
-                  company={company}
-                  label={t("certifications")}
-                />
+                <Certificates company={company} label={t("certifications")} />
               </div>
             </div>
 
@@ -163,9 +164,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
                 <h2 className="set-text-caption1">
                   {t("whyChoose")} {company.initial_name[loc].toUpperCase()}
                 </h2>
-                <div className="set-text-headline1">
-                  {t("provenStrengths")}
-                </div>
+                <div className="set-text-headline1">{t("provenStrengths")}</div>
               </div>
               <div className="overflow-x-auto overflow-y-hidden hide-scrollbar mt-16 -mx-4 md:mx-0 px-4 md:px-0">
                 <div className="w-fit flex gap-9 md:ml-auto">
@@ -304,6 +303,15 @@ export default async function Page__CompanyDetails({ params }: Props) {
           locationDisplayType={company.location_display_type}
           title={t("visitLocations")}
           subtitle={t("visitLocationsSubtitle")}
+        />
+      )}
+
+      {/* MORE COMPANIES */}
+      {otherCompanies.length > 0 && (
+        <MoreCompanies
+          companies={otherCompanies}
+          title={t("otherCompanies")}
+          locale={loc}
         />
       )}
     </>

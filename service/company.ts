@@ -249,6 +249,38 @@ export async function getCompanyBySlug(slug: string): Promise<Company | null> {
   };
 }
 
+export async function getOtherCompanies(
+  excludeSlug: string,
+  limit = 6,
+): Promise<CompanyListItem[]> {
+  const { data, error } = await supabase
+    .from("companies")
+    .select(
+      "order, slug, name_id, name_en, initial_name_id, initial_name_en, logo, description_id, description_en, thumbnail",
+    )
+    .neq("slug", excludeSlug)
+    .order("order", { ascending: true })
+    .limit(limit);
+
+  if (error) {
+    console.error("Failed to fetch other companies:", error);
+    return [];
+  }
+
+  return data.map((row) => ({
+    order: row.order,
+    slug: row.slug,
+    name: { id: row.name_id, en: row.name_en },
+    initial_name: { id: row.initial_name_id, en: row.initial_name_en },
+    logo: row.logo ?? "",
+    description: {
+      id: row.description_id ?? "",
+      en: row.description_en ?? "",
+    },
+    thumbnail: row.thumbnail ?? "",
+  }));
+}
+
 export type FeaturedBrand = Brand & { companyName: string };
 
 export async function getFeaturedBrands(): Promise<FeaturedBrand[]> {
