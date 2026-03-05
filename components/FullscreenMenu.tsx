@@ -128,12 +128,12 @@ export default function FullscreenMenu({
                             className="block opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out"
                             style={{ transitionDelay: `${index * 60}ms` }}
                           >
-                            <div className="aspect-[118/83] w-[118px] overflow-hidden border border-white/30">
-                              {company.thumbnail && (
+                            <div className="aspect-[118/83] w-[118px] overflow-hidden border border-white/30 bg-white p-2">
+                              {company.logo && (
                                 <img
-                                  src={company.thumbnail}
+                                  src={company.logo}
                                   alt={company.name[locale]}
-                                  className="w-full h-full object-cover"
+                                  className="w-full h-full object-contain"
                                 />
                               )}
                             </div>

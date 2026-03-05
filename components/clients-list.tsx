@@ -47,27 +47,30 @@ export default async function ClientsList({ locale }: Props) {
   const { industrial, horeka } = await getClientsByGroup();
 
   return (
-    <section className="bg-white pt-10 pb-40">
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="set-text-caption1">OUR CLIENTS</h2>
-        <div className="set-text-headline1 mt-8">
-          Explore our valued clients
-        </div>
+    <section className="bg-[#e8e8e8]">
+      <div className="bg-white pt-10 pb-40">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="set-text-caption1">OUR CLIENTS</h2>
+          <div className="set-text-headline1 mt-8">
+            Explore our valued clients
+          </div>
 
-        {/* CLIENT INDUSTRIAL */}
-        <div className="mt-20">
-          <h3 className="text-lg font-medium tracking-wider">INDUSTRIAL</h3>
-          <ClientGrid clients={industrial} locale={locale} />
-        </div>
+          {/* CLIENT INDUSTRIAL */}
+          <div className="mt-20">
+            <h3 className="text-lg font-medium tracking-wider">INDUSTRIAL</h3>
+            <ClientGrid clients={industrial} locale={locale} />
+          </div>
 
-        <div className="h-px bg-black/50 mt-20" />
+          <div className="h-px bg-black/50 mt-20" />
 
-        {/* CLIENT HOREKA */}
-        <div className="mt-20">
-          <h3 className="text-lg font-medium tracking-wider">HOREKA</h3>
-          <ClientGrid clients={horeka} locale={locale} />
+          {/* CLIENT HOREKA */}
+          <div className="mt-20">
+            <h3 className="text-lg font-medium tracking-wider">HOREKA</h3>
+            <ClientGrid clients={horeka} locale={locale} />
+          </div>
         </div>
       </div>
+      <div className="h-4 bg-white w-2/5" />
     </section>
   );
 }
