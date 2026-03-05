@@ -39,6 +39,38 @@ export type Database = {
   };
   public: {
     Tables: {
+      about_page_content: {
+        Row: {
+          id: string;
+          images: string[] | null;
+          section: string;
+          updated_at: string | null;
+          updated_by: string | null;
+        };
+        Insert: {
+          id?: string;
+          images?: string[] | null;
+          section: string;
+          updated_at?: string | null;
+          updated_by?: string | null;
+        };
+        Update: {
+          id?: string;
+          images?: string[] | null;
+          section?: string;
+          updated_at?: string | null;
+          updated_by?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "about_page_content_updated_by_fkey";
+            columns: ["updated_by"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       articles: {
         Row: {
           content_en: string | null;

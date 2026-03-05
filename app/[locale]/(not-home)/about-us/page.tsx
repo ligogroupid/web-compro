@@ -3,6 +3,7 @@ import LigoLetterValues from "@/components/ligo-letter-values";
 import OurJourney from "@/components/our-journey";
 import RecycledProcess from "@/components/recycle-process";
 import { Locale } from "@/i18n/routing";
+import { getAboutPageBannerImages } from "@/service/about";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -10,6 +11,9 @@ type Props = {
 
 export default async function Page__AboutUs({ params }: Props) {
   const { locale } = await params;
+
+  // Fetch banner images from CMS
+  const bannerImages = await getAboutPageBannerImages();
 
   return (
     <>
@@ -134,14 +138,19 @@ export default async function Page__AboutUs({ params }: Props) {
       {/*OUR JOURNEY SECTION*/}
       <OurJourney locale={locale as Locale} />
 
+      {/* BANNER SECTION - Managed by CMS */}
       <div>
         <ImageCover
-          images={[
-            {
-              src: "https://placehold.co/1920x600?text=BANNER%0AAbout%20Us",
-              alt: "Banner ABOUT US",
-            },
-          ]}
+          images={
+            bannerImages.length > 0
+              ? bannerImages.map((src) => ({ src, alt: "Banner ABOUT US" }))
+              : [
+                  {
+                    src: "https://placehold.co/1920x600?text=BANNER%0AAbout%20Us",
+                    alt: "Banner ABOUT US",
+                  },
+                ]
+          }
         />
       </div>
     </>
