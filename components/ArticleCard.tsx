@@ -1,9 +1,17 @@
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import type { Article } from "@/dummy/articles";
 import { formatArticleDate } from "@/lib/format-date";
 
+import type { Article as ArticleFromService } from "@/service/article";
+import type { Article as ArticleFromDummy } from "@/dummy/articles";
 import Icon__ArrowRight from "./icon-arrow-right";
+
+/**
+ * Union type supporting both:
+ * - Database format (createdAt)
+ * - Dummy data format (created_date)
+ */
+type Article = ArticleFromService | ArticleFromDummy;
 
 type Props = {
   article: Article;
@@ -11,6 +19,28 @@ type Props = {
   index: number;
   variant?: "hero" | "compact" | "other-news";
 };
+
+/**
+ * Get the created date from either format.
+ */
+function getCreatedDate(article: Article): string {
+  // Check for database format (createdAt)
+  if ("createdAt" in article) {
+    return article.createdAt;
+  }
+  // Dummy format uses created_date
+  return (article as ArticleFromDummy).created_date;
+}
+
+/**
+ * Get title from either format.
+ */
+function getTitle(article: Article, locale: Locale): string {
+  if ("createdAt" in article) {
+    return article.title[locale];
+  }
+  return (article as ArticleFromDummy).title[locale];
+}
 
 const VARIANT_STYLES = {
   hero: {
@@ -57,6 +87,10 @@ export default function ArticleCard({
   const styles = VARIANT_STYLES[variant];
   const TitleTag = styles.titleTag;
 
+  const createdDate = getCreatedDate(article);
+  const titleText = getTitle(article, locale);
+  const thumbnail = article.thumbnail;
+
   return (
     <Link
       href={`/article/${article.slug}`}
@@ -70,11 +104,11 @@ export default function ArticleCard({
     >
       {/* Thumbnail */}
       <div className={styles.thumbnail}>
-        {article.thumbnail && (
+        {thumbnail && (
           <img
             className={`${styles.imgHover} pointer-events-none`}
-            alt={article.title[locale]}
-            src={article.thumbnail}
+            alt={titleText}
+            src={thumbnail}
           />
         )}
       </div>
@@ -83,11 +117,11 @@ export default function ArticleCard({
       <div className={styles.textWrapper}>
         {/* Date — editorial dateline */}
         <span className="text-xs tracking-[0.02em] block uppercase text-primary-blue">
-          {formatArticleDate(article.created_date, locale)}
+          {formatArticleDate(createdDate, locale)}
         </span>
 
         {/* Title */}
-        <TitleTag className={styles.title}>{article.title[locale]}</TitleTag>
+        <TitleTag className={styles.title}>{titleText}</TitleTag>
 
         {/* Arrow indicator */}
         <div className="ml-auto flex items-center gap-2 absolute right-0 bottom-0">

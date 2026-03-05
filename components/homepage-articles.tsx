@@ -1,14 +1,14 @@
 import type { Locale } from "@/i18n/routing";
 
-import { DUMMY_ARTICLES } from "@/dummy/articles";
+import { getRecentArticles } from "@/service/article";
 import ArticleCard from "@/components/ArticleCard";
 
 type Props = {
   locale: Locale;
 };
 
-export default function HomepageArticles({ locale }: Props) {
-  const articles = DUMMY_ARTICLES.sort((a, b) => a.order - b.order).slice(0, 4);
+export default async function HomepageArticles({ locale }: Props) {
+  const articles = await getRecentArticles(4);
 
   if (articles.length === 0) return null;
 

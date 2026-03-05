@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 import { notFound } from "next/navigation";
 
-import { DUMMY_ARTICLES } from "@/dummy/articles";
 import type { Locale } from "@/i18n/routing";
+import { getArticleBySlug, getOtherArticles } from "@/service/article";
 import { formatArticleDate } from "@/lib/format-date";
 import ArticleCard from "@/components/ArticleCard";
 import ButtonBrandLink from "@/components/ButtonBrandLink";
@@ -17,7 +17,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const article = DUMMY_ARTICLES.find((a) => a.slug === slug);
+  const article = await getArticleBySlug(slug);
 
   if (!article) return { title: "Article Not Found" };
 
@@ -38,15 +38,13 @@ export default async function Page__ArticleDetail({ params }: Props) {
   const { locale, slug } = await params;
   const loc = locale as Locale;
 
-  const article = DUMMY_ARTICLES.find((a) => a.slug === slug);
+  const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
   /* Other news — exclude current article, take 3 */
-  const otherArticles = DUMMY_ARTICLES.filter((a) => a.slug !== slug)
-    .sort((a, b) => a.order - b.order)
-    .slice(0, 3);
+  const otherArticles = await getOtherArticles(slug, 3);
 
-  const formattedDate = formatArticleDate(article.created_date, loc);
+  const formattedDate = formatArticleDate(article.createdAt, loc);
 
   return (
     <>

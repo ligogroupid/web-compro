@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n/routing";
 
-import { DUMMY_ARTICLES } from "@/dummy/articles";
+import { getArticlesPaginated } from "@/service/article";
 import ArticleCard from "@/components/ArticleCard";
 import ArticlePagination from "@/components/article-pagination";
 
@@ -17,8 +17,8 @@ export default async function Page__Article({ params, searchParams }: Props) {
 
   const currentPage = Math.max(1, parseInt(page || "1", 10) || 1);
 
-  const articles = DUMMY_ARTICLES.sort((a, b) => a.order - b.order);
-  const totalPages = Math.ceil(articles.length / ITEMS_PER_PAGE);
+  const { articles, total } = await getArticlesPaginated(currentPage, ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
   const safeCurrentPage = Math.min(currentPage, totalPages);
 
   // Slice articles for current page
