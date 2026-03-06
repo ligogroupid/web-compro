@@ -19,15 +19,12 @@ export default async function Page__Article({ params, searchParams }: Props) {
 
   const { articles, total } = await getArticlesPaginated(currentPage, ITEMS_PER_PAGE);
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
-  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const safeCurrentPage = Math.min(currentPage, Math.max(1, totalPages));
 
-  // Slice articles for current page
-  const startIdx = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
-  const pageArticles = articles.slice(startIdx, startIdx + ITEMS_PER_PAGE);
-
+  // Articles already paginated from Supabase — no additional slicing needed
   // First article = hero, rest = compact sidebar
-  const heroArticle = pageArticles[0];
-  const compactArticles = pageArticles.slice(1);
+  const heroArticle = articles[0];
+  const compactArticles = articles.slice(1);
 
   return (
     <section className="bg-white px-4 md:px-8">
