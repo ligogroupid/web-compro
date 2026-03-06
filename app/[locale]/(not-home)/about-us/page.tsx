@@ -5,7 +5,7 @@ import LigoLetterValues from "@/components/ligo-letter-values";
 import OurJourney from "@/components/our-journey";
 import RecycledProcess from "@/components/recycle-process";
 import { Locale } from "@/i18n/routing";
-import { getAboutPageBannerImages } from "@/service/about";
+import { getAllAboutPageImages } from "@/service/about";
 import { getPageMetadata } from "@/service/seo";
 
 type Props = {
@@ -38,8 +38,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page__AboutUs({ params }: Props) {
   const { locale } = await params;
 
-  // Fetch banner images from CMS
-  const bannerImages = await getAboutPageBannerImages();
+  // Fetch both banner images from CMS
+  const { bannerMiddle, bannerBottom } = await getAllAboutPageImages();
 
   return (
     <>
@@ -124,15 +124,20 @@ export default async function Page__AboutUs({ params }: Props) {
         </div>
       </section>
 
+      {/* BANNER MIDDLE - Managed by CMS */}
       <div className="sticky top-header">
         <div className="relative">
           <ImageCover
-            images={[
-              {
-                src: "https://placehold.co/1920x600?text=BANNER%0AAbout%20Us",
-                alt: "Banner ABOUT US",
-              },
-            ]}
+            images={
+              bannerMiddle.length > 0
+                ? bannerMiddle.map((src) => ({ src, alt: "Banner About Us" }))
+                : [
+                    {
+                      src: "https://placehold.co/1920x600?text=BANNER+MIDDLE%0AAbout%20Us",
+                      alt: "Banner About Us",
+                    },
+                  ]
+            }
           />
 
           <div className="absolute right-0 bottom-0 w-[50%] h-4 bg-gray-light" />
@@ -164,16 +169,16 @@ export default async function Page__AboutUs({ params }: Props) {
       {/*OUR JOURNEY SECTION*/}
       <OurJourney locale={locale as Locale} />
 
-      {/* BANNER SECTION - Managed by CMS */}
+      {/* BANNER BOTTOM - Managed by CMS */}
       <div>
         <ImageCover
           images={
-            bannerImages.length > 0
-              ? bannerImages.map((src) => ({ src, alt: "Banner ABOUT US" }))
+            bannerBottom.length > 0
+              ? bannerBottom.map((src) => ({ src, alt: "Banner About Us" }))
               : [
                   {
-                    src: "https://placehold.co/1920x600?text=BANNER%0AAbout%20Us",
-                    alt: "Banner ABOUT US",
+                    src: "https://placehold.co/1920x600?text=BANNER+BOTTOM%0AAbout%20Us",
+                    alt: "Banner About Us",
                   },
                 ]
           }

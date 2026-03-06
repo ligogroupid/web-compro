@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase";
 
-type AboutPageSection = "banner";
+type AboutPageSection = "banner_middle" | "banner_bottom";
 
 type AboutPageImages = {
   section: AboutPageSection;
@@ -8,18 +8,39 @@ type AboutPageImages = {
 };
 
 /**
- * Fetch banner images for the About Us page.
+ * Fetch banner middle images for the About Us page.
+ * Displayed as a sticky banner between Values and Business Model sections.
  * Returns an array of image URLs, or empty array if not found.
  */
-export async function getAboutPageBannerImages(): Promise<string[]> {
+export async function getAboutPageBannerMiddleImages(): Promise<string[]> {
   const { data, error } = await supabase
     .from("about_page_content")
     .select("images")
-    .eq("section", "banner")
+    .eq("section", "banner_middle")
     .single();
 
   if (error) {
-    console.error("[about-page] Failed to fetch banner images:", error.message);
+    console.error("[about-page] Failed to fetch banner middle images:", error.message);
+    return [];
+  }
+
+  return data?.images ?? [];
+}
+
+/**
+ * Fetch banner bottom images for the About Us page.
+ * Displayed after the Our Journey section.
+ * Returns an array of image URLs, or empty array if not found.
+ */
+export async function getAboutPageBannerBottomImages(): Promise<string[]> {
+  const { data, error } = await supabase
+    .from("about_page_content")
+    .select("images")
+    .eq("section", "banner_bottom")
+    .single();
+
+  if (error) {
+    console.error("[about-page] Failed to fetch banner bottom images:", error.message);
     return [];
   }
 
@@ -28,10 +49,11 @@ export async function getAboutPageBannerImages(): Promise<string[]> {
 
 /**
  * Fetch all about page sections at once.
- * Returns an object with banner image array.
+ * Returns an object with both banner image arrays.
  */
 export async function getAllAboutPageImages(): Promise<{
-  banner: string[];
+  bannerMiddle: string[];
+  bannerBottom: string[];
 }> {
   const { data, error } = await supabase
     .from("about_page_content")
@@ -40,12 +62,13 @@ export async function getAllAboutPageImages(): Promise<{
 
   if (error) {
     console.error("[about-page] Failed to fetch about page images:", error.message);
-    return { banner: [] };
+    return { bannerMiddle: [], bannerBottom: [] };
   }
 
   const sections = (data ?? []) as AboutPageImages[];
 
-  const banner = sections.find((s) => s.section === "banner")?.images ?? [];
+  const bannerMiddle = sections.find((s) => s.section === "banner_middle")?.images ?? [];
+  const bannerBottom = sections.find((s) => s.section === "banner_bottom")?.images ?? [];
 
-  return { banner };
+  return { bannerMiddle, bannerBottom };
 }
