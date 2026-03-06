@@ -188,9 +188,9 @@ export default async function Page__CompanyDetails({ params }: Props) {
 
           {/* IMAGE COMPANY STRENGTH */}
           {company.strengths_image && (
-            <div className="relative md:absolute left-0 bottom-0 pointer-events-none max-w-[40rem] aspect-[3/2.2] border border-dashed border-green-400">
+            <div className="relative md:absolute left-0 bottom-0 pointer-events-none max-w-[40rem] aspect-[3/2.2] border border-dashed border-green-400 flex items-end">
               <img
-                className="size-full object-contain"
+                className="w-full object-contain"
                 alt={`${company.name[loc]} strength`}
                 src={company.strengths_image}
               />
@@ -277,17 +277,18 @@ export default async function Page__CompanyDetails({ params }: Props) {
       )}
 
       {/* COVER SECTIONS */}
-      {company.cover_sections.length > 0 &&
-        company.cover_sections.map((section, i) => (
-          <div key={i} className="relative">
-            <ImageCover
-              images={section.images.map((src) => ({
-                src,
+      {company.cover_image.length > 0 && (
+        <div className="relative">
+          <ImageCover
+            images={company.cover_image.map((c, i) => {
+              return {
+                src: c,
                 alt: `${company.name[loc]} cover ${i + 1}`,
-              }))}
-            />
-          </div>
-        ))}
+              };
+            })}
+          />
+        </div>
+      )}
 
       {/* VISIT LOCATIONS */}
       {company.locations.length > 0 && (

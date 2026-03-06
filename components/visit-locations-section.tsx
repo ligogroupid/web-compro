@@ -41,9 +41,18 @@ export default function VisitLocationsSection({
 }: VisitLocationsSectionProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Determine which mode to render
-  const isProjection = locationDisplayType === "maps_projection";
-  const isGmaps = locationDisplayType === "gmaps_embed";
+  // Determine which mode to render.
+  // If locationDisplayType is not explicitly set, auto-detect from item data.
+  const resolvedDisplayType =
+    locationDisplayType ??
+    (locations.some((loc) => loc.displayType === "gmaps_embed")
+      ? "gmaps_embed"
+      : locations.some((loc) => loc.displayType === "maps_projection")
+        ? "maps_projection"
+        : undefined);
+
+  const isProjection = resolvedDisplayType === "maps_projection";
+  const isGmaps = resolvedDisplayType === "gmaps_embed";
 
   // Filter locations by display type
   const projectionLocations = locations.filter(
@@ -74,7 +83,7 @@ export default function VisitLocationsSection({
   return (
     <section className="relative bg-primary-blue overflow-hidden">
       {/* Diagonal accent line — subtle geometric detail */}
-      <div
+      {/* <div
         className="absolute top-0 right-0 w-px opacity-[0.07]"
         style={{
           height: "120%",
@@ -83,7 +92,7 @@ export default function VisitLocationsSection({
           transform: "rotate(12deg)",
           transformOrigin: "top right",
         }}
-      />
+      /> */}
 
       <div className="relative px-4 py-20 md:py-28">
         <div className="max-w-7xl mx-auto">
@@ -218,7 +227,7 @@ export default function VisitLocationsSection({
                             className={[
                               "w-full",
                               gmapsLocations.length === 1
-                                ? "aspect-[21/9]"
+                                ? "aspect-[4/3]"
                                 : "aspect-[4/3]",
                             ].join(" ")}
                           >
@@ -237,7 +246,7 @@ export default function VisitLocationsSection({
                         </div>
 
                         {/* Location name — below the map */}
-                        <div className="px-5 py-4 mx-6 lg:mx-10 transition-all duration-300 border border-white/50 border-l-0 border-r-0 mt-8">
+                        <div className="px-5 py-4 mx-6 lg:mx-10 transition-all duration-300 border border-white/50 border-l-0 border-r-0 mt-8  max-w-[300px]">
                           <div className="flex items-center gap-3">
                             <p
                               className="font-heading text-sm font-bold tracking-wide transition-colors duration-300"
