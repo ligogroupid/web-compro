@@ -13,7 +13,7 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-/* ─── Dynamic metadata (title + open graph image) ─── */
+/* ─── Dynamic metadata — SEO fields → entity fallback → root layout ─── */
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
@@ -23,11 +23,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const loc = locale as Locale;
 
+  // Tier 1: SEO fields from DB, Tier 2: entity fields
+  const title =
+    article.metaTitle[loc] || article.title[loc] || undefined;
+  const description =
+    article.metaDescription[loc] || undefined;
+  const image = article.metaImage || article.thumbnail || undefined;
+
   return {
-    title: article.title[loc],
+    title,
+    description,
     openGraph: {
-      title: article.title[loc],
-      images: article.thumbnail ? [{ url: article.thumbnail }] : [],
+      title: title ? `${title} | Ligo Group` : undefined,
+      description,
+      images: image ? [{ url: image }] : undefined,
     },
   };
 }

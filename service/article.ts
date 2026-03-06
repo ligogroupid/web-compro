@@ -1,5 +1,9 @@
 import { supabase } from "@/lib/supabase";
 
+/** Columns selected in every article query. */
+const ARTICLE_SELECT =
+  "id, slug, title_id, title_en, name_id, name_en, thumbnail, content_id, content_en, created_at, meta_title_id, meta_title_en, meta_description_id, meta_description_en, meta_image" as const;
+
 /**
  * Article row from Supabase queries (selected columns only).
  * This is a subset of the full table columns.
@@ -15,6 +19,12 @@ type ArticleSelectRow = {
   content_id: string | null;
   content_en: string | null;
   created_at: string | null;
+  /* SEO columns */
+  meta_title_id: string;
+  meta_title_en: string;
+  meta_description_id: string;
+  meta_description_en: string;
+  meta_image: string | null;
 };
 
 /**
@@ -36,6 +46,10 @@ export type Article = {
   thumbnail: string | null;
   content: LocaleText;
   createdAt: string; // ISO 8601 datetime
+  /* SEO metadata — populated after migration, empty strings before */
+  metaTitle: LocaleText;
+  metaDescription: LocaleText;
+  metaImage: string | null;
 };
 
 /**
@@ -58,6 +72,16 @@ function transformArticle(row: ArticleSelectRow): Article {
       en: row.content_en ?? "",
     },
     createdAt: row.created_at ?? new Date().toISOString(),
+    /* SEO metadata */
+    metaTitle: {
+      id: row.meta_title_id ?? "",
+      en: row.meta_title_en ?? "",
+    },
+    metaDescription: {
+      id: row.meta_description_id ?? "",
+      en: row.meta_description_en ?? "",
+    },
+    metaImage: row.meta_image ?? null,
   };
 }
 
@@ -68,7 +92,7 @@ function transformArticle(row: ArticleSelectRow): Article {
 export async function getArticles(): Promise<Article[]> {
   const { data, error } = await supabase
     .from("articles")
-    .select("id, slug, title_id, title_en, name_id, name_en, thumbnail, content_id, content_en, created_at")
+    .select(ARTICLE_SELECT)
     .eq("is_published", true)
     .order("created_at", { ascending: false });
 
@@ -105,7 +129,7 @@ export async function getArticlesPaginated(
   // Fetch paginated data
   const { data, error } = await supabase
     .from("articles")
-    .select("id, slug, title_id, title_en, name_id, name_en, thumbnail, content_id, content_en, created_at")
+    .select(ARTICLE_SELECT)
     .eq("is_published", true)
     .order("created_at", { ascending: false })
     .range(offset, offset + limit - 1);
@@ -128,7 +152,7 @@ export async function getArticlesPaginated(
 export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
   const { data, error } = await supabase
     .from("articles")
-    .select("id, slug, title_id, title_en, name_id, name_en, thumbnail, content_id, content_en, created_at")
+    .select(ARTICLE_SELECT)
     .eq("slug", slug)
     .eq("is_published", true)
     .single();
@@ -153,7 +177,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | undefine
 export async function getRecentArticles(limit: number = 4): Promise<Article[]> {
   const { data, error } = await supabase
     .from("articles")
-    .select("id, slug, title_id, title_en, name_id, name_en, thumbnail, content_id, content_en, created_at")
+    .select(ARTICLE_SELECT)
     .eq("is_published", true)
     .order("created_at", { ascending: false })
     .limit(limit);
@@ -178,7 +202,7 @@ export async function getOtherArticles(
 ): Promise<Article[]> {
   const { data, error } = await supabase
     .from("articles")
-    .select("id, slug, title_id, title_en, name_id, name_en, thumbnail, content_id, content_en, created_at")
+    .select(ARTICLE_SELECT)
     .eq("is_published", true)
     .neq("slug", excludeSlug)
     .order("created_at", { ascending: false })

@@ -62,6 +62,10 @@ type Company = {
   location_display_type?: string;
   cover_image: string[];
   hero_image: string[];
+  /* SEO metadata — populated after migration, empty strings before */
+  meta_title: LocaleText;
+  meta_description: LocaleText;
+  meta_image: string | null;
 };
 
 export type TCompany = Company;
@@ -246,6 +250,16 @@ export async function getCompanyBySlug(slug: string): Promise<Company | null> {
     location_display_type: companyRow.location_display_type ?? undefined,
     cover_image: companyRow.cover_image ?? [],
     hero_image: companyRow.hero_image ?? [],
+    /* SEO metadata */
+    meta_title: {
+      id: companyRow.meta_title_id ?? "",
+      en: companyRow.meta_title_en ?? "",
+    },
+    meta_description: {
+      id: companyRow.meta_description_id ?? "",
+      en: companyRow.meta_description_en ?? "",
+    },
+    meta_image: companyRow.meta_image ?? null,
   };
 }
 

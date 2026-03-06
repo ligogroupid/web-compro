@@ -14,7 +14,7 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-/* ─── Dynamic metadata (title + open graph with logo) ─── */
+/* ─── Dynamic metadata — SEO fields → entity fallback → root layout ─── */
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
@@ -23,15 +23,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!company) return { title: "Company Not Found" };
 
   const loc = locale as Locale;
-  const t = await getTranslations({ locale, namespace: "CompanyDetail" });
+
+  // Tier 1: SEO fields from DB, Tier 2: entity fields
+  const title =
+    company.meta_title[loc] || company.name[loc] || undefined;
+  const description =
+    company.meta_description[loc] || company.description[loc] || undefined;
+  const image = company.meta_image || company.logo || undefined;
 
   return {
-    title: company.name[loc] + t("metaTitleSuffix"),
-    description: company.description[loc],
+    title,
+    description,
     openGraph: {
-      title: company.name[loc] + t("metaTitleSuffix"),
-      description: company.description[loc],
-      images: company.logo ? [{ url: company.logo }] : [],
+      title: title ? `${title} | Ligo Group` : undefined,
+      description,
+      images: image ? [{ url: image }] : undefined,
     },
   };
 }

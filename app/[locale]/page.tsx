@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import type { Locale } from "@/i18n/routing";
 
 import { setRequestLocale } from "next-intl/server";
@@ -13,10 +15,34 @@ import IndonesiaMap from "@/components/indonesia-map";
 import ClientsList from "@/components/clients-list";
 import ButtonBrandLink from "@/components/ButtonBrandLink";
 import HomepageArticles from "@/components/homepage-articles";
+import { getPageMetadata } from "@/service/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+/* ─── Dynamic SEO metadata for Homepage ─── */
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const loc = locale as Locale;
+
+  const seo = await getPageMetadata("home");
+  if (!seo) return {};
+
+  const title = seo.metaTitle[loc] || undefined;
+  const description = seo.metaDescription[loc] || undefined;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: title ? `${title} | Ligo Group` : undefined,
+      description,
+      images: seo.metaImage ? [{ url: seo.metaImage }] : undefined,
+    },
+  };
+}
 
 export default async function Home({ params }: Props) {
   const { locale } = await params;

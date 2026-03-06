@@ -1,13 +1,39 @@
+import type { Metadata } from "next";
+
 import ImageCover from "@/components/cover-images";
 import LigoLetterValues from "@/components/ligo-letter-values";
 import OurJourney from "@/components/our-journey";
 import RecycledProcess from "@/components/recycle-process";
 import { Locale } from "@/i18n/routing";
 import { getAboutPageBannerImages } from "@/service/about";
+import { getPageMetadata } from "@/service/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+/* ─── Dynamic SEO metadata for About Us ─── */
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const loc = locale as Locale;
+
+  const seo = await getPageMetadata("about");
+  if (!seo) return {};
+
+  const title = seo.metaTitle[loc] || undefined;
+  const description = seo.metaDescription[loc] || undefined;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: title ? `${title} | Ligo Group` : undefined,
+      description,
+      images: seo.metaImage ? [{ url: seo.metaImage }] : undefined,
+    },
+  };
+}
 
 export default async function Page__AboutUs({ params }: Props) {
   const { locale } = await params;

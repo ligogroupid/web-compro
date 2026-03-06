@@ -27,19 +27,36 @@ const inter = Inter({
   weight: ["400", "500", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "Ligo",
-  description: "Multi-company plastics corporation profile",
-};
-
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
+
+/* ─── Root metadata — hardcoded fallback for all pages ─── */
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    title: {
+      template: "%s | Ligo Group",
+      default: "Ligo Group",
+    },
+    description:
+      locale === "id"
+        ? "Ligo Group adalah grup perusahaan plastik terkemuka di Indonesia dengan lebih dari 40 tahun pengalaman."
+        : "Ligo Group is a leading plastic corporation in Indonesia with over 40 years of experience.",
+    openGraph: {
+      siteName: "Ligo Group",
+      locale: locale === "id" ? "id_ID" : "en_US",
+      type: "website",
+    },
+  };
+}
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;

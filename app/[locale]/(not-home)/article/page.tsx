@@ -1,8 +1,10 @@
+import type { Metadata } from "next";
 import type { Locale } from "@/i18n/routing";
 
 import { getArticlesPaginated } from "@/service/article";
 import ArticleCard from "@/components/ArticleCard";
 import ArticlePagination from "@/components/article-pagination";
+import { getPageMetadata } from "@/service/seo";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -10,6 +12,29 @@ type Props = {
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ page?: string }>;
 };
+
+/* ─── Dynamic SEO metadata for Articles List ─── */
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const loc = locale as Locale;
+
+  const seo = await getPageMetadata("articles");
+  if (!seo) return {};
+
+  const title = seo.metaTitle[loc] || undefined;
+  const description = seo.metaDescription[loc] || undefined;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: title ? `${title} | Ligo Group` : undefined,
+      description,
+      images: seo.metaImage ? [{ url: seo.metaImage }] : undefined,
+    },
+  };
+}
 
 export default async function Page__Article({ params, searchParams }: Props) {
   const { locale } = await params;
