@@ -3,19 +3,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { Locale } from "@/i18n/routing";
+import type { JourneyMilestoneData } from "@/service/about";
 import Icon__ArrowRight from "./icon-arrow-right";
 
-// ─── Journey Milestone Data ───────────────────────────────────────────────────
+// ─── Fallback hardcoded data (used when CMS returns empty) ────────────────────
 
-type JourneyMilestone = {
-  year: string;
-  companyName: { id: string; en: string };
-  description: { id: string; en: string };
-  logo: React.ReactNode;
-};
-
-const REAL_MILESTONE: JourneyMilestone[] = [
+const FALLBACK_MILESTONES: JourneyMilestoneData[] = [
   {
+    id: "fallback-1",
     year: "1986",
     companyName: {
       id: "LIGOKRIYASA MANDIRI",
@@ -25,14 +20,11 @@ const REAL_MILESTONE: JourneyMilestone[] = [
       id: "Ligo Group journey began with the establishment of PT. Ligokriyasa Mandiri (LKM) in 1986, focusing on the production of plastic bags for household and industrial needs in various sizes and material types. From the outset, the company specialized in meeting the demand for plastic bags across a wide range of businesses, building a strong reputation as a trusted partner in the plastic packaging industry.",
       en: "Ligo Group journey began with the establishment of PT. Ligokriyasa Mandiri (LKM) in 1986, focusing on the production of plastic bags for household and industrial needs in various sizes and material types. From the outset, the company specialized in meeting the demand for plastic bags across a wide range of businesses, building a strong reputation as a trusted partner in the plastic packaging industry.",
     },
-    logo: (
-      <img
-        alt="Logo Ligokriyasa Mandiri"
-        src="/journey/logo-ligokriyasa-mandiri.webp"
-      />
-    ),
+    logo: "/journey/logo-ligokriyasa-mandiri.webp",
+    order: 0,
   },
   {
+    id: "fallback-2",
     year: "1998",
     companyName: {
       id: "DOLPIN",
@@ -42,9 +34,11 @@ const REAL_MILESTONE: JourneyMilestone[] = [
       id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
       en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
     },
-    logo: <img alt="Logo Dolpin" src="/journey/logo-dolpin.webp" />,
+    logo: "/journey/logo-dolpin.webp",
+    order: 1,
   },
   {
+    id: "fallback-3",
     year: "2000",
     companyName: {
       id: "UKS",
@@ -54,9 +48,11 @@ const REAL_MILESTONE: JourneyMilestone[] = [
       id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
       en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
     },
-    logo: <img alt="Logo UKS" src="/journey/logo-uks.webp" />,
+    logo: "/journey/logo-uks.webp",
+    order: 2,
   },
   {
+    id: "fallback-4",
     year: "2001",
     companyName: {
       id: "UKS",
@@ -66,9 +62,11 @@ const REAL_MILESTONE: JourneyMilestone[] = [
       id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
       en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
     },
-    logo: <img alt="Imaging 2001" src="/journey/imaging-2001.jpg" />,
+    logo: "/journey/imaging-2001.jpg",
+    order: 3,
   },
   {
+    id: "fallback-5",
     year: "2001",
     companyName: {
       id: "UKS",
@@ -78,9 +76,11 @@ const REAL_MILESTONE: JourneyMilestone[] = [
       id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
       en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
     },
-    logo: <img alt="Imaging 2001" src="/journey/imaging-2001.jpg" />,
+    logo: "/journey/imaging-2001.jpg",
+    order: 4,
   },
   {
+    id: "fallback-6",
     year: "2001",
     companyName: {
       id: "UKS",
@@ -90,9 +90,11 @@ const REAL_MILESTONE: JourneyMilestone[] = [
       id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
       en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
     },
-    logo: <img alt="Imaging 2001" src="/journey/imaging-2001.jpg" />,
+    logo: "/journey/imaging-2001.jpg",
+    order: 5,
   },
   {
+    id: "fallback-7",
     year: "2001",
     companyName: {
       id: "UKS",
@@ -102,7 +104,8 @@ const REAL_MILESTONE: JourneyMilestone[] = [
       id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
       en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
     },
-    logo: <img alt="Imaging 2001" src="/journey/imaging-2001.jpg" />,
+    logo: "/journey/imaging-2001.jpg",
+    order: 6,
   },
 ];
 
@@ -110,16 +113,18 @@ const REAL_MILESTONE: JourneyMilestone[] = [
 
 type Props = {
   locale: Locale;
+  milestones?: JourneyMilestoneData[];
 };
 
-export default function OurJourney({ locale }: Props) {
+export default function OurJourney({ locale, milestones }: Props) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  // const [scrollProgress, setScrollProgress] = useState(0);
-  // const [isInSection, setIsInSection] = useState(false);
   const [contentTransition, setContentTransition] = useState(false);
   const prevIndexRef = useRef(0);
   const isTransitioningRef = useRef(false);
+
+  // Use CMS data if available, otherwise fallback
+  const data = milestones && milestones.length > 0 ? milestones : FALLBACK_MILESTONES;
 
   const handleScroll = useCallback(() => {
     const section = sectionRef.current;
@@ -133,14 +138,9 @@ export default function OurJourney({ locale }: Props) {
     const scrollableDistance = sectionHeight - viewportHeight;
     const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
 
-    // setScrollProgress(progress);
-
-    // const inSection = rect.top <= 0 && rect.bottom >= viewportHeight;
-    // setIsInSection(inSection);
-
-    const segmentSize = 1 / REAL_MILESTONE.length;
+    const segmentSize = 1 / data.length;
     const newIndex = Math.min(
-      REAL_MILESTONE.length - 1,
+      data.length - 1,
       Math.floor(progress / segmentSize),
     );
 
@@ -155,7 +155,7 @@ export default function OurJourney({ locale }: Props) {
         isTransitioningRef.current = false;
       }, 300);
     }
-  }, []);
+  }, [data.length]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -172,7 +172,7 @@ export default function OurJourney({ locale }: Props) {
     const viewportHeight = window.innerHeight;
     const scrollableDistance = sectionHeight - viewportHeight;
 
-    const segmentSize = 1 / REAL_MILESTONE.length;
+    const segmentSize = 1 / data.length;
     const targetProgress = index * segmentSize + segmentSize * 0.3;
     const targetScroll = sectionTop + scrollableDistance * targetProgress;
 
@@ -184,17 +184,17 @@ export default function OurJourney({ locale }: Props) {
   };
 
   const navigateDown = () => {
-    if (activeIndex < REAL_MILESTONE.length - 1)
+    if (activeIndex < data.length - 1)
       navigateToMilestone(activeIndex + 1);
   };
 
-  const activeMilestone = REAL_MILESTONE[activeIndex];
+  const activeMilestone = data[activeIndex];
 
   return (
     <section
       ref={sectionRef}
       className="relative"
-      style={{ height: `${REAL_MILESTONE.length * 100}vh` }}
+      style={{ height: `${data.length * 100}vh` }}
     >
       {/* Sticky container — stays pinned while section scrolls */}
       <div className="sticky top-0 h-dvh overflow-hidden bg-white">
@@ -220,15 +220,14 @@ export default function OurJourney({ locale }: Props) {
                   </div>
                 </button>
 
-                {REAL_MILESTONE.map((milestone, index) => {
+                {data.map((milestone, index) => {
                   const isActive = index === activeIndex;
 
                   return (
                     <button
-                      key={`notch-${index}`}
+                      key={`notch-${milestone.id}`}
                       onClick={() => navigateToMilestone(index)}
                       className=" left-px z-10 group/notch"
-                      // style={{ top: `${position}%` }}
                       aria-label={`Go to year ${milestone.year}`}
                     >
                       {/* Notch dot */}
@@ -245,8 +244,8 @@ export default function OurJourney({ locale }: Props) {
                 {/* Arrow Down */}
                 <button
                   onClick={navigateDown}
-                  className={`absolute left-4 bottom-2 journey-nav-arrow group ${activeIndex === REAL_MILESTONE.length - 1 ? "opacity-30 cursor-default" : "cursor-pointer"}`}
-                  disabled={activeIndex === REAL_MILESTONE.length - 1}
+                  className={`absolute left-4 bottom-2 journey-nav-arrow group ${activeIndex === data.length - 1 ? "opacity-30 cursor-default" : "cursor-pointer"}`}
+                  disabled={activeIndex === data.length - 1}
                   aria-label="Next milestone"
                 >
                   <div className="rotate-90">
@@ -265,8 +264,14 @@ export default function OurJourney({ locale }: Props) {
                   ${contentTransition ? "opacity-0 translate-y-6 scale-95" : "opacity-100 translate-y-0 scale-100"}
                 `}
               >
-                <div className="w-[280px] lg:w-[304px] relative [&>img]:h-full">
-                  {activeMilestone.logo}
+                <div className="w-[280px] lg:w-[304px] relative">
+                  {activeMilestone.logo && (
+                    <img
+                      alt={`Logo ${activeMilestone.companyName[locale]}`}
+                      src={activeMilestone.logo}
+                      className="h-full w-full object-contain"
+                    />
+                  )}
                 </div>
               </div>
 

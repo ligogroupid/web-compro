@@ -523,6 +523,56 @@ export type Database = {
           },
         ]
       }
+      journey_milestones: {
+        Row: {
+          id: string
+          year: string
+          company_name_id: string
+          company_name_en: string
+          description_id: string
+          description_en: string
+          logo: string | null
+          order: number
+          created_at: string | null
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          id?: string
+          year: string
+          company_name_id?: string
+          company_name_en?: string
+          description_id?: string
+          description_en?: string
+          logo?: string | null
+          order?: number
+          created_at?: string | null
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          id?: string
+          year?: string
+          company_name_id?: string
+          company_name_en?: string
+          description_id?: string
+          description_en?: string
+          logo?: string | null
+          order?: number
+          created_at?: string | null
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "journey_milestones_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       homepage_content: {
         Row: {
           id: string

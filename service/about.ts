@@ -7,6 +7,48 @@ type AboutPageImages = {
   images: string[];
 };
 
+// ─── Journey Milestone Type (from CMS) ────────────────────────────────────────
+
+export type JourneyMilestoneData = {
+  id: string;
+  year: string;
+  companyName: { id: string; en: string };
+  description: { id: string; en: string };
+  logo: string | null;
+  order: number;
+};
+
+/**
+ * Fetch all journey milestones ordered by `order` field.
+ * Used by the OurJourney component on the About Us page.
+ */
+export async function getJourneyMilestones(): Promise<JourneyMilestoneData[]> {
+  const { data, error } = await supabase
+    .from("journey_milestones")
+    .select("*")
+    .order("order", { ascending: true });
+
+  if (error) {
+    console.error("[about-page] Failed to fetch journey milestones:", error.message);
+    return [];
+  }
+
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    year: row.year,
+    companyName: {
+      id: row.company_name_id,
+      en: row.company_name_en,
+    },
+    description: {
+      id: row.description_id,
+      en: row.description_en,
+    },
+    logo: row.logo ?? null,
+    order: row.order,
+  }));
+}
+
 /**
  * Fetch banner middle images for the About Us page.
  * Displayed as a sticky banner between Values and Business Model sections.

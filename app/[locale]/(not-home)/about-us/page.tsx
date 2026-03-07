@@ -5,7 +5,7 @@ import LigoLetterValues from "@/components/ligo-letter-values";
 import OurJourney from "@/components/our-journey";
 import RecycledProcess from "@/components/recycle-process";
 import { Locale } from "@/i18n/routing";
-import { getAllAboutPageImages } from "@/service/about";
+import { getAllAboutPageImages, getJourneyMilestones } from "@/service/about";
 import { getPageMetadata } from "@/service/seo";
 
 type Props = {
@@ -38,8 +38,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page__AboutUs({ params }: Props) {
   const { locale } = await params;
 
-  // Fetch both banner images from CMS
-  const { bannerMiddle, bannerBottom } = await getAllAboutPageImages();
+  // Fetch both banner images and journey milestones from CMS
+  const [{ bannerMiddle, bannerBottom }, journeyMilestones] = await Promise.all([
+    getAllAboutPageImages(),
+    getJourneyMilestones(),
+  ]);
 
   return (
     <>
@@ -167,7 +170,7 @@ export default async function Page__AboutUs({ params }: Props) {
       </section>
 
       {/*OUR JOURNEY SECTION*/}
-      <OurJourney locale={locale as Locale} />
+      <OurJourney locale={locale as Locale} milestones={journeyMilestones} />
 
       {/* BANNER BOTTOM - Managed by CMS */}
       <div>
