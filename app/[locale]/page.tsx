@@ -98,14 +98,14 @@ export default async function Home({ params }: Props) {
           <div className="h-4 bg-primary-blue w-2/5" />
         </section>
         <ClientsList locale={locale as Locale} />
-        <section className="bg-[#E8E8E8] pt-12 pb-32">
+        <section className="bg-[#E8E8E8] pt-12 pb-32 px-4">
           <div className="max-w-7xl mx-auto">
             <h2 className="set-text-caption1">EXPLORE</h2>
             <div className="set-text-headline1 mt-8">Latest News for You</div>
             <div className="mt-20">
               <HomepageArticles locale={locale as Locale} />
             </div>
-            <div className="mt-24">
+            <div className="mt-24 flex">
               <ButtonBrandLink href="/article">All News</ButtonBrandLink>
             </div>
           </div>

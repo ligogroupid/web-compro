@@ -40,7 +40,7 @@ export default function CompanyItemList({ locale, ...company }: Props) {
             src={company.thumbnail}
           />
         )}
-        <div className="text-white p-2.5 bg-primary-blue absolute bottom-0 right-0 w-10 h-10 flex items-center justify-start transition-all duration-500 group-hover:w-20">
+        <div className="text-white p-2.5 bg-primary-blue absolute bottom-0 right-0 w-10 h-10 flex items-center justify-start transition-all duration-500 group-hover:bg-primary-red">
           <Icon__ArrowRight />
         </div>
       </div>

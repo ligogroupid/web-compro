@@ -394,6 +394,40 @@ body {
   animation: accent-line-v 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
+/* ─── Contact Action: Popup Enter/Exit ─── */
+
+@keyframes contact-popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes contact-popup-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+}
+
+.contact-popup-enter {
+  animation: contact-popup-in 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: bottom left;
+}
+
+.contact-popup-exit {
+  animation: contact-popup-out 0.18s ease-in forwards;
+  transform-origin: bottom left;
+}
+
 /* ─── Utility: Hide Scrollbar ─── */
 
 @utility hide-scrollbar {

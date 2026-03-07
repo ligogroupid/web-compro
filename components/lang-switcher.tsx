@@ -22,12 +22,16 @@ export default function LangSwitcher() {
     <button
       type="button"
       onClick={toggle}
-      className="flex items-center bg-primary-blue cursor-pointer ring-2 ring-transparent hover:ring-primary-red text-white py-3 px-2.5 text-[11px]"
+      className="flex items-center bg-primary-blue cursor-pointer text-white py-3 px-2.5 text-[11px] group"
     >
       {LOCALES.map((l, i) => (
         <span key={l} className="flex items-center">
           {i > 0 && <span className="mx-1 font-bold">/</span>}
-          <span className={l === locale ? "font-bold" : "font-normal"}>
+          <span
+            className={
+              l === locale ? "font-bold" : "font-normal group-hover:font-bold"
+            }
+          >
             {l.toUpperCase()}
           </span>
         </span>

@@ -49,7 +49,7 @@ export default function BurgerMenu({
       <button
         type="button"
         onClick={isOpen ? closeMenu : openMenu}
-        className="bg-primary-red flex flex-col justify-center gap-1.5 group p-2.5 aspect-square cursor-pointer ring-2 ring-transparent hover:ring-primary-blue relative z-[9999]"
+        className="bg-primary-red flex flex-col justify-center gap-1.5 group p-2.5 aspect-square cursor-pointer relative z-[9999]"
         title="Menu Button"
         aria-expanded={isOpen}
         aria-controls="fullscreen-menu"

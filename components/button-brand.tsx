@@ -11,7 +11,7 @@ export default function ButtonBrand({
     <button
       type={type}
       {...props}
-      className="relative cursor-pointer flex justify-between gap-2 min-w-[230px] border-b border-b-primary-blue hover:bg-primary-blue hover:text-white group text-lg font-bold active:scale-90 transition-all"
+      className="relative cursor-pointer flex justify-between gap-2 min-w-[230px] border-b border-b-primary-blue group text-lg font-bold active:scale-90 transition-all hover:[&>svg]:-rotate-45 [&>svg]:transition-all [&>svg]:duration-500"
     >
       {children}
       <Icon__ArrowRight />

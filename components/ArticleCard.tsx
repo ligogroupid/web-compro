@@ -48,20 +48,23 @@ const VARIANT_STYLES = {
     thumbnail: "relative aspect-[281/144] w-full overflow-hidden bg-gray-light",
     imgHover:
       "size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105",
-    textWrapper: "py-10 px-6 pb-4 bg-white",
-    title: "mt-4 md:mt-8 text-headline2 leading-[1.3em] font-semibold",
+    textWrapper:
+      "py-10 px-6 pb-4 bg-white group-hover:bg-primary-blue group-hover:text-white",
+    title:
+      "mt-4 md:mt-8 text-xl md:text-headline2 leading-[1.3em] font-semibold",
     titleTag: "h3",
     revealDelay: (index: number) => index * 120,
   },
   compact: {
     link: "bg-gray-light article-card-reveal group flex",
     thumbnail:
-      "relative aspect-[281/144] h-[144px] overflow-hidden bg-gray-light",
+      "relative aspect-[281/144] h-[144px] max-w-2/5 overflow-hidden bg-gray-light",
     imgHover:
       "size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110",
-    textWrapper: "flex-1 px-4 py-6 bg-white",
+    textWrapper:
+      "flex-1 px-4 py-6 bg-white group-hover:bg-primary-blue group-hover:text-white",
     title:
-      "mt-6 line-clamp-3 text-sm leading-[1.4] font-bold text-primary-blue sm:text-[0.9375rem] sm:leading-[1.35] pr-7",
+      "mt-6 line-clamp-3 text-sm leading-[1.4] font-bold sm:text-[0.9375rem] sm:leading-[1.35] pr-7",
     titleTag: "h4",
     revealDelay: (index: number) => (index + 1) * 120,
   },
@@ -116,7 +119,7 @@ export default function ArticleCard({
       {/* Text content */}
       <div className={styles.textWrapper}>
         {/* Date — editorial dateline */}
-        <span className="text-xs tracking-[0.02em] block uppercase text-primary-blue">
+        <span className="text-xs tracking-[0.02em] block uppercase">
           {formatArticleDate(createdDate, locale)}
         </span>
 
@@ -125,7 +128,7 @@ export default function ArticleCard({
 
         {/* Arrow indicator */}
         <div className="ml-auto flex items-center gap-2 absolute right-0 bottom-0">
-          <div className="flex size-8 items-center justify-center bg-transparent transition-all duration-300 group-hover:bg-primary-blue group-hover:text-white">
+          <div className="flex size-8 items-center justify-center bg-transparent transition-all duration-300 group-hover:bg-primary-red group-hover:text-white">
             <Icon__ArrowRight width={14} />
           </div>
         </div>

@@ -18,7 +18,7 @@ export default function ImageCover({ images }: Props) {
     return (
       <img
         key={`${i}${n.src}`}
-        className="size-full object-cover"
+        className="size-full object-cover pointer-events-auto"
         alt={n.alt ?? ""}
         src={n.src}
       />

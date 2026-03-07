@@ -94,26 +94,30 @@ export default function FullscreenMenu({
           <div className="mt-10 md:mt-[53px] flex flex-col md:flex-row md:justify-between gap-10">
             <div className="flex order-2 gap-10 md:gap-16">
               {/* Nav links */}
-              <nav className="flex flex-col justify-center gap-2">
+              <nav className="flex flex-col justify-center gap-6">
                 {NAV_ITEMS.map((item) => (
                   <div key={item.href} className="relative group">
                     <Link
                       href={item.href}
                       locale={locale as Locale}
                       onClick={onClose}
-                      className="group/navitem font-heading set-text-headline1 leading-tight tracking-wide text-white opacity-80 hover:opacity-100 hover:text-orange transition-all duration-200 w-fit flex items-center gap-4 relative"
+                      className="group/navitem font-heading set-text-headline1 leading-tight tracking-wide text-white opacity-80 transition-all duration-200 w-fit flex items-center gap-4 relative"
                     >
                       <span>{item.label}</span>
 
                       {/* Arrow icon — always rendered for Companies, visible on hover via CSS */}
                       {item.hasSubmenu && (
-                        <span className="inline-flex items-center text-orange opacity-0 -translate-x-2 transition-all duration-300 ease-out group-hover/navitem:opacity-100 group-hover/navitem:translate-x-0">
+                        <span className="inline-flex items-center text-white opacity-0 -translate-x-2 transition-all duration-300 ease-out group-hover/navitem:opacity-100 group-hover/navitem:translate-x-0">
                           <Icon__ArrowRight width={24} />
                         </span>
                       )}
 
-                      <div
+                      {/*<div
                         className={`absolute left-0 bottom-0 ${item.hasSubmenu ? "w-0 group-hover/navitem:w-full" : "w-0"} h-1 transition-all duration-300 bg-orange`}
+                      />*/}
+
+                      <div
+                        className={`absolute left-0 bottom-0 w-0 group-hover/navitem:w-full h-1 transition-all duration-300 bg-primary-red`}
                       />
                     </Link>
 

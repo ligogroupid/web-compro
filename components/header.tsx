@@ -22,21 +22,22 @@ export default async function Header({ variant = "general" }: Props) {
       }
     >
       <div className="relative">
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
-          {isHome ? (
-            <div className="bg-white p-4">
-              <Link href="/">
-                <Icon__LogoLigo />
-              </Link>
-            </div>
-          ) : (
-            <div className="w-[90px] aspect-[90/55]">
-              <Link href="/">
+        <Link href="/">
+          <div className="flex justify-between items-center max-w-7xl mx-auto relative">
+            {isHome ? (
+              <div className="relative">
+                <div className="bg-white p-8">
+                  <Icon__LogoLigo width={92} />
+                </div>
+                <div className="h-3 bg-white w-1/2" />
+              </div>
+            ) : (
+              <div className="w-[70px] aspect-[90/55]">
                 <Icon__LogoLigo width={90} />
-              </Link>
-            </div>
-          )}
-        </div>
+              </div>
+            )}
+          </div>
+        </Link>
         <div className="absolute right-0 top-[50%] translate-y-[-50%] flex">
           <LangSwitcher />
           <BurgerMenu companies={companies} />
