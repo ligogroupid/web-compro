@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 
 import ImageCover from "@/components/cover-images";
+
+export const revalidate = 600; // 10 minutes
 import LigoLetterValues from "@/components/ligo-letter-values";
 import OurJourney from "@/components/our-journey";
 import RecycledProcess from "@/components/recycle-process";

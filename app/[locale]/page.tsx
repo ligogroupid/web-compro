@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import type { Locale } from "@/i18n/routing";
 
+export const revalidate = 600; // 10 minutes
+
 import { setRequestLocale } from "next-intl/server";
 import ImageCover from "@/components/cover-images";
 import Separator from "@/components/separator";

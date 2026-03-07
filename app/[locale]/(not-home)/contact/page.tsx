@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { Locale } from "@/i18n/routing";
 
 import ContactForm from "@/components/contact-form";
+
+export const revalidate = 600; // 10 minutes
 import { getContacts } from "@/service/contact";
 import { getPageMetadata } from "@/service/seo";
 

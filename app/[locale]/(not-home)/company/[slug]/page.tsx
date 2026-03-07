@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import ImageCover from "@/components/cover-images";
+
+export const revalidate = 600; // 10 minutes
 import MoreCompanies from "@/components/MoreCompanies";
 import VisitLocationsSection from "@/components/visit-locations-section";
 import type { Locale } from "@/i18n/routing";

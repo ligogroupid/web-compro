@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import type { Locale } from "@/i18n/routing";
+
+export const revalidate = 600; // 10 minutes
 import { getArticleBySlug, getOtherArticles } from "@/service/article";
 import { formatArticleDate } from "@/lib/format-date";
 import ArticleCard from "@/components/ArticleCard";
