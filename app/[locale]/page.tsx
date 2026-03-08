@@ -68,14 +68,16 @@ export default async function Home({ params }: Props) {
         <CompanyList locale={locale as Locale} />
         <FeaturedBrandList locale={locale as Locale} />
         <Achivements locale={locale as Locale} />
-        {/*COVER DISTRIBUTION HOMEPAGE*/}
-        <ImageCover
-          images={distributionImages.map((src) => ({
-            src,
-            alt: "Distribution",
-          }))}
-        />
-        <section className="">
+        <div className="sticky top-header">
+          {/*COVER DISTRIBUTION HOMEPAGE*/}
+          <ImageCover
+            images={distributionImages.map((src) => ({
+              src,
+              alt: "Distribution",
+            }))}
+          />
+        </div>
+        <section className="relative">
           <div className="bg-primary-blue text-white pt-20 pb-[180px] px-6">
             <div className="max-w-7xl mx-auto  grid md:grid-cols-2 gap-8">
               <div>
@@ -95,10 +97,12 @@ export default async function Home({ params }: Props) {
               </div>
             </div>
           </div>
-          <div className="h-4 bg-primary-blue w-2/5" />
+          <div className="bg-white">
+            <div className="h-4 bg-primary-blue w-2/5" />
+          </div>
         </section>
         <ClientsList locale={locale as Locale} />
-        <section className="bg-[#E8E8E8] pt-12 pb-32 px-4">
+        <section className="relative bg-[#E8E8E8] pt-12 pb-32 px-4">
           <div className="max-w-7xl mx-auto">
             <h2 className="set-text-caption1">EXPLORE</h2>
             <div className="set-text-headline1 mt-8">Latest News for You</div>

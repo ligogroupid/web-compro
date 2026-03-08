@@ -1,4 +1,6 @@
-import { Locale } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+
+import CountUpNumber from "@/components/count-up-number";
 
 function BlueSection() {
   return (
@@ -6,14 +8,18 @@ function BlueSection() {
       {/*TEXT PART*/}
       <div className="">
         <div className=" text-white py-8 px-11">
-          <div className="text-[50px]">40+</div>
+          <div className="text-[50px]">
+            <CountUpNumber end={40} suffix="+" />
+          </div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
             YEARS OF EXPERIENCE
           </div>
         </div>
         <div className="bg-white h-px" />
-        <div className=" text-orange py-5 px-8 md:py-8 md:px-11">
-          <div className="text-[50px]">800+</div>
+        <div className=" text-white py-5 px-8 md:py-8 md:px-11">
+          <div className="text-[50px]">
+            <CountUpNumber end={3000} suffix="+" noDelimiter />
+          </div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
             EMPLOYMENT OPPORTUNITIES CREATED
           </div>
@@ -35,15 +41,19 @@ function BlueSection() {
 function LightSection() {
   return (
     <div>
-      <div className="bg-gray-light text-orange py-5 px-8 md:py-8 md:px-11 border-b border-b-[#7689C3]">
-        <div className="text-[50px]">114,000+</div>
+      <div className="bg-gray-light py-5 px-8 md:py-8 md:px-11 border-b border-b-[#7689C3]">
+        <div className="text-[50px]">
+          <CountUpNumber end={113500} suffix="+" />
+        </div>
         <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
-          METER² OF FACTORY AREA
+          METER OF FACTORY AREA
         </div>
       </div>
       <div className="grid grid-cols-2">
-        <div className="bg-white text-orange py-5 px-8 md:py-8 md:px-11">
-          <div className="text-[50px]">350+</div>
+        <div className="bg-white py-5 px-8 md:py-8 md:px-11">
+          <div className="text-[50px]">
+            <CountUpNumber end={350} suffix="+" />
+          </div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
             TONS OF MATERIALS RECYCLED EACH YEAR
           </div>
@@ -56,7 +66,9 @@ function LightSection() {
               className="size-full object-contain"
             />
           </div>
-          <div className="text-[50px] relative">25+</div>
+          <div className="text-[50px] relative">
+            <CountUpNumber end={25} suffix="+" />
+          </div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9 max-w-1/3 relative">
             CITIES OF DISTRIBUTION NETWORK
           </div>

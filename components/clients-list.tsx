@@ -47,7 +47,7 @@ export default async function ClientsList({ locale }: Props) {
   const { industrial, horeka } = await getClientsByGroup();
 
   return (
-    <section className="bg-[#e8e8e8]">
+    <section className="bg-[#e8e8e8] relative">
       <div className="bg-white pt-10 pb-40">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="set-text-caption1">OUR CLIENTS</h2>
