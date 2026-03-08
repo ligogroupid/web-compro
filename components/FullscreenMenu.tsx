@@ -39,14 +39,14 @@ export default function FullscreenMenu({
 
   type NavItem = {
     label: string;
-    href: string;
+    href?: string;
     hasSubmenu?: boolean;
   };
 
   const NAV_ITEMS: NavItem[] = [
     { label: t("home"), href: "/" },
     { label: t("aboutUs"), href: "/about-us" },
-    { label: t("companies"), href: "/company", hasSubmenu: true },
+    { label: t("companies"), hasSubmenu: true },
     { label: t("articles"), href: "/article" },
     { label: t("contact"), href: "/contact" },
   ];
@@ -99,26 +99,42 @@ export default function FullscreenMenu({
               {/* Nav links */}
               <nav className="flex flex-col justify-center gap-6">
                 {NAV_ITEMS.map((item) => (
-                  <div key={item.href} className="relative group">
-                    <Link
-                      href={item.href}
-                      locale={locale as Locale}
-                      onClick={onClose}
-                      className="group/navitem font-heading set-text-headline1 leading-tight tracking-wide text-white opacity-80 transition-all duration-200 w-fit flex items-center gap-4 relative"
-                    >
-                      <span>{item.label}</span>
+                  <div key={item.label} className="relative group">
+                    {item.href ? (
+                      <Link
+                        href={item.href}
+                        locale={locale as Locale}
+                        onClick={onClose}
+                        className="group/navitem font-heading set-text-headline1 leading-tight tracking-wide text-white transition-all duration-200 w-fit flex items-center gap-4 relative"
+                      >
+                        <span>{item.label}</span>
 
-                      {/* Arrow icon — always rendered for Companies, visible on hover via CSS */}
-                      {item.hasSubmenu && (
-                        <span className="inline-flex items-center text-white opacity-0 -translate-x-2 transition-all duration-300 ease-out group-hover/navitem:opacity-100 group-hover/navitem:translate-x-0">
-                          <Icon__ArrowRight width={24} />
-                        </span>
-                      )}
+                        {/* Arrow icon — always rendered for Companies, visible on hover via CSS */}
+                        {item.hasSubmenu && (
+                          <span className="inline-flex items-center text-white">
+                            <Icon__ArrowRight width={22} />
+                          </span>
+                        )}
 
-                      <div
-                        className={`absolute left-0 bottom-0 w-0 group-hover/navitem:w-full h-1 transition-all duration-300 bg-primary-red`}
-                      />
-                    </Link>
+                        <div
+                          className={`absolute left-0 bottom-0 w-0 group-hover/navitem:w-full h-1 transition-all duration-300 bg-primary-red`}
+                        />
+                      </Link>
+                    ) : (
+                      <div className="group/navitem font-heading set-text-headline1 leading-tight tracking-wide text-white transition-all duration-200 w-fit flex items-center gap-4 relative cursor-default">
+                        <span>{item.label}</span>
+
+                        {item.hasSubmenu && (
+                          <span className="inline-flex items-center text-white">
+                            <Icon__ArrowRight width={22} />
+                          </span>
+                        )}
+
+                        <div
+                          className={`absolute left-0 bottom-0 w-0 group-hover/navitem:w-full h-1 transition-all duration-300 bg-primary-red`}
+                        />
+                      </div>
+                    )}
 
                     {item.hasSubmenu && (
                       <div className="pointer-events-none group-hover:pointer-events-auto flex flex-wrap gap-3 w-[200%] absolute left-full pl-10 top-[50%] translate-y-[-50%]">
@@ -158,13 +174,15 @@ export default function FullscreenMenu({
           </div>
 
           {/* BRAND LINE */}
-          <BrandLine />
+          <div className="mt-[62px] md:mt-[113px]">
+            <BrandLine />
+          </div>
         </div>
 
         {/* BG BAR */}
         <div className="bg-primary-red h-[25%]">
           <div
-            className={`h-4 bg-primary-blue ${isOpen ? "w-[50%]" : "w-0"} transition-all duration-1000 delay-200 ml-auto`}
+            className={`h-4 bg-primary-blue ${isOpen ? "w-[65%]" : "w-0"} transition-all duration-1000 delay-200 ml-auto`}
           />
         </div>
       </div>

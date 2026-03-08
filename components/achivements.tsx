@@ -49,7 +49,10 @@ function BlueSection({ labels }: { labels: AchievementLabels }) {
 function LightSection({ labels }: { labels: AchievementLabels }) {
   return (
     <div>
-      <div className="bg-gray-light py-5 px-8 md:py-8 md:px-11 border-b border-b-[#7689C3]">
+      <div className="bg-gray-light py-5 px-8 md:py-8 md:px-11 border-b border-b-[#7689C3] relative">
+        <div className="w-[190px] h-[213px] absolute top-4 right-0 -rotate-[25deg] scale-[130%] z-[1]">
+          <img alt="Plastic Cup" src="/plastic-cup.webp" />
+        </div>
         <div className="text-[50px]">
           <CountUpNumber end={113500} suffix="+" />
         </div>

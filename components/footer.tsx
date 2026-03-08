@@ -21,7 +21,7 @@ export default async function Footer({ locale }: Props) {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/*LEFT SECTION*/}
-            <div>
+            <div className="flex flex-col justify-between">
               <div className="w-[364px]">
                 <Icon__LogoLigo />
               </div>
@@ -44,30 +44,34 @@ export default async function Footer({ locale }: Props) {
             {/*RIGHT SECTION*/}
             <div className="flex flex-col justify-between">
               <div className="max-w-2xl">
-                <div className="bg-primary-blue text-white py-6 px-10">
+                <div className="bg-primary-blue text-white py-10 lg:py-6 px-10">
                   <div className="set-text-headline2 font-heading max-w-sm">
                     {t("ctaText")}
                   </div>
-                  <div className="pt-10 lg:pt-20 flex flex-col md:flex-row gap-4 md:gap-9 md:items-center">
-                    <ContactAction
-                      type="phone"
-                      label={contacts.phone.label[locale]}
-                      prefix="T."
-                      value={contacts.phone.value}
-                    />
-                    <div className="h-px w-9 md:h-9 md:w-px bg-white" />
-                    <ContactAction
-                      type="email"
-                      label={contacts.email.label[locale]}
-                      prefix="E."
-                      value={contacts.email.value}
-                    />
+                  <div className="pt-10 lg:pt-20 flex flex-col xl:flex-row gap-4 xl:gap-9 xl:items-center">
+                    <div className="w-full">
+                      <ContactAction
+                        type="phone"
+                        label={contacts.phone.label[locale]}
+                        prefix="T."
+                        value={contacts.phone.value}
+                      />
+                    </div>
+                    <div className="h-px w-full xl:h-9 xl:w-px bg-white" />
+                    <div className="w-full">
+                      <ContactAction
+                        type="email"
+                        label={contacts.email.label[locale]}
+                        prefix="E."
+                        value={contacts.email.value}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="w-[46%] bg-primary-blue h-2"></div>
               </div>
 
-              <div className="flex justify-end">
+              <div className="flex justify-end mt-20 md:mb-4">
                 <BrandLine />
               </div>
             </div>

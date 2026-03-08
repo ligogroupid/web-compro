@@ -16,7 +16,7 @@ export default async function CompanyList({ locale }: Props) {
   ]);
 
   return (
-    <section className="px-4 py-12">
+    <section className="px-4 py-12 pb-[60px] md:pb-[120px]">
       <div className="mx-auto max-w-7xl">
         <div className="md:max-w-[65%] xl:max-w-[50%]">
           <h2 className="text-caption1">{t("label")}</h2>
