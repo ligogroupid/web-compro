@@ -3,7 +3,8 @@
     "headline": "A Trusted Partner for",
     "headlineAccent": "Reliable Packaging solutions.",
     "label": "ABOUT US",
-    "description": "As the demand for various plastic products to grow and industry competition become more intense, Ligo Group is committed to maintaining and improving product quality as part of our dedication to customers, Ligo Group also continues to innovate and deliver the best value for customers and all stakeholders, both now and in the future."
+    "description": "As the demand for various plastic products to grow and industry competition become more intense, Ligo Group is committed to maintaining and improving product quality as part of our dedication to customers, Ligo Group also continues to innovate and deliver the best value for customers and all stakeholders, both now and in the future.",
+    "readMore": "Read More"
   },
   "CompanyDetail": {
     "metaTitleSuffix": " — Ligo Group",
@@ -15,6 +16,128 @@
     "visitLocations": "LOCATION PRESENCE",
     "visitLocationsSubtitle": "Visit Us",
     "locationNotFound": "Company Not Found",
-    "otherCompanies": "Ligo’s other proficient companies"
+    "otherCompanies": "Ligo's other proficient companies"
+  },
+  "Nav": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "companies": "Companies",
+    "articles": "Articles",
+    "contact": "Contact",
+    "tagline": "We Deliver the Best"
+  },
+  "Homepage": {
+    "distributionLabel": "DISTRIBUTION",
+    "distributionHeadline": "Integrated plastic solutions with nationwide distribution coverage.",
+    "distributionBody": "With nationwide distribution capabilities, Ligo Group supplies trusted products and innovative solutions to customers throughout Indonesia to meet rising market demands.",
+    "exploreLabel": "EXPLORE",
+    "exploreHeadline": "Latest News for You",
+    "allNews": "All News"
+  },
+  "AboutUs": {
+    "heroLabel": "ABOUT US",
+    "heroHeadline": "A growing group driving innovation in the plastic industry",
+    "heroParagraph1": "Ligo Group began its journey with the establishment of PT. Ligokriyasa Mandiri (LKM) in 1986. In its early operations, Ligo Group focused on plastic bag printing and cutting services. Over time, the Group expanded its production capacity by adding various machines to manufacture PP plastic bags.",
+    "heroParagraph2": "Over more than two decades, Ligo Group has grown into a rapidly expanding company and has become a benchmark of success within the plastic packaging industry. Driven by a commitment to sustainable growth, Ligo Group remains dedicated to delivering the best value to its customers and all stakeholders, both now and in the future.",
+    "visionLabel": "VISION",
+    "visionText": "To be the best company in its industry with excellent human capital.",
+    "missionLabel": "MISSION",
+    "mission1": "The company where people work and grow, offering job opportunities to the talented and competent ones, and deliver more career opportunities and a better life in the future.",
+    "mission2": "The company where people work and deliver the best quality products to give the satisfaction to all customers.",
+    "mission3": "The company where stakeholders become an integrated part, together reaching the best benefit and financial profit.",
+    "valuesLabel": "VALUES",
+    "valuesHeadline": "What we stand for",
+    "businessModelLabel": "BUSINESS MODEL",
+    "businessModelHeadline": "A cycle that drives our group from raw materials to recycling.",
+    "businessModelBody": "Our business model operates as an integrated cycle, transforming raw materials through advanced manufacturing into products that support everyday needs. After use, these materials are systematically recovered and recycled, creating a continuous flow that enhances production efficiency and reinforces our long-term commitment to sustainability."
+  },
+  "ContactForm": {
+    "nameLabel": "Name",
+    "namePlaceholder": "Your full name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "+62 xxx xxxx xxxx",
+    "companyLabel": "Company",
+    "companyPlaceholder": "Your company name",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us how we can help you\u2026",
+    "submit": "Submit",
+    "sending": "Sending\u2026",
+    "errorMessage": "Something went wrong. Please try again later.",
+    "successTitle": "Thank you for reaching out!",
+    "successBody": "We\u2019ve received your message and will get back to you as soon as possible.",
+    "sendAnother": "Send another message"
+  },
+  "RecycleProcess": {
+    "stepBadge": "Step",
+    "cycleRepeats": "Cycle repeats",
+    "step1Title": "Raw Materials",
+    "step1Item1": "Pure Resin",
+    "step1Item2": "Recycled Resin",
+    "step2Title": "Manufacturing Process",
+    "step2Item1": "Blowing Process",
+    "step2Item2": "Weaving Process",
+    "step2Item3": "Thermoforming Process",
+    "step3Title": "Final Products",
+    "step3Item1": "Plastic Bags",
+    "step3Item2": "Tarpaulin",
+    "step3Item3": "Cups",
+    "step3Item4": "Plastic Sacks",
+    "step4Title": "Consumption",
+    "step5Title": "Plastic Waste",
+    "step6Title": "Recycling Process",
+    "step6Item1": "Recycled Resin"
+  },
+  "Achievements": {
+    "headline": "Our achievements",
+    "yearsExperience": "YEARS OF EXPERIENCE",
+    "employmentOpportunities": "EMPLOYMENT OPPORTUNITIES CREATED",
+    "factoryArea": "METER OF FACTORY AREA",
+    "materialsRecycled": "TONS OF MATERIALS RECYCLED EACH YEAR",
+    "citiesDistribution": "CITIES OF DISTRIBUTION NETWORK"
+  },
+  "ClientsList": {
+    "label": "OUR CLIENTS",
+    "headline": "Explore our valued clients",
+    "industrial": "INDUSTRIAL",
+    "horeka": "HOREKA"
+  },
+  "CompaniesList": {
+    "label": "OUR COMPANIES",
+    "headline": "Discover our companies that prioritize top performance and innovation."
+  },
+  "FeaturedBrands": {
+    "label": "OUR BRANDS",
+    "headline": "Take a glimpse at our popular brands offering their best products."
+  },
+  "ArticleDetail": {
+    "backToArticles": "Back to Articles",
+    "newsLabel": "News",
+    "otherNewsHeadline": "Checkout Other News & Articles"
+  },
+  "ArticleList": {
+    "headline": "Never Miss an Update on Our News and Article"
+  },
+  "ContactPage": {
+    "label": "CONTACT US",
+    "headline": "Let\u2019s Work Together",
+    "description": "Supported by a wide distribution network, Ligo Group serves customers throughout Indonesia with trusted products and innovative solutions to meet national market demands.",
+    "visitUs": "Visit Us"
+  },
+  "Footer": {
+    "ctaText": "Feel free to contact us for more details."
+  },
+  "MoreCompanies": {
+    "clickHint": "Click to view detailed information."
+  },
+  "LigoValues": {
+    "L": "LEADING IN PRODUCT INNOVATION",
+    "I": "INSPIRE FOR CONTINUOUS MOVEMENT",
+    "G": "GOAL AND GROWTH ORIENTATION",
+    "O": "OPTIMIZING RESOURCES"
+  },
+  "OurJourney": {
+    "label": "OUR JOURNEY"
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import ButtonBrand from "@/components/button-brand";
 
@@ -30,6 +31,7 @@ const inputClass =
   "w-full bg-white text-black placeholder:text-gray-400 border border-primary-blue px-4 py-3 outline-none focus:ring-2 focus:ring-primary-blue/40 transition-shadow font-body text-sm focus:ring-4 focus:ring-primary-blue/10";
 
 export default function ContactForm() {
+  const t = useTranslations("ContactForm");
   const [fields, setFields] = useState<FormFields>(INITIAL_FIELDS);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -58,7 +60,7 @@ export default function ContactForm() {
       setFields(INITIAL_FIELDS);
     } catch (err) {
       console.error("[ContactForm] submission error:", err);
-      setError("Something went wrong. Please try again later.");
+      setError(t("errorMessage"));
     } finally {
       setSubmitting(false);
     }
@@ -67,19 +69,14 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="flex flex-col gap-4 py-12">
-        <p className="set-text-caption2 text-primary-blue">
-          Thank you for reaching out!
-        </p>
-        <p className="set-text-bodytext">
-          We&apos;ve received your message and will get back to you as soon as
-          possible.
-        </p>
+        <p className="set-text-caption2 text-primary-blue">{t("successTitle")}</p>
+        <p className="set-text-bodytext">{t("successBody")}</p>
         <button
           type="button"
           onClick={() => setSubmitted(false)}
           className="self-start set-text-bodytext underline underline-offset-4 text-primary-blue hover:text-orange transition-colors cursor-pointer"
         >
-          Send another message
+          {t("sendAnother")}
         </button>
       </div>
     );
@@ -89,8 +86,8 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
       {/* Name */}
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="cf-name" className="text-bodytext   font-albert">
-          Name {requiredMark}
+        <label htmlFor="cf-name" className="text-bodytext font-albert">
+          {t("nameLabel")} {requiredMark}
         </label>
         <input
           id="cf-name"
@@ -98,7 +95,7 @@ export default function ContactForm() {
           type="text"
           autoComplete="name"
           required
-          placeholder="Your full name"
+          placeholder={t("namePlaceholder")}
           value={fields.name}
           onChange={handleChange}
           className={inputClass}
@@ -107,8 +104,8 @@ export default function ContactForm() {
 
       {/* Email */}
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="cf-email" className="text-bodytext   font-albert">
-          Email {requiredMark}
+        <label htmlFor="cf-email" className="text-bodytext font-albert">
+          {t("emailLabel")} {requiredMark}
         </label>
         <input
           id="cf-email"
@@ -116,7 +113,7 @@ export default function ContactForm() {
           type="email"
           autoComplete="email"
           required
-          placeholder="your@email.com"
+          placeholder={t("emailPlaceholder")}
           value={fields.email}
           onChange={handleChange}
           className={inputClass}
@@ -125,8 +122,8 @@ export default function ContactForm() {
 
       {/* Phone */}
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="cf-phone" className="text-bodytext   font-albert">
-          Phone {requiredMark}
+        <label htmlFor="cf-phone" className="text-bodytext font-albert">
+          {t("phoneLabel")} {requiredMark}
         </label>
         <input
           id="cf-phone"
@@ -134,7 +131,7 @@ export default function ContactForm() {
           type="tel"
           autoComplete="tel"
           required
-          placeholder="+62 xxx xxxx xxxx"
+          placeholder={t("phonePlaceholder")}
           value={fields.phone}
           onChange={handleChange}
           className={inputClass}
@@ -143,8 +140,8 @@ export default function ContactForm() {
 
       {/* Company */}
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="cf-company" className="text-bodytext   font-albert">
-          Company {requiredMark}
+        <label htmlFor="cf-company" className="text-bodytext font-albert">
+          {t("companyLabel")} {requiredMark}
         </label>
         <input
           id="cf-company"
@@ -152,7 +149,7 @@ export default function ContactForm() {
           type="text"
           autoComplete="organization"
           required
-          placeholder="Your company name"
+          placeholder={t("companyPlaceholder")}
           value={fields.company}
           onChange={handleChange}
           className={inputClass}
@@ -161,15 +158,15 @@ export default function ContactForm() {
 
       {/* Message */}
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="cf-message" className="text-bodytext   font-albert">
-          Message {requiredMark}
+        <label htmlFor="cf-message" className="text-bodytext font-albert">
+          {t("messageLabel")} {requiredMark}
         </label>
         <textarea
           id="cf-message"
           name="message"
           rows={5}
           required
-          placeholder="Tell us how we can help you…"
+          placeholder={t("messagePlaceholder")}
           value={fields.message}
           onChange={handleChange}
           className={`${inputClass} resize-none`}
@@ -187,7 +184,7 @@ export default function ContactForm() {
 
       <div className="mt-2">
         <ButtonBrand type="submit" disabled={submitting}>
-          {submitting ? "Sending…" : "Submit"}
+          {submitting ? t("sending") : t("submit")}
         </ButtonBrand>
       </div>
     </form>

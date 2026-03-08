@@ -3,7 +3,8 @@
     "headline": "Mitra Terpercaya untuk",
     "headlineAccent": "Solusi Kemasan yang Handal.",
     "label": "TENTANG KAMI",
-    "description": "Seiring meningkatnya permintaan berbagai produk plastik dan semakin ketatnya persaingan industri, Ligo Group berkomitmen untuk menjaga dan meningkatkan kualitas produk sebagai wujud dedikasi kami kepada pelanggan. Ligo Group juga terus berinovasi dan memberikan nilai terbaik bagi pelanggan serta seluruh pemangku kepentingan, kini dan di masa mendatang."
+    "description": "Seiring meningkatnya permintaan berbagai produk plastik dan semakin ketatnya persaingan industri, Ligo Group berkomitmen untuk menjaga dan meningkatkan kualitas produk sebagai wujud dedikasi kami kepada pelanggan. Ligo Group juga terus berinovasi dan memberikan nilai terbaik bagi pelanggan serta seluruh pemangku kepentingan, kini dan di masa mendatang.",
+    "readMore": "Selengkapnya"
   },
   "CompanyDetail": {
     "metaTitleSuffix": " — Ligo Group",
@@ -16,5 +17,127 @@
     "visitLocationsSubtitle": "Kunjungi Kami",
     "locationNotFound": "Perusahaan Tidak Ditemukan",
     "otherCompanies": "Perusahaan andalan Ligo lainnya"
+  },
+  "Nav": {
+    "home": "Beranda",
+    "aboutUs": "Tentang Kami",
+    "companies": "Perusahaan",
+    "articles": "Artikel",
+    "contact": "Kontak",
+    "tagline": "Kami Memberikan yang Terbaik"
+  },
+  "Homepage": {
+    "distributionLabel": "DISTRIBUSI",
+    "distributionHeadline": "Solusi plastik terintegrasi dengan jaringan distribusi nasional.",
+    "distributionBody": "Dengan kemampuan distribusi nasional, Ligo Group memasok produk terpercaya dan solusi inovatif kepada pelanggan di seluruh Indonesia untuk memenuhi permintaan pasar yang terus meningkat.",
+    "exploreLabel": "JELAJAHI",
+    "exploreHeadline": "Berita Terkini untuk Anda",
+    "allNews": "Semua Berita"
+  },
+  "AboutUs": {
+    "heroLabel": "TENTANG KAMI",
+    "heroHeadline": "Grup yang terus berkembang mendorong inovasi di industri plastik",
+    "heroParagraph1": "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
+    "heroParagraph2": "Selama lebih dari dua dekade, Ligo Group telah berkembang menjadi perusahaan yang terus bertumbuh pesat dan menjadi tolok ukur keberhasilan dalam industri kemasan plastik. Didorong oleh komitmen terhadap pertumbuhan berkelanjutan, Ligo Group terus berdedikasi memberikan nilai terbaik bagi pelanggan dan seluruh pemangku kepentingan, kini dan di masa mendatang.",
+    "visionLabel": "VISI",
+    "visionText": "Menjadi perusahaan terbaik di industrinya dengan modal manusia yang unggul.",
+    "missionLabel": "MISI",
+    "mission1": "Perusahaan tempat orang bekerja dan berkembang, menawarkan peluang kerja bagi yang berbakat dan kompeten, serta memberikan lebih banyak kesempatan karier dan kehidupan yang lebih baik di masa depan.",
+    "mission2": "Perusahaan tempat orang bekerja dan menghasilkan produk berkualitas terbaik untuk memberikan kepuasan kepada seluruh pelanggan.",
+    "mission3": "Perusahaan tempat para pemangku kepentingan menjadi bagian yang terintegrasi, bersama-sama mencapai manfaat terbaik dan keuntungan finansial.",
+    "valuesLabel": "NILAI",
+    "valuesHeadline": "Yang kami junjung tinggi",
+    "businessModelLabel": "MODEL BISNIS",
+    "businessModelHeadline": "Sebuah siklus yang menggerakkan grup kami dari bahan baku hingga daur ulang.",
+    "businessModelBody": "Model bisnis kami beroperasi sebagai siklus terintegrasi, mengubah bahan baku melalui manufaktur canggih menjadi produk yang mendukung kebutuhan sehari-hari. Setelah digunakan, material-material ini dipulihkan dan didaur ulang secara sistematis, menciptakan aliran berkelanjutan yang meningkatkan efisiensi produksi dan memperkuat komitmen jangka panjang kami terhadap keberlanjutan."
+  },
+  "ContactForm": {
+    "nameLabel": "Nama",
+    "namePlaceholder": "Nama lengkap Anda",
+    "emailLabel": "Email",
+    "emailPlaceholder": "anda@email.com",
+    "phoneLabel": "Telepon",
+    "phonePlaceholder": "+62 xxx xxxx xxxx",
+    "companyLabel": "Perusahaan",
+    "companyPlaceholder": "Nama perusahaan Anda",
+    "messageLabel": "Pesan",
+    "messagePlaceholder": "Ceritakan bagaimana kami dapat membantu Anda\u2026",
+    "submit": "Kirim",
+    "sending": "Mengirim\u2026",
+    "errorMessage": "Terjadi kesalahan. Silakan coba lagi nanti.",
+    "successTitle": "Terima kasih telah menghubungi kami!",
+    "successBody": "Pesan Anda telah kami terima dan akan segera kami balas.",
+    "sendAnother": "Kirim pesan lain"
+  },
+  "RecycleProcess": {
+    "stepBadge": "Langkah",
+    "cycleRepeats": "Siklus berulang",
+    "step1Title": "Bahan Baku",
+    "step1Item1": "Resin Murni",
+    "step1Item2": "Resin Daur Ulang",
+    "step2Title": "Proses Manufaktur",
+    "step2Item1": "Proses Blowing",
+    "step2Item2": "Proses Weaving",
+    "step2Item3": "Proses Thermoforming",
+    "step3Title": "Produk Jadi",
+    "step3Item1": "Kantong Plastik",
+    "step3Item2": "Terpal",
+    "step3Item3": "Gelas",
+    "step3Item4": "Karung Plastik",
+    "step4Title": "Konsumsi",
+    "step5Title": "Limbah Plastik",
+    "step6Title": "Proses Daur Ulang",
+    "step6Item1": "Resin Daur Ulang"
+  },
+  "Achievements": {
+    "headline": "Pencapaian kami",
+    "yearsExperience": "TAHUN PENGALAMAN",
+    "employmentOpportunities": "PELUANG KERJA YANG DICIPTAKAN",
+    "factoryArea": "METER LUAS AREA PABRIK",
+    "materialsRecycled": "TON MATERIAL DIDAUR ULANG SETIAP TAHUN",
+    "citiesDistribution": "KOTA JARINGAN DISTRIBUSI"
+  },
+  "ClientsList": {
+    "label": "KLIEN KAMI",
+    "headline": "Kenali klien-klien kami yang berharga",
+    "industrial": "INDUSTRIAL",
+    "horeka": "HOREKA"
+  },
+  "CompaniesList": {
+    "label": "PERUSAHAAN KAMI",
+    "headline": "Temukan perusahaan kami yang mengutamakan kinerja dan inovasi terbaik."
+  },
+  "FeaturedBrands": {
+    "label": "MEREK KAMI",
+    "headline": "Intip merek-merek populer kami yang menawarkan produk terbaik mereka."
+  },
+  "ArticleDetail": {
+    "backToArticles": "Kembali ke Artikel",
+    "newsLabel": "Berita",
+    "otherNewsHeadline": "Lihat Berita & Artikel Lainnya"
+  },
+  "ArticleList": {
+    "headline": "Jangan Lewatkan Update Berita dan Artikel Kami"
+  },
+  "ContactPage": {
+    "label": "HUBUNGI KAMI",
+    "headline": "Mari Bekerja Sama",
+    "description": "Didukung oleh jaringan distribusi yang luas, Ligo Group melayani pelanggan di seluruh Indonesia dengan produk terpercaya dan solusi inovatif untuk memenuhi permintaan pasar nasional.",
+    "visitUs": "Kunjungi Kami"
+  },
+  "Footer": {
+    "ctaText": "Silakan hubungi kami untuk informasi lebih lanjut."
+  },
+  "MoreCompanies": {
+    "clickHint": "Klik untuk melihat informasi lebih lanjut."
+  },
+  "LigoValues": {
+    "L": "LEADING IN PRODUCT INNOVATION",
+    "I": "INSPIRE FOR CONTINUOUS MOVEMENT",
+    "G": "GOAL AND GROWTH ORIENTATION",
+    "O": "OPTIMIZING RESOURCES"
+  },
+  "OurJourney": {
+    "label": "PERJALANAN KAMI"
   }
 }

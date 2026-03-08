@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { createPortal } from "react-dom";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import type { TCompanyListItem } from "@/service/company";
 import type { Locale } from "@/i18n/routing";
@@ -11,12 +12,6 @@ import { Link } from "@/i18n/navigation";
 import { BrandLine } from "./footer";
 import Icon__LogoLigoOffWhite from "./icon-logo-ligo-off-white";
 import Icon__ArrowRight from "./icon-arrow-right";
-
-type NavItem = {
-  label: string;
-  href: string;
-  hasSubmenu?: boolean;
-};
 
 type Props = {
   isOpen: boolean;
@@ -35,17 +30,25 @@ export default function FullscreenMenu({
 }: Props) {
   const params = useParams();
   const locale = params.locale as Locale;
+  const t = useTranslations("Nav");
+
   const sortedCompanies = useMemo(
     () => [...companies].sort((a, b) => a.order - b.order),
     [companies],
   );
 
+  type NavItem = {
+    label: string;
+    href: string;
+    hasSubmenu?: boolean;
+  };
+
   const NAV_ITEMS: NavItem[] = [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about-us" },
-    { label: "Companies", href: "/company", hasSubmenu: true },
-    { label: "Articles", href: "/article" },
-    { label: "Contact", href: "/contact" },
+    { label: t("home"), href: "/" },
+    { label: t("aboutUs"), href: "/about-us" },
+    { label: t("companies"), href: "/company", hasSubmenu: true },
+    { label: t("articles"), href: "/article" },
+    { label: t("contact"), href: "/contact" },
   ];
 
   if (!isVisible) return null;
@@ -112,10 +115,6 @@ export default function FullscreenMenu({
                         </span>
                       )}
 
-                      {/*<div
-                        className={`absolute left-0 bottom-0 ${item.hasSubmenu ? "w-0 group-hover/navitem:w-full" : "w-0"} h-1 transition-all duration-300 bg-orange`}
-                      />*/}
-
                       <div
                         className={`absolute left-0 bottom-0 w-0 group-hover/navitem:w-full h-1 transition-all duration-300 bg-primary-red`}
                       />
@@ -153,7 +152,7 @@ export default function FullscreenMenu({
             <div className="order-1 md:order-2">
               <Icon__LogoLigoOffWhite />
               <div className="hidden md:block mt-4 md:mt-8 text-right tracking-[0.02em] leading-[1.625em]">
-                We Deliver the Best
+                {t("tagline")}
               </div>
             </div>
           </div>

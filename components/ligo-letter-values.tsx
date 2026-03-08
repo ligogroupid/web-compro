@@ -1,40 +1,24 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { useInView } from "@/hooks/useInView";
-import { Locale } from "@/i18n/routing";
 
 type LetterValue = {
   letter: string;
   values: string;
 };
 
-const LETTERS_EN: LetterValue[] = [
-  {
-    letter: "L",
-    values: "LEADING IN PRODUCT INNOVATION",
-  },
-  {
-    letter: "I",
-    values: "INSPIRE FOR CONTINUOUS MOVEMENT",
-  },
-  {
-    letter: "G",
-    values: "GOAL AND GROWTH ORIENTATION",
-  },
-  {
-    letter: "O",
-    values: "OPTIMIZING RESOURCES",
-  },
-];
-
-const LETTERS_BY_LOCALE: Record<string, LetterValue[]> = {
-  id: LETTERS_EN,
-  en: LETTERS_EN,
-};
-
-export default function LigoLetterValues({ locale }: { locale: Locale }) {
+export default function LigoLetterValues() {
+  const t = useTranslations("LigoValues");
   const { isInView, ref } = useInView({ once: true, rootMargin: "0px" });
-  const letters = LETTERS_BY_LOCALE[locale] ?? LETTERS_EN;
+
+  const letters: LetterValue[] = [
+    { letter: "L", values: t("L") },
+    { letter: "I", values: t("I") },
+    { letter: "G", values: t("G") },
+    { letter: "O", values: t("O") },
+  ];
 
   return (
     <div
@@ -54,16 +38,6 @@ export default function LigoLetterValues({ locale }: { locale: Locale }) {
           `}
           style={{ transitionDelay: `${(index + 1) * 300}ms` }}
         >
-          {/* Accent bar — left on mobile, top on sm+ */}
-          {/*<div
-            className="
-              absolute left-0 top-0 h-full w-1 bg-primary-red
-              sm:left-0 sm:top-0 sm:h-1 sm:w-full
-              transition-all duration-500 ease-out
-            "
-            style={{ transitionDelay: `${(index + 1) * 300 + 400}ms` }}
-          />*/}
-
           {/* Letter */}
           <div className="set-text-headline1 shrink-0 sm:shrink">
             {item.letter}

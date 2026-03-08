@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/i18n/routing";
 
+import { getTranslations } from "next-intl/server";
 import { getArticlesPaginated } from "@/service/article";
 
 export const revalidate = 600; // 10 minutes
@@ -44,7 +45,10 @@ export default async function Page__Article({ params, searchParams }: Props) {
 
   const currentPage = Math.max(1, parseInt(page || "1", 10) || 1);
 
-  const { articles, total } = await getArticlesPaginated(currentPage, ITEMS_PER_PAGE);
+  const [t, { articles, total }] = await Promise.all([
+    getTranslations("ArticleList"),
+    getArticlesPaginated(currentPage, ITEMS_PER_PAGE),
+  ]);
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
   const safeCurrentPage = Math.min(currentPage, Math.max(1, totalPages));
 
@@ -58,9 +62,7 @@ export default async function Page__Article({ params, searchParams }: Props) {
       <div className="mx-auto max-w-7xl py-16 md:py-[105px]">
         {/* Section header */}
         <div className="mb-12 max-w-[494px] md:mb-16">
-          <h2 className="set-text-headline1">
-            Never Miss an Update on Our News and Article
-          </h2>
+          <h2 className="set-text-headline1">{t("headline")}</h2>
         </div>
 
         {/* Article grid — hero left, compact stack right */}

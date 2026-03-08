@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 import type { Locale } from "@/i18n/routing";
 
@@ -49,7 +50,10 @@ export default async function Page__ArticleDetail({ params }: Props) {
   const { locale, slug } = await params;
   const loc = locale as Locale;
 
-  const article = await getArticleBySlug(slug);
+  const [t, article] = await Promise.all([
+    getTranslations("ArticleDetail"),
+    getArticleBySlug(slug),
+  ]);
   if (!article) notFound();
 
   /* Other news — exclude current article, take 3 */
@@ -111,7 +115,7 @@ export default async function Page__ArticleDetail({ params }: Props) {
             {/* Back button */}
             <div className="mt-12 md:mt-16">
               <ButtonBrandLink href="/article" scroll={true}>
-                {loc === "id" ? "Kembali ke Artikel" : "Back to Articles"}
+                {t("backToArticles")}
               </ButtonBrandLink>
             </div>
           </div>
@@ -127,14 +131,12 @@ export default async function Page__ArticleDetail({ params }: Props) {
         <div className="mx-auto max-w-7xl py-16 md:py-[105px]">
           {/* Section label */}
           <span className="set-text-caption1 uppercase text-primary-blue/70 block">
-            {loc === "id" ? "Berita" : "News"}
+            {t("newsLabel")}
           </span>
 
           {/* Section heading */}
           <h2 className="set-text-headline2 font-bold mt-3 max-w-md">
-            {loc === "id"
-              ? "Lihat Berita & Artikel Lainnya"
-              : "Checkout Other News & Articles"}
+            {t("otherNewsHeadline")}
           </h2>
 
           {/* Cards grid — 3 columns */}

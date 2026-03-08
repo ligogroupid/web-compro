@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n/routing";
 
+import { getTranslations } from "next-intl/server";
 import { getContacts } from "@/service/contact";
 import ContactAction from "./contact-action";
 import Icon__LogoLigo from "./icon-logo-ligo";
@@ -8,14 +9,11 @@ type Props = {
   locale: Locale;
 };
 
-/** CTA text — the only remaining locale-specific static text. */
-const ctaText: Record<Locale, string> = {
-  en: "Feel free to contact us for more details.",
-  id: "Silakan hubungi kami untuk informasi lebih lanjut.",
-};
-
 export default async function Footer({ locale }: Props) {
-  const contacts = await getContacts();
+  const [t, contacts] = await Promise.all([
+    getTranslations("Footer"),
+    getContacts(),
+  ]);
 
   return (
     <footer className="">
@@ -48,7 +46,7 @@ export default async function Footer({ locale }: Props) {
               <div className="max-w-2xl">
                 <div className="bg-primary-blue text-white py-6 px-10">
                   <div className="set-text-headline2 font-heading max-w-sm">
-                    {ctaText[locale]}
+                    {t("ctaText")}
                   </div>
                   <div className="pt-10 lg:pt-20 flex flex-col md:flex-row gap-4 md:gap-9 md:items-center">
                     <ContactAction

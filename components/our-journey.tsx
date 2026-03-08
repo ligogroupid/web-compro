@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import type { Locale } from "@/i18n/routing";
 import type { JourneyMilestoneData } from "@/service/about";
@@ -117,6 +118,7 @@ type Props = {
 };
 
 export default function OurJourney({ locale, milestones }: Props) {
+  const t = useTranslations("OurJourney");
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [contentTransition, setContentTransition] = useState(false);
@@ -200,7 +202,7 @@ export default function OurJourney({ locale, milestones }: Props) {
       <div className="sticky top-0 h-dvh overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto px-4 h-full flex flex-col justify-center relative">
           {/* Section label */}
-          <h2 className="set-text-caption1">OUR JOURNEY</h2>
+          <h2 className="set-text-caption1">{t("label")}</h2>
 
           {/* ── Main layout: vertical timeline bar + content ── */}
           <div className="flex items-center gap-8 md:gap-16 lg:gap-24 mt-11 min-h-[467px]">

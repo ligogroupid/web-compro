@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import type { Locale } from "@/i18n/routing";
 import type { TClient } from "@/service/client";
 
@@ -44,20 +46,21 @@ function ClientGrid({
 }
 
 export default async function ClientsList({ locale }: Props) {
-  const { industrial, horeka } = await getClientsByGroup();
+  const [t, { industrial, horeka }] = await Promise.all([
+    getTranslations("ClientsList"),
+    getClientsByGroup(),
+  ]);
 
   return (
     <section className="bg-[#e8e8e8] relative">
       <div className="bg-white pt-10 pb-40">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="set-text-caption1">OUR CLIENTS</h2>
-          <div className="set-text-headline1 mt-8">
-            Explore our valued clients
-          </div>
+          <h2 className="set-text-caption1">{t("label")}</h2>
+          <div className="set-text-headline1 mt-8">{t("headline")}</div>
 
           {/* CLIENT INDUSTRIAL */}
           <div className="mt-20">
-            <h3 className="text-lg font-medium tracking-wider">INDUSTRIAL</h3>
+            <h3 className="text-lg font-medium tracking-wider">{t("industrial")}</h3>
             <ClientGrid clients={industrial} locale={locale} />
           </div>
 
@@ -65,7 +68,7 @@ export default async function ClientsList({ locale }: Props) {
 
           {/* CLIENT HOREKA */}
           <div className="mt-20">
-            <h3 className="text-lg font-medium tracking-wider">HOREKA</h3>
+            <h3 className="text-lg font-medium tracking-wider">{t("horeka")}</h3>
             <ClientGrid clients={horeka} locale={locale} />
           </div>
         </div>

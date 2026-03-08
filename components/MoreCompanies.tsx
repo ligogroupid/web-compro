@@ -2,6 +2,7 @@
 
 import { Link } from "@/i18n/navigation";
 import { useInView } from "@/hooks/useInView";
+import { useTranslations } from "next-intl";
 import type { Locale } from "@/i18n/routing";
 import type { TCompanyListItem } from "@/service/company";
 
@@ -12,6 +13,7 @@ type Props = {
 };
 
 export default function MoreCompanies({ companies, title, locale }: Props) {
+  const t = useTranslations("MoreCompanies");
   const { ref: sectionRef, isInView: isVisible } = useInView({
     threshold: 0.15,
   });
@@ -28,9 +30,7 @@ export default function MoreCompanies({ companies, title, locale }: Props) {
           }`}
         >
           <h2 className="mt-3 set-text-headline2 max-w-md">{title}</h2>
-          <p className="set-text-bodytext mt-8">
-            Click to view detailed information.
-          </p>
+          <p className="set-text-bodytext mt-8">{t("clickHint")}</p>
         </div>
 
         {/* Company logo grid — 3 columns, aspect 2/1.5 cards */}

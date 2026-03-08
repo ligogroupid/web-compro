@@ -4,7 +4,7 @@ import type { Locale } from "@/i18n/routing";
 
 export const revalidate = 600; // 10 minutes
 
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import ImageCover from "@/components/cover-images";
 import Separator from "@/components/separator";
 import AboutUsHook from "@/components/about-us-hook";
@@ -50,8 +50,11 @@ export default async function Home({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const { hero: heroImages, distribution: distributionImages } =
-    await getAllHomepageImages();
+  const [t, { hero: heroImages, distribution: distributionImages }] =
+    await Promise.all([
+      getTranslations("Homepage"),
+      getAllHomepageImages(),
+    ]);
 
   return (
     <>
@@ -66,8 +69,8 @@ export default async function Home({ params }: Props) {
         <Separator />
         <AboutUsHook />
         <CompanyList locale={locale as Locale} />
-        <FeaturedBrandList locale={locale as Locale} />
-        <Achivements locale={locale as Locale} />
+        <FeaturedBrandList />
+        <Achivements />
         <div className="sticky top-header">
           {/*COVER DISTRIBUTION HOMEPAGE*/}
           <ImageCover
@@ -81,15 +84,12 @@ export default async function Home({ params }: Props) {
           <div className="bg-primary-blue text-white pt-20 pb-[180px] px-6">
             <div className="max-w-7xl mx-auto  grid md:grid-cols-2 gap-8">
               <div>
-                <h2 className="set-text-caption1">DISTRIBUTION</h2>
+                <h2 className="set-text-caption1">{t("distributionLabel")}</h2>
                 <div className="mt-8 set-text-headline1">
-                  Integrated plastic solutions with nationwide distribution
-                  coverage.
+                  {t("distributionHeadline")}
                 </div>
                 <div className="mt-16 set-text-bodytext">
-                  With nationwide distribution capabilities, Ligo Group supplies
-                  trusted products and innovative solutions to customers
-                  throughout Indonesia to meet rising market demands.
+                  {t("distributionBody")}
                 </div>
               </div>
               <div className="flex items-end">
@@ -104,13 +104,13 @@ export default async function Home({ params }: Props) {
         <ClientsList locale={locale as Locale} />
         <section className="relative bg-[#E8E8E8] pt-12 pb-32 px-4">
           <div className="max-w-7xl mx-auto">
-            <h2 className="set-text-caption1">EXPLORE</h2>
-            <div className="set-text-headline1 mt-8">Latest News for You</div>
+            <h2 className="set-text-caption1">{t("exploreLabel")}</h2>
+            <div className="set-text-headline1 mt-8">{t("exploreHeadline")}</div>
             <div className="mt-20">
               <HomepageArticles locale={locale as Locale} />
             </div>
             <div className="mt-24 flex">
-              <ButtonBrandLink href="/article">All News</ButtonBrandLink>
+              <ButtonBrandLink href="/article">{t("allNews")}</ButtonBrandLink>
             </div>
           </div>
         </section>

@@ -1,14 +1,13 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { EffectFade, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
-
-import type { Locale } from "@/i18n/routing";
 
 // ─── Step Data ─────────────────────────────────────────────────────────────────
 
@@ -19,164 +18,99 @@ type StepData = {
   image: string;
 };
 
-const STEPS: StepData[] = [
-  {
-    number: 1,
-    title: "Raw Materials",
-    items: ["Pure Resin", "Recycled Resin"],
-    image:
-      "https://placehold.co/800x600/1C3687/FFFFFF?text=Raw+Materials%0APure+%26+Recycled+Resin",
-  },
-  {
-    number: 2,
-    title: "Manufacturing Process",
-    items: ["Blowing Process", "Weaving Process", "Thermoforming Process"],
-    image:
-      "https://placehold.co/800x600/2A4494/FFFFFF?text=Manufacturing%0ABlowing+%7C+Weaving+%7C+Thermoforming",
-  },
-  {
-    number: 3,
-    title: "Final Products",
-    items: ["Plastic Bags", "Tarpaulin", "Cups", "Plastic Sacks"],
-    image:
-      "https://placehold.co/800x600/1C3687/FFFFFF?text=Final+Products%0ABags+%7C+Tarpaulin+%7C+Cups",
-  },
-  {
-    number: 4,
-    title: "Consumption",
-    items: undefined,
-    image:
-      "https://placehold.co/800x600/EC6626/FFFFFF?text=Consumption%0AEnd+Users",
-  },
-  {
-    number: 5,
-    title: "Plastic Waste",
-    items: undefined,
-    image:
-      "https://placehold.co/800x600/D71920/FFFFFF?text=Plastic+Waste%0ACollection+%26+Sorting",
-  },
-  {
-    number: 6,
-    title: "Recycling Process",
-    items: ["Recycled Resin"],
-    image:
-      "https://placehold.co/800x600/1C3687/FFFFFF?text=Recycling+Process%0ARecycled+Resin",
-  },
-];
-
 // ─── Desktop Step Components (preserved original layout) ───────────────────────
 
-function Step1() {
+function Step1({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="flex items-start gap-3">
       <div className="text-[11px] text-primary-red font-bold">1</div>
       <div className="min-w-[120px]">
         <div className="text-lg font-body leading-[1em] font-bold max-w-[86px]">
-          Raw Materials
+          {title}
         </div>
         <ul className="text-sm mt-[22px]">
-          <li>
-            <span className="text-primary-red">-</span> Pure Resin
-          </li>
-          <li>
-            <span className="text-primary-red">-</span> Recycled Resin
-          </li>
+          {items.map((item) => (
+            <li key={item}>
+              <span className="text-primary-red">-</span> {item}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
   );
 }
 
-function Step6() {
+function Step6({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="flex items-start gap-3">
       <div className="text-[11px] text-primary-red font-bold">6</div>
       <div className="max-w-[120px]">
-        <div className="text-lg font-body leading-[1em] font-bold">
-          Recycling Process
-        </div>
+        <div className="text-lg font-body leading-[1em] font-bold">{title}</div>
         <ul className="text-sm mt-[22px]">
-          <li>
-            <span className="text-primary-red">-</span> Recycled Resin
-          </li>
+          {items.map((item) => (
+            <li key={item}>
+              <span className="text-primary-red">-</span> {item}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
   );
 }
 
-function Step5() {
+function Step5({ title }: { title: string }) {
   return (
     <div className="flex items-start gap-3">
       <div className="text-[11px] text-primary-red font-bold">5</div>
       <div className="max-w-[120px]">
-        <div className="text-lg font-body leading-[1em] font-bold">
-          Plastic Waste
-        </div>
+        <div className="text-lg font-body leading-[1em] font-bold">{title}</div>
       </div>
     </div>
   );
 }
 
-function Step2() {
+function Step2({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="flex items-start gap-3">
       <div className="text-[11px] text-primary-red font-bold">2</div>
       <div className="max-w-[180px]">
-        <div className="text-lg font-body leading-[1em] font-bold">
-          Manufacturing Process
-        </div>
+        <div className="text-lg font-body leading-[1em] font-bold">{title}</div>
         <ul className="text-sm mt-[22px]">
-          <li>
-            <span className="text-primary-red">-</span> Blowing Process
-          </li>
-          <li>
-            <span className="text-primary-red">-</span> Weaving Process
-          </li>
-          <li>
-            <span className="text-primary-red">-</span> Thermoforming Process
-          </li>
+          {items.map((item) => (
+            <li key={item}>
+              <span className="text-primary-red">-</span> {item}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
   );
 }
 
-function Step3() {
+function Step3({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="flex items-start gap-3">
       <div className="text-[11px] text-primary-red font-bold">3</div>
       <div className="min-w-[120px]">
-        <div className="text-lg font-body leading-[1em] font-bold">
-          Final Products
-        </div>
+        <div className="text-lg font-body leading-[1em] font-bold">{title}</div>
         <ul className="text-sm mt-[22px]">
-          <li>
-            <span className="text-primary-red">-</span> Plastic Bags
-          </li>
-          <li>
-            <span className="text-primary-red">-</span> Tarpaulin
-          </li>
-          <li>
-            <span className="text-primary-red">-</span> Cups
-          </li>
-          <li>
-            <span className="text-primary-red">-</span> Plastic Sacks
-          </li>
+          {items.map((item) => (
+            <li key={item}>
+              <span className="text-primary-red">-</span> {item}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
   );
 }
 
-function Step4() {
+function Step4({ title }: { title: string }) {
   return (
     <div className="flex items-start gap-3">
       <div className="text-[11px] text-primary-red font-bold">4</div>
       <div className="max-w-[120px]">
-        <div className="text-lg font-body leading-[1em] font-bold">
-          Consumption
-        </div>
+        <div className="text-lg font-body leading-[1em] font-bold">{title}</div>
       </div>
     </div>
   );
@@ -184,20 +118,31 @@ function Step4() {
 
 // ─── Desktop Layout (original circular diagram) ────────────────────────────────
 
-function DesktopLayout() {
+type DesktopLayoutProps = {
+  steps: {
+    step1: { title: string; items: string[] };
+    step2: { title: string; items: string[] };
+    step3: { title: string; items: string[] };
+    step4: { title: string };
+    step5: { title: string };
+    step6: { title: string; items: string[] };
+  };
+};
+
+function DesktopLayout({ steps }: DesktopLayoutProps) {
   return (
     <div className="flex justify-center">
       <div className="pr-[100px]">
         <div className="relative">
-          <Step1 />
+          <Step1 {...steps.step1} />
           <div className="w-full h-px bg-primary-blue absolute left-[calc(100%+10px)] top-2" />
         </div>
         <div className="relative mt-20">
-          <Step6 />
+          <Step6 {...steps.step6} />
           <div className="w-1/2 h-px bg-primary-blue absolute left-[calc(100%+10px)] top-2" />
         </div>
         <div className="relative mt-24">
-          <Step5 />
+          <Step5 {...steps.step5} />
           <div className="w-full h-px bg-primary-blue absolute left-[calc(100%+10px)] top-2" />
         </div>
       </div>
@@ -211,15 +156,15 @@ function DesktopLayout() {
       <div className="pl-[100px]">
         <div className="relative">
           <div className="w-3/4 h-px bg-primary-blue absolute right-[calc(100%+20px)] top-2" />
-          <Step2 />
+          <Step2 {...steps.step2} />
         </div>
         <div className="relative mt-10">
           <div className="w-1/3 h-px bg-primary-blue absolute right-[calc(100%+20px)] top-2" />
-          <Step3 />
+          <Step3 {...steps.step3} />
         </div>
         <div className="relative mt-14">
           <div className="w-2/3 h-px bg-primary-blue absolute right-[calc(100%+20px)] top-2" />
-          <Step4 />
+          <Step4 {...steps.step4} />
         </div>
       </div>
     </div>
@@ -228,7 +173,15 @@ function DesktopLayout() {
 
 // ─── Mobile/Tablet Slide Card ──────────────────────────────────────────────────
 
-function SlideCard({ step, isActive }: { step: StepData; isActive: boolean }) {
+function SlideCard({
+  step,
+  isActive,
+  stepBadge,
+}: {
+  step: StepData;
+  isActive: boolean;
+  stepBadge: string;
+}) {
   return (
     <div className="relative overflow-hidden rounded-lg bg-white h-full">
       {/* Image area */}
@@ -253,7 +206,7 @@ function SlideCard({ step, isActive }: { step: StepData; isActive: boolean }) {
           </div>
           <div className="h-px w-6 bg-white/40" />
           <span className="text-white/60 text-[10px] font-body tracking-[0.2em] uppercase">
-            Step
+            {stepBadge}
           </span>
         </div>
 
@@ -286,7 +239,15 @@ function SlideCard({ step, isActive }: { step: StepData; isActive: boolean }) {
 
 // ─── Mobile/Tablet Slider ──────────────────────────────────────────────────────
 
-function MobileSlider() {
+function MobileSlider({
+  steps,
+  stepBadge,
+  cycleRepeats,
+}: {
+  steps: StepData[];
+  stepBadge: string;
+  cycleRepeats: string;
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const progressRef = useRef<HTMLDivElement>(null);
 
@@ -295,7 +256,7 @@ function MobileSlider() {
       {/* Loop indicator — shows circular nature */}
       <div className="flex items-center gap-3 mb-6">
         <div className="relative flex items-center gap-1.5">
-          {STEPS.map((_, idx) => (
+          {steps.map((_, idx) => (
             <div
               key={idx}
               className={`
@@ -313,7 +274,7 @@ function MobileSlider() {
         </div>
         <span className="text-[11px] font-body text-primary-blue/40 tracking-wider">
           {String(activeIndex + 1).padStart(2, "0")}/
-          {String(STEPS.length).padStart(2, "0")}
+          {String(steps.length).padStart(2, "0")}
         </span>
       </div>
 
@@ -334,9 +295,13 @@ function MobileSlider() {
           onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
           className="recycle-swiper !overflow-visible"
         >
-          {STEPS.map((step, idx) => (
+          {steps.map((step, idx) => (
             <SwiperSlide key={step.number} className="!h-auto">
-              <SlideCard step={step} isActive={idx === activeIndex} />
+              <SlideCard
+                step={step}
+                isActive={idx === activeIndex}
+                stepBadge={stepBadge}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -347,12 +312,12 @@ function MobileSlider() {
         <div
           ref={progressRef}
           className="h-full bg-primary-red rounded-full transition-all duration-500 ease-out"
-          style={{ width: `${((activeIndex + 1) / STEPS.length) * 100}%` }}
+          style={{ width: `${((activeIndex + 1) / steps.length) * 100}%` }}
         />
       </div>
 
       {/* Recycle loop hint on last slide */}
-      {activeIndex === STEPS.length - 1 && (
+      {activeIndex === steps.length - 1 && (
         <div className="mt-4 flex items-center gap-2 animate-pulse">
           <svg
             width="16"
@@ -376,7 +341,7 @@ function MobileSlider() {
             />
           </svg>
           <span className="text-[11px] text-primary-red/70 font-body tracking-wider uppercase">
-            Cycle repeats
+            {cycleRepeats}
           </span>
         </div>
       )}
@@ -386,17 +351,89 @@ function MobileSlider() {
 
 // ─── Main Component ────────────────────────────────────────────────────────────
 
-export default function RecycledProcess({ locale }: { locale: Locale }) {
+export default function RecycledProcess() {
+  const t = useTranslations("RecycleProcess");
+
+  const stepData = {
+    step1: {
+      title: t("step1Title"),
+      items: [t("step1Item1"), t("step1Item2")],
+    },
+    step2: {
+      title: t("step2Title"),
+      items: [t("step2Item1"), t("step2Item2"), t("step2Item3")],
+    },
+    step3: {
+      title: t("step3Title"),
+      items: [t("step3Item1"), t("step3Item2"), t("step3Item3"), t("step3Item4")],
+    },
+    step4: { title: t("step4Title") },
+    step5: { title: t("step5Title") },
+    step6: {
+      title: t("step6Title"),
+      items: [t("step6Item1")],
+    },
+  };
+
+  const STEPS: StepData[] = [
+    {
+      number: 1,
+      title: stepData.step1.title,
+      items: stepData.step1.items,
+      image:
+        "https://placehold.co/800x600/1C3687/FFFFFF?text=Raw+Materials%0APure+%26+Recycled+Resin",
+    },
+    {
+      number: 2,
+      title: stepData.step2.title,
+      items: stepData.step2.items,
+      image:
+        "https://placehold.co/800x600/2A4494/FFFFFF?text=Manufacturing%0ABlowing+%7C+Weaving+%7C+Thermoforming",
+    },
+    {
+      number: 3,
+      title: stepData.step3.title,
+      items: stepData.step3.items,
+      image:
+        "https://placehold.co/800x600/1C3687/FFFFFF?text=Final+Products%0ABags+%7C+Tarpaulin+%7C+Cups",
+    },
+    {
+      number: 4,
+      title: stepData.step4.title,
+      items: undefined,
+      image:
+        "https://placehold.co/800x600/EC6626/FFFFFF?text=Consumption%0AEnd+Users",
+    },
+    {
+      number: 5,
+      title: stepData.step5.title,
+      items: undefined,
+      image:
+        "https://placehold.co/800x600/D71920/FFFFFF?text=Plastic+Waste%0ACollection+%26+Sorting",
+    },
+    {
+      number: 6,
+      title: stepData.step6.title,
+      items: stepData.step6.items,
+      image:
+        "https://placehold.co/800x600/1C3687/FFFFFF?text=Recycling+Process%0ARecycled+Resin",
+    },
+  ];
+
   return (
     <>
       {/* Desktop: original circular diagram */}
       <div className="hidden lg:block">
-        <DesktopLayout />
+        <DesktopLayout steps={stepData} />
       </div>
 
       {/* Mobile/Tablet: swiper slider */}
       <div className="lg:hidden overflow-x-hidden">
-        <MobileSlider />
+        <MobileSlider
+          steps={STEPS}
+          stepBadge={t("stepBadge")}
+          cycleRepeats={t("cycleRepeats")}
+        />
       </div>
     </>
   );

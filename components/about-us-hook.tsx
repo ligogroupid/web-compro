@@ -18,7 +18,7 @@ export default function AboutUsHook() {
           <div className="mt-6 set-text-bodytext">{t("description")}</div>
           <div className="mt-14">
             <Link href="about-us">
-              <ButtonBrand>Read More</ButtonBrand>
+              <ButtonBrand>{t("readMore")}</ButtonBrand>
             </Link>
           </div>
         </div>

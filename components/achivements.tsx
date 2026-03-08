@@ -1,8 +1,16 @@
-import type { Locale } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
 
 import CountUpNumber from "@/components/count-up-number";
 
-function BlueSection() {
+type AchievementLabels = {
+  yearsExperience: string;
+  employmentOpportunities: string;
+  factoryArea: string;
+  materialsRecycled: string;
+  citiesDistribution: string;
+};
+
+function BlueSection({ labels }: { labels: AchievementLabels }) {
   return (
     <div className="bg-primary-blue blue grid grid-cols-2 relative">
       {/*TEXT PART*/}
@@ -12,7 +20,7 @@ function BlueSection() {
             <CountUpNumber end={40} suffix="+" />
           </div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
-            YEARS OF EXPERIENCE
+            {labels.yearsExperience}
           </div>
         </div>
         <div className="bg-white h-px" />
@@ -21,7 +29,7 @@ function BlueSection() {
             <CountUpNumber end={3000} suffix="+" noDelimiter />
           </div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
-            EMPLOYMENT OPPORTUNITIES CREATED
+            {labels.employmentOpportunities}
           </div>
         </div>
       </div>
@@ -38,7 +46,7 @@ function BlueSection() {
   );
 }
 
-function LightSection() {
+function LightSection({ labels }: { labels: AchievementLabels }) {
   return (
     <div>
       <div className="bg-gray-light py-5 px-8 md:py-8 md:px-11 border-b border-b-[#7689C3]">
@@ -46,7 +54,7 @@ function LightSection() {
           <CountUpNumber end={113500} suffix="+" />
         </div>
         <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
-          METER OF FACTORY AREA
+          {labels.factoryArea}
         </div>
       </div>
       <div className="grid grid-cols-2">
@@ -55,7 +63,7 @@ function LightSection() {
             <CountUpNumber end={350} suffix="+" />
           </div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
-            TONS OF MATERIALS RECYCLED EACH YEAR
+            {labels.materialsRecycled}
           </div>
         </div>
         <div className="bg-primary-red text-white py-8 px-11 relative">
@@ -70,7 +78,7 @@ function LightSection() {
             <CountUpNumber end={25} suffix="+" />
           </div>
           <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9 max-w-1/3 relative">
-            CITIES OF DISTRIBUTION NETWORK
+            {labels.citiesDistribution}
           </div>
         </div>
       </div>
@@ -78,15 +86,25 @@ function LightSection() {
   );
 }
 
-export default function Achivements({ locale }: { locale: Locale }) {
+export default async function Achivements() {
+  const t = await getTranslations("Achievements");
+
+  const labels: AchievementLabels = {
+    yearsExperience: t("yearsExperience"),
+    employmentOpportunities: t("employmentOpportunities"),
+    factoryArea: t("factoryArea"),
+    materialsRecycled: t("materialsRecycled"),
+    citiesDistribution: t("citiesDistribution"),
+  };
+
   return (
     <section className="px-4 py-20">
       <div className="max-w-7xl mx-auto">
-        <h2 className="set-text-headline2">Our achievements</h2>
+        <h2 className="set-text-headline2">{t("headline")}</h2>
         <div className="mt-14">
           <div className="grid md:grid-cols-2">
-            <BlueSection />
-            <LightSection />
+            <BlueSection labels={labels} />
+            <LightSection labels={labels} />
           </div>
         </div>
       </div>

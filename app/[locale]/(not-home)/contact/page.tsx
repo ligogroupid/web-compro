@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/i18n/routing";
 
+import { getTranslations } from "next-intl/server";
 import ContactForm from "@/components/contact-form";
 
 export const revalidate = 600; // 10 minutes
@@ -36,7 +37,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
-  const contacts = await getContacts();
+
+  const [t, contacts] = await Promise.all([
+    getTranslations("ContactPage"),
+    getContacts(),
+  ]);
 
   return (
     <>
@@ -44,13 +49,9 @@ export default async function ContactPage({ params }: Props) {
         <div className="mx-auto max-w-7xl flex flex-col md:flex-row md:gap-20">
           {/*LEFT SECTION*/}
           <div className="max-w-lg">
-            <h2 className="set-text-caption1">CONTACT US</h2>
-            <div className="set-text-headline1 mt-8">Let's Work Together</div>
-            <div className="mt-12 set-text-bodytext">
-              Supported by a wide distribution network, Ligo Group serves
-              customers throughout Indonesia with trusted products and
-              innovative solutions to meet national market demands.
-            </div>
+            <h2 className="set-text-caption1">{t("label")}</h2>
+            <div className="set-text-headline1 mt-8">{t("headline")}</div>
+            <div className="mt-12 set-text-bodytext">{t("description")}</div>
             <div className="h-px mt-14 bg-primary-blue" />
             <div className="hidden mt-24 md:flex flex-col gap-9">
               <div>
@@ -93,7 +94,7 @@ export default async function ContactPage({ params }: Props) {
       </section>
       <section className="bg-gray-light px-4 pb-14 pt-14">
         <div className="mx-auto max-w-7xl">
-          <h2 className="set-text-headline1">Visit Us</h2>
+          <h2 className="set-text-headline1">{t("visitUs")}</h2>
           <div className="aspect-[3/2] md:aspect-[1200/467] w-full mt-12">
             <iframe
               src={
