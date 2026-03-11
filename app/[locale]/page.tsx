@@ -51,10 +51,7 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
 
   const [t, { hero: heroImages, distribution: distributionImages }] =
-    await Promise.all([
-      getTranslations("Homepage"),
-      getAllHomepageImages(),
-    ]);
+    await Promise.all([getTranslations("Homepage"), getAllHomepageImages()]);
 
   return (
     <>
@@ -81,7 +78,7 @@ export default async function Home({ params }: Props) {
           />
         </div>
         <section className="relative">
-          <div className="bg-primary-blue text-white pt-20 pb-[180px] px-6">
+          <div className="bg-primary-blue text-white pt-20 pb-[100px] md:pb-[180px] px-6">
             <div className="max-w-7xl mx-auto  grid md:grid-cols-2 gap-8">
               <div>
                 <h2 className="set-text-caption1">{t("distributionLabel")}</h2>
@@ -105,7 +102,9 @@ export default async function Home({ params }: Props) {
         <section className="relative bg-[#E8E8E8] pt-12 pb-32 px-4">
           <div className="max-w-7xl mx-auto">
             <h2 className="set-text-caption1">{t("exploreLabel")}</h2>
-            <div className="set-text-headline1 mt-8">{t("exploreHeadline")}</div>
+            <div className="set-text-headline1 mt-8">
+              {t("exploreHeadline")}
+            </div>
             <div className="mt-20">
               <HomepageArticles locale={locale as Locale} />
             </div>

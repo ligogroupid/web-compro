@@ -15,7 +15,7 @@ function BlueSection({ labels }: { labels: AchievementLabels }) {
     <div className="bg-primary-blue blue grid grid-cols-2 relative">
       {/*TEXT PART*/}
       <div className="">
-        <div className=" text-white py-8 px-11">
+        <div className=" text-white py-4 px-4 md:py-8 md:px-11">
           <div className="text-[50px]">
             <CountUpNumber end={40} suffix="+" />
           </div>
@@ -24,7 +24,7 @@ function BlueSection({ labels }: { labels: AchievementLabels }) {
           </div>
         </div>
         <div className="bg-white h-px" />
-        <div className=" text-white py-5 px-8 md:py-8 md:px-11">
+        <div className=" text-white py-4 px-4 md:py-8 md:px-11">
           <div className="text-[50px]">
             <CountUpNumber end={3000} suffix="+" noDelimiter />
           </div>
@@ -48,9 +48,9 @@ function BlueSection({ labels }: { labels: AchievementLabels }) {
 
 function LightSection({ labels }: { labels: AchievementLabels }) {
   return (
-    <div>
-      <div className="bg-gray-light py-5 px-8 md:py-8 md:px-11 border-b border-b-[#7689C3] relative">
-        <div className="w-[190px] h-[213px] absolute top-4 right-0 -rotate-[25deg] scale-[130%] z-[1]">
+    <div className="overflow-x-hidden">
+      <div className="bg-gray-light py-4 px-4 md:py-8 md:px-11 border-b border-b-[#7689C3] relative">
+        <div className="w-[130px] h-[150px] md:w-[190px] md:h-[213px] absolute top-4 right-0 -rotate-[25deg] scale-[130%] z-[1]">
           <img alt="Plastic Cup" src="/plastic-cup.webp" />
         </div>
         <div className="text-[50px]">
@@ -61,7 +61,8 @@ function LightSection({ labels }: { labels: AchievementLabels }) {
         </div>
       </div>
       <div className="grid grid-cols-2">
-        <div className="bg-white py-5 px-8 md:py-8 md:px-11">
+        {/*4th Section*/}
+        <div className="bg-white py-4 px-4 md:py-8 md:px-11">
           <div className="text-[50px]">
             <CountUpNumber end={350} suffix="+" />
           </div>
@@ -69,8 +70,9 @@ function LightSection({ labels }: { labels: AchievementLabels }) {
             {labels.materialsRecycled}
           </div>
         </div>
-        <div className="bg-primary-red text-white py-8 px-11 relative">
-          <div className="absolute bottom-0 right-0 w-[120px] aspect-square">
+        {/*5th Section*/}
+        <div className="bg-primary-red text-white py-4 px-4 md:py-8 md:px-11 relative">
+          <div className="absolute bottom-12 md:bottom-0 right-0 w-[120px] aspect-square">
             <img
               alt="truck-delivery"
               src="/truck-delivery.webp"
@@ -80,7 +82,7 @@ function LightSection({ labels }: { labels: AchievementLabels }) {
           <div className="text-[50px] relative">
             <CountUpNumber end={25} suffix="+" />
           </div>
-          <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9 max-w-1/3 relative">
+          <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9 md:max-w-1/3 relative">
             {labels.citiesDistribution}
           </div>
         </div>

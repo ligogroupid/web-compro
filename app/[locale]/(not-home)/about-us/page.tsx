@@ -50,31 +50,33 @@ export default async function Page__AboutUs({ params }: Props) {
 
   return (
     <>
-      <section className="min-h-[120dvh] bg-sky-image text-white px-4 relative overflow-hidden">
-        <div className="absolute left-0 bottom-0 size-full flex items-end justify-start">
+      <section className=" bg-sky-image text-white">
+        <div className="px-4 sticky top-0">
+          <div className="max-w-7xl mx-auto relative pt-[102px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              <div>
+                <h2 className="set-text-caption1">{t("heroLabel")}</h2>
+                <div className="set-text-headline1 mt-14">
+                  {t("heroHeadline")}
+                </div>
+              </div>
+              <div className="space-y-14">
+                <p className="max-w-[615px]">{t("heroParagraph1")}</p>
+                <p className="max-w-[615px]">{t("heroParagraph2")}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="size-full flex items-end justify-start relative">
           <img
             className="w-full object-contain"
             alt="Ligo Building"
             src="/ligo-building.webp"
           />
-        </div>
 
-        <div className="max-w-7xl mx-auto relative">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 pt-[102px]">
-            <div>
-              <h2 className="set-text-caption1">{t("heroLabel")}</h2>
-              <div className="set-text-headline1 mt-14">
-                {t("heroHeadline")}
-              </div>
-            </div>
-            <div className="space-y-14">
-              <p className="max-w-[615px]">{t("heroParagraph1")}</p>
-              <p className="max-w-[615px]">{t("heroParagraph2")}</p>
-            </div>
-          </div>
+          <div className="absolute right-0 -bottom-0.5 h-4 w-[65%] bg-gray-light" />
         </div>
-
-        <div className="absolute right-0 bottom-0 h-4 w-[65%] bg-gray-light" />
       </section>
 
       <section className="bg-gray-light px-4 py-20 relative">
@@ -87,14 +89,14 @@ export default async function Page__AboutUs({ params }: Props) {
             <div>
               <h2 className="set-text-caption1">{t("missionLabel")}</h2>
               <div className="mt-12 space-y-7">
-                {([t("mission1"), t("mission2"), t("mission3")] as string[]).map(
-                  (text, index) => (
-                    <div key={index} className="flex items-start gap-7">
-                      <div className="h-0.5 w-5 bg-primary-red" />
-                      <div className="set-text-bodytext flex-1">{text}</div>
-                    </div>
-                  ),
-                )}
+                {(
+                  [t("mission1"), t("mission2"), t("mission3")] as string[]
+                ).map((text, index) => (
+                  <div key={index} className="flex items-start gap-7">
+                    <div className="h-0.5 w-5 bg-primary-red" />
+                    <div className="set-text-bodytext flex-1">{text}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
