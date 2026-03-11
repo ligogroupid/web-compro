@@ -9,10 +9,10 @@ type Props = {
 export default function NotHomeLayout({ children }: Props) {
   return (
     <>
-      <div className="sticky top-0 z-50">
-        <Header />
-        <Separator />
-      </div>
+      {/*<div className="">*/}
+      <Header />
+      <Separator />
+      {/*</div>*/}
       <main>{children}</main>
     </>
   );

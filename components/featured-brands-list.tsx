@@ -16,7 +16,7 @@ export default async function FeaturedBrandList() {
           <div className="set-text-headline1 mt-8">{t("headline")}</div>
         </div>
         <div className="mt-20 max-w-[893px] ml-auto  grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-7 md:gap-12 lg:gap-20">
-          {[...brands, ...brands, ...brands].map((brand, n) => (
+          {brands.map((brand, n) => (
             <div
               key={`${brand.name}-${n}`}
               className="relative aspect-square p-2 flex items-center justify-center"
