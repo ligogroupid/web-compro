@@ -51,12 +51,12 @@ export default async function Page__AboutUs({ params }: Props) {
   return (
     <>
       <section className=" bg-sky-image text-white">
-        <div className="px-4 sticky top-0">
+        <div className="px-4 xl:sticky lg:top-0">
           <div className="max-w-7xl mx-auto relative pt-[102px]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <div>
                 <h2 className="set-text-caption1">{t("heroLabel")}</h2>
-                <div className="set-text-headline1 mt-14">
+                <div className="set-text-headline1 mt-14 max-w-[75%] md:max-w-full">
                   {t("heroHeadline")}
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default async function Page__AboutUs({ params }: Props) {
         </div>
       </section>
 
-      <section className="bg-primary-blue text-white px-4 pt-[68px] pb-[182px]">
+      <section className="sticky top-0  bg-primary-blue text-white px-4 pt-[68px] pb-[182px]">
         <div className="max-w-7xl mx-auto">
           <div>
             <h2 className="set-text-caption1">{t("valuesLabel")}</h2>
@@ -116,24 +116,24 @@ export default async function Page__AboutUs({ params }: Props) {
       </section>
 
       {/* BANNER MIDDLE - Managed by CMS */}
-      <div className="sticky top-header">
-        <div className="relative">
-          <ImageCover
-            images={
-              bannerMiddle.length > 0
-                ? bannerMiddle.map((src) => ({ src, alt: "Banner About Us" }))
-                : [
-                    {
-                      src: "https://placehold.co/1920x600?text=BANNER+MIDDLE%0AAbout%20Us",
-                      alt: "Banner About Us",
-                    },
-                  ]
-            }
-          />
+      {/*<div className="sticky top-0">*/}
+      <div className="relative">
+        <ImageCover
+          images={
+            bannerMiddle.length > 0
+              ? bannerMiddle.map((src) => ({ src, alt: "Banner About Us" }))
+              : [
+                  {
+                    src: "https://placehold.co/1920x600?text=BANNER+MIDDLE%0AAbout%20Us",
+                    alt: "Banner About Us",
+                  },
+                ]
+          }
+        />
 
-          <div className="absolute right-0 bottom-0 w-[50%] h-4 bg-gray-light" />
-        </div>
+        <div className="absolute right-0 bottom-0 w-[50%] h-4 bg-gray-light" />
       </div>
+      {/*</div>*/}
 
       <section className="bg-gray-light px-4 py-16 relative">
         <div className="max-w-7xl mx-auto">

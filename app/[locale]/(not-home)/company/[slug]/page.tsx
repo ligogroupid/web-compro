@@ -27,8 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const loc = locale as Locale;
 
   // Tier 1: SEO fields from DB, Tier 2: entity fields
-  const title =
-    company.meta_title[loc] || company.name[loc] || undefined;
+  const title = company.meta_title[loc] || company.name[loc] || undefined;
   const description =
     company.meta_description[loc] || company.description[loc] || undefined;
   const image = company.meta_image || company.logo || undefined;
@@ -156,7 +155,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
       {/* COMPANY STRENGTHS */}
       {company.provens.length > 0 && (
         <section
-          className="relative"
+          className="sticky top-0"
           style={{
             backgroundColor: company.strengths_bg_color ?? "#e0e0e0",
             backgroundImage: company.strengths_bg_image
@@ -178,7 +177,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
                 <div className="w-fit flex gap-9 md:ml-auto">
                   {company.provens.map((n, i) => (
                     <div key={i} className="w-[270px] relative">
-                      <div className="h-[365px] bg-white px-5 py-6 overflow-y-auto hide-scrollbar">
+                      <div className="bg-white px-5 py-6 h-[calc(100%-0.75rem)]">
                         <div className="font-heading text-[1.375rem] leading-[1.36em] tracking-[0.02em] h-[60px]">
                           {n.title[loc]}
                         </div>
@@ -193,27 +192,32 @@ export default async function Page__CompanyDetails({ params }: Props) {
               </div>
             </div>
           </div>
-
-          {/* IMAGE COMPANY STRENGTH */}
-          {company.strengths_image && (
-            <div className="relative md:absolute left-0 bottom-0 pointer-events-none max-w-[40rem] aspect-[3/2.2] border border-dashed border-green-400 flex items-end">
-              <img
-                className="w-full object-contain"
-                alt={`${company.name[loc]} strength`}
-                src={company.strengths_image}
-              />
-            </div>
-          )}
         </section>
       )}
 
+      {/* IMAGE COMPANY STRENGTH */}
+      {company.strengths_image && (
+        <div
+          className={[
+            "relative",
+            "pointer-events-none max-w-[40rem] aspect-[3/2.2] flex items-end",
+          ].join(" ")}
+        >
+          <img
+            className="w-full object-contain"
+            alt={`${company.name[loc]} strength`}
+            src={company.strengths_image}
+          />
+        </div>
+      )}
+
       {/* BRANDS and PRODUCTS OF COMPANY */}
-      <section className="bg-white px-4">
+      <section className="bg-white px-4 relative">
         {/* BRANDS */}
         {company.brands.length > 0 && (
           <>
             <div className="py-16 flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
-              <div className="w-1/5">
+              <div className="lg:w-1/5">
                 <h2 className="set-text-headline2">
                   {t("brandsOf")} {company.initial_name[loc]}
                 </h2>
@@ -246,7 +250,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
         {/* PRODUCTS */}
         {company.products.length > 0 && (
           <div className="py-16 flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
-            <div className="w-1/5">
+            <div className="lg:w-1/5">
               <h2 className="set-text-headline2">
                 {t("productsOf")} {company.initial_name[loc]}
               </h2>

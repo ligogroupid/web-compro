@@ -68,7 +68,7 @@ export default async function Home({ params }: Props) {
         <CompanyList locale={locale as Locale} />
         <FeaturedBrandList />
         <Achivements />
-        <div className="sticky top-header">
+        <div className="sticky top-0">
           {/*COVER DISTRIBUTION HOMEPAGE*/}
           <ImageCover
             images={distributionImages.map((src) => ({
