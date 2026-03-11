@@ -58,7 +58,7 @@ export default async function Page__Article({ params, searchParams }: Props) {
   const compactArticles = articles.slice(1);
 
   return (
-    <section className="bg-white px-4 md:px-8">
+    <section className="bg-gray-light px-4 md:px-8">
       <div className="mx-auto max-w-7xl py-16 md:py-[105px]">
         {/* Section header */}
         <div className="mb-12 max-w-[494px] md:mb-16">

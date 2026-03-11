@@ -27,10 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const loc = locale as Locale;
 
   // Tier 1: SEO fields from DB, Tier 2: entity fields
-  const title =
-    article.metaTitle[loc] || article.title[loc] || undefined;
-  const description =
-    article.metaDescription[loc] || undefined;
+  const title = article.metaTitle[loc] || article.title[loc] || undefined;
+  const description = article.metaDescription[loc] || undefined;
   const image = article.metaImage || article.thumbnail || undefined;
 
   return {
@@ -99,7 +97,7 @@ export default async function Page__ArticleDetail({ params }: Props) {
               )}
 
               {/* Title */}
-              <h1 className="set-text-headline1 font-extrabold mt-8 md:mt-10">
+              <h1 className="set-text-headline1 mt-8 md:mt-10">
                 {article.title[loc]}
               </h1>
 

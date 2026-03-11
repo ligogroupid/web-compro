@@ -86,7 +86,7 @@ export default function ArticlePagination({ currentPage, totalPages }: Props) {
           </svg>
         </Link>
       ) : (
-        <div className="flex size-10 items-center justify-center text-primary-blue/20">
+        <div className="flex size-10 items-center justify-center text-primary-blue/50">
           <svg
             width="10"
             height="10"
@@ -155,7 +155,7 @@ export default function ArticlePagination({ currentPage, totalPages }: Props) {
           </svg>
         </Link>
       ) : (
-        <div className="flex size-10 items-center justify-center text-primary-blue/20">
+        <div className="flex size-10 items-center justify-center text-primary-blue/50">
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
             <path
               d="M1 5h8M5.5 1L9 5l-3.5 4"

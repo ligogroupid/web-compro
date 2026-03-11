@@ -51,7 +51,7 @@ const VARIANT_STYLES = {
     textWrapper:
       "py-10 px-6 pb-4 bg-white group-hover:bg-primary-blue group-hover:text-white",
     title:
-      "mt-4 md:mt-8 text-xl md:text-headline2 leading-[1.3em] font-semibold",
+      "mt-4 md:mt-8 font-semibold text-xl md:text-[1.875rem] leading-[1.3em] tracking-[0.03em] line-clamp-3 ",
     titleTag: "h3",
     revealDelay: (index: number) => index * 120,
   },
@@ -64,7 +64,7 @@ const VARIANT_STYLES = {
     textWrapper:
       "flex-1 px-4 py-6 bg-white group-hover:bg-primary-blue group-hover:text-white",
     title:
-      "mt-6 line-clamp-3 text-sm leading-[1.4] font-bold sm:text-[0.9375rem] sm:leading-[1.35] pr-7",
+      "mt-6 line-clamp-3 text-sm leading-[1.4em] font-bold sm:text-[1rem] sm:leading-[1.35] tracking-[0.03em] pr-7",
     titleTag: "h4",
     revealDelay: (index: number) => (index + 1) * 120,
   },
@@ -73,9 +73,10 @@ const VARIANT_STYLES = {
     thumbnail: "relative aspect-[16/10] w-full overflow-hidden bg-gray-light",
     imgHover:
       "size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105",
-    textWrapper: "py-5 px-5 pb-4 flex-1 flex flex-col",
+    textWrapper:
+      "py-5 px-5 pb-4 flex-1 flex flex-col group-hover:bg-primary-blue group-hover:text-white",
     title:
-      "mt-2 line-clamp-3 text-sm leading-[1.45] font-bold text-primary-blue sm:text-[0.9375rem] sm:leading-[1.4]",
+      "mt-2 line-clamp-3 text-sm leading-[1.4em] font-bold sm:text-[0.9375rem] sm:leading-[1.4] tracking-[0.03em]",
     titleTag: "h4",
     revealDelay: (index: number) => (index + 1) * 150,
   },

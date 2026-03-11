@@ -94,7 +94,7 @@ export default function FullscreenMenu({
           )}
 
           {/* CONTENT AREA */}
-          <div className="mt-10 md:mt-[53px] flex flex-col md:flex-row md:justify-between gap-10">
+          <div className="mt-10 md:mt-[53px] flex flex-col md:flex-row md:justify-between gap-10 ">
             <div className="flex order-2 gap-10 md:gap-16">
               {/* Nav links */}
               <nav className="flex flex-col justify-center gap-6">
@@ -137,25 +137,26 @@ export default function FullscreenMenu({
                     )}
 
                     {item.hasSubmenu && (
-                      <div className="pointer-events-none group-hover:pointer-events-auto flex flex-wrap gap-3 w-[200%] absolute left-full pl-10 top-[50%] translate-y-[-50%]">
+                      <div className="pointer-events-none group-hover:pointer-events-auto flex flex-wrap gap-3 w-[210%] lg:w-[230%] absolute left-full pl-6 xl:pl-10 top-[50%] translate-y-[-50%]">
                         {sortedCompanies.map((company, index) => (
                           <Link
                             key={company.slug}
                             href={`/company/${company.slug}`}
                             locale={locale as Locale}
                             onClick={onClose}
-                            className="block opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out"
+                            className="block opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out relative group/logo"
                             style={{ transitionDelay: `${index * 60}ms` }}
                           >
-                            <div className="aspect-[118/83] w-[118px] overflow-hidden border border-white/30 bg-white p-2">
+                            <div className="aspect-[118/83] w-[118px] lg:w-[129px] xl:w-[139px] bg-white p-4 lg:p-6">
                               {company.logo && (
                                 <img
                                   src={company.logo}
                                   alt={company.name[locale]}
-                                  className="w-full h-full object-contain"
+                                  className="w-full h-full object-contain group-hover/logo:scale-110 transition-all duration-200"
                                 />
                               )}
                             </div>
+                            <div className="h-1.5 w-3/5 bg-white -mt-px" />
                           </Link>
                         ))}
                       </div>

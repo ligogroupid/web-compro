@@ -28,8 +28,8 @@ type VisitLocationsSectionProps = {
  *  - 3+ locations → 3 columns on lg+
  */
 function gmapsGridClass(count: number): string {
-  if (count === 1) return "grid grid-cols-1";
-  if (count === 2) return "grid grid-cols-1 md:grid-cols-2";
+  // if (count === 1) return "grid grid-cols-1";
+  // if (count === 2) return "grid grid-cols-1 md:grid-cols-2";
   return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
 }
 
@@ -246,7 +246,7 @@ export default function VisitLocationsSection({
                         </div>
 
                         {/* Location name — below the map */}
-                        <div className="px-5 py-4 mx-6 lg:mx-10 transition-all duration-300 border border-white/50 border-l-0 border-r-0 mt-8  max-w-[300px]">
+                        <div className="py-4 transition-all duration-300 border border-white/50 border-l-0 border-r-0 mt-8  max-w-[300px]">
                           <div className="flex items-center gap-3">
                             <p
                               className="font-heading text-sm font-bold tracking-wide transition-colors duration-300"
