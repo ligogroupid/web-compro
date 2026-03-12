@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -31,6 +31,12 @@ export default function FullscreenMenu({
   const params = useParams();
   const locale = params.locale as Locale;
   const t = useTranslations("Nav");
+
+  const [companyMenuOpen, setCompanyMenuOpen] = useState(false);
+
+  // Derive effective submenu state: auto-collapse when main menu is closed.
+  // This avoids setState-in-effect or ref-during-render anti-patterns.
+  const isCompanyMenuOpen = isOpen && companyMenuOpen;
 
   const sortedCompanies = useMemo(
     () => [...companies].sort((a, b) => a.order - b.order),
@@ -94,7 +100,7 @@ export default function FullscreenMenu({
           )}
 
           {/* CONTENT AREA */}
-          <div className="mt-10 md:mt-[53px] flex flex-col md:flex-row md:justify-between gap-10 ">
+          <div className="mt-10 md:mt-[53px] flex flex-col md:flex-row md:justify-between gap-10 overflow-y-auto md:overflow-visible hide-scrollbar">
             <div className="flex order-2 gap-10 md:gap-16">
               {/* Nav links */}
               <nav className="flex flex-col justify-center gap-6">
@@ -109,35 +115,103 @@ export default function FullscreenMenu({
                       >
                         <span>{item.label}</span>
 
-                        {/* Arrow icon — always rendered for Companies, visible on hover via CSS */}
-                        {item.hasSubmenu && (
-                          <span className="inline-flex items-center text-white">
-                            <Icon__ArrowRight width={22} />
-                          </span>
-                        )}
-
                         <div
                           className={`absolute left-0 bottom-0 w-0 group-hover/navitem:w-full h-1 transition-all duration-300 bg-primary-red`}
                         />
                       </Link>
                     ) : (
-                      <div className="group/navitem font-heading set-text-headline1 leading-tight tracking-wide text-white transition-all duration-200 w-fit flex items-center gap-4 relative cursor-default">
-                        <span>{item.label}</span>
+                      /* Companies item: button on mobile (tap-to-toggle), div on desktop (hover) */
+                      <>
+                        {/* Mobile trigger — only visible below md */}
+                        <button
+                          type="button"
+                          onClick={() => setCompanyMenuOpen((prev) => !prev)}
+                          aria-expanded={isCompanyMenuOpen}
+                          aria-controls="mobile-company-submenu"
+                          className="md:hidden group/navitem font-heading set-text-headline1 leading-tight tracking-wide text-white transition-all duration-200 w-fit flex items-center gap-4 relative"
+                        >
+                          <span>{item.label}</span>
 
-                        {item.hasSubmenu && (
-                          <span className="inline-flex items-center text-white">
-                            <Icon__ArrowRight width={22} />
-                          </span>
-                        )}
+                          {item.hasSubmenu && (
+                            <span
+                              className={`inline-flex items-center text-white transition-transform duration-300 ${
+                                isCompanyMenuOpen ? "rotate-90" : "rotate-0"
+                              }`}
+                            >
+                              <Icon__ArrowRight width={22} />
+                            </span>
+                          )}
 
-                        <div
-                          className={`absolute left-0 bottom-0 w-0 group-hover/navitem:w-full h-1 transition-all duration-300 bg-primary-red`}
-                        />
+                          <div className="absolute left-0 bottom-0 w-0 group-hover/navitem:w-full h-1 transition-all duration-300 bg-primary-red" />
+                        </button>
+
+                        {/* Desktop trigger — only visible from md up, hover-based */}
+                        <div className="hidden md:flex group/navitem font-heading set-text-headline1 leading-tight tracking-wide text-white transition-all duration-200 w-fit items-center gap-4 relative cursor-default">
+                          <span>{item.label}</span>
+
+                          {item.hasSubmenu && (
+                            <span className="inline-flex items-center text-white">
+                              <Icon__ArrowRight width={22} />
+                            </span>
+                          )}
+
+                          <div className="absolute left-0 bottom-0 w-0 group-hover/navitem:w-full h-1 transition-all duration-300 bg-primary-red" />
+                        </div>
+                      </>
+                    )}
+
+                    {/* Mobile submenu — slide down below "Companies" on tap */}
+                    {item.hasSubmenu && (
+                      <div
+                        id="mobile-company-submenu"
+                        className="md:hidden overflow-hidden transition-all duration-400 ease-in-out"
+                        style={{
+                          maxHeight: isCompanyMenuOpen
+                            ? `${sortedCompanies.length * 120}px`
+                            : "0px",
+                          opacity: isCompanyMenuOpen ? 1 : 0,
+                          WebkitTransition:
+                            "max-height 0.4s ease-in-out, opacity 0.3s ease-in-out",
+                          transition:
+                            "max-height 0.4s ease-in-out, opacity 0.3s ease-in-out",
+                        }}
+                      >
+                        <div className="flex flex-wrap gap-3 pt-5">
+                          {sortedCompanies.map((company, index) => (
+                            <Link
+                              key={company.slug}
+                              href={`/company/${company.slug}`}
+                              locale={locale as Locale}
+                              onClick={onClose}
+                              className="block relative group/logo"
+                              style={{
+                                opacity: isCompanyMenuOpen ? 1 : 0,
+                                transform: isCompanyMenuOpen
+                                  ? "translateY(0)"
+                                  : "translateY(8px)",
+                                WebkitTransition: `opacity 0.3s ease-out ${index * 60}ms, -webkit-transform 0.3s ease-out ${index * 60}ms`,
+                                transition: `opacity 0.3s ease-out ${index * 60}ms, transform 0.3s ease-out ${index * 60}ms`,
+                              }}
+                            >
+                              <div className="aspect-[118/83] w-[105px] bg-white p-3">
+                                {company.logo && (
+                                  <img
+                                    src={company.logo}
+                                    alt={company.name[locale]}
+                                    className="w-full h-full object-contain group-hover/logo:scale-110 transition-all duration-200"
+                                  />
+                                )}
+                              </div>
+                              <div className="h-1.5 w-3/5 bg-white -mt-px" />
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     )}
 
+                    {/* Desktop submenu — absolute positioned to the right on hover */}
                     {item.hasSubmenu && (
-                      <div className="pointer-events-none group-hover:pointer-events-auto flex flex-wrap gap-3 w-[210%] lg:w-[230%] absolute left-full pl-6 xl:pl-10 top-[50%] translate-y-[-50%]">
+                      <div className="hidden md:flex pointer-events-none group-hover:pointer-events-auto flex-wrap gap-3 w-[210%] lg:w-[230%] absolute left-full pl-6 xl:pl-10 top-[50%] translate-y-[-50%]">
                         {sortedCompanies.map((company, index) => (
                           <Link
                             key={company.slug}

@@ -110,7 +110,7 @@ export default function VisitLocationsSection({
               {isProjection && projectionLocations.length > 0 && (
                 <div className="mb-16">
                   <div className="relative w-full">
-                    <IndonesiaMap className="block w-full opacity-20" />
+                    <IndonesiaMap className="block w-full opacity-70" />
 
                     {projectionLocations.map((loc, idx) => {
                       if (

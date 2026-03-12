@@ -16,19 +16,19 @@ function BlueSection({ labels }: { labels: AchievementLabels }) {
       {/*TEXT PART*/}
       <div className="">
         <div className=" text-white py-4 px-4 md:py-8 md:px-11">
-          <div className="text-[50px]">
+          <div className="text-[2.35rem] md:text-[3.125rem]">
             <CountUpNumber end={40} suffix="+" />
           </div>
-          <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
+          <div className="text-[0.6785rem] md:text-sm leading-[1.5em] tracking-[0.02em] mt-5 md:mt-9">
             {labels.yearsExperience}
           </div>
         </div>
         <div className="bg-white h-px" />
         <div className=" text-white py-4 px-4 md:py-8 md:px-11">
-          <div className="text-[50px]">
+          <div className="text-[2.35rem] md:text-[3.125rem]">
             <CountUpNumber end={3000} suffix="+" noDelimiter />
           </div>
-          <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
+          <div className="text-[0.6785rem] md:text-sm leading-[1.5em] tracking-[0.02em] mt-5 md:mt-9">
             {labels.employmentOpportunities}
           </div>
         </div>
@@ -53,36 +53,36 @@ function LightSection({ labels }: { labels: AchievementLabels }) {
         <div className="w-[130px] h-[150px] md:w-[190px] md:h-[213px] absolute top-4 right-0 -rotate-[25deg] scale-[130%] z-[1]">
           <img alt="Plastic Cup" src="/plastic-cup.webp" />
         </div>
-        <div className="text-[50px]">
+        <div className="text-[2.35rem] md:text-[3.125rem]">
           <CountUpNumber end={113500} suffix="+" />
         </div>
-        <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
+        <div className="text-[0.6785rem] md:text-sm leading-[1.5em] tracking-[0.02em] mt-5 md:mt-9">
           {labels.factoryArea}
         </div>
       </div>
       <div className="grid grid-cols-2">
         {/*4th Section*/}
         <div className="bg-white py-4 px-4 md:py-8 md:px-11">
-          <div className="text-[50px]">
+          <div className="text-[2.35rem] md:text-[3.125rem]">
             <CountUpNumber end={350} suffix="+" />
           </div>
-          <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9">
+          <div className="text-[0.6785rem] md:text-sm leading-[1.5em] tracking-[0.02em] mt-5 md:mt-9">
             {labels.materialsRecycled}
           </div>
         </div>
         {/*5th Section*/}
         <div className="bg-primary-red text-white py-4 px-4 md:py-8 md:px-11 relative">
-          <div className="absolute bottom-12 md:bottom-0 right-0 w-[120px] aspect-square">
+          <div className="absolute bottom-10 md:bottom-0 right-0 w-[100px] md:w-[120px] aspect-square">
             <img
               alt="truck-delivery"
               src="/truck-delivery.webp"
               className="size-full object-contain"
             />
           </div>
-          <div className="text-[50px] relative">
+          <div className="text-[2.35rem] md:text-[3.125rem] relative">
             <CountUpNumber end={25} suffix="+" />
           </div>
-          <div className="text-sm leading-[1.5em] tracking-[0.02em] mt-9 md:max-w-1/3 relative">
+          <div className="text-[0.6785rem] md:text-sm leading-[1.5em] tracking-[0.02em] mt-5 md:mt-9 md:max-w-1/3 relative">
             {labels.citiesDistribution}
           </div>
         </div>
