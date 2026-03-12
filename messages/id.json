@@ -64,6 +64,8 @@
     "messagePlaceholder": "Ceritakan bagaimana kami dapat membantu Anda\u2026",
     "submit": "Kirim",
     "sending": "Mengirim\u2026",
+    "captchaUnavailable": "Verifikasi keamanan tidak tersedia. Silakan coba lagi.",
+    "captchaFailed": "Verifikasi keamanan gagal. Silakan coba lagi.",
     "errorMessage": "Terjadi kesalahan. Silakan coba lagi nanti.",
     "successTitle": "Terima kasih telah menghubungi kami!",
     "successBody": "Pesan Anda telah kami terima dan akan segera kami balas.",

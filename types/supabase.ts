@@ -415,6 +415,39 @@ export type Database = {
           },
         ]
       }
+      contact_submissions: {
+        Row: {
+          captcha_score: number | null
+          company: string
+          created_at: string | null
+          email: string
+          id: string
+          message: string
+          name: string
+          phone: string
+        }
+        Insert: {
+          captcha_score?: number | null
+          company: string
+          created_at?: string | null
+          email: string
+          id?: string
+          message: string
+          name: string
+          phone: string
+        }
+        Update: {
+          captcha_score?: number | null
+          company?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          phone?: string
+        }
+        Relationships: []
+      }
       contacts: {
         Row: {
           id: string
@@ -523,56 +556,6 @@ export type Database = {
           },
         ]
       }
-      journey_milestones: {
-        Row: {
-          id: string
-          year: string
-          company_name_id: string
-          company_name_en: string
-          description_id: string
-          description_en: string
-          logo: string | null
-          order: number
-          created_at: string | null
-          updated_at: string | null
-          updated_by: string | null
-        }
-        Insert: {
-          id?: string
-          year: string
-          company_name_id?: string
-          company_name_en?: string
-          description_id?: string
-          description_en?: string
-          logo?: string | null
-          order?: number
-          created_at?: string | null
-          updated_at?: string | null
-          updated_by?: string | null
-        }
-        Update: {
-          id?: string
-          year?: string
-          company_name_id?: string
-          company_name_en?: string
-          description_id?: string
-          description_en?: string
-          logo?: string | null
-          order?: number
-          created_at?: string | null
-          updated_at?: string | null
-          updated_by?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "journey_milestones_updated_by_fkey"
-            columns: ["updated_by"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       homepage_content: {
         Row: {
           id: string
@@ -598,6 +581,56 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "homepage_content_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      journey_milestones: {
+        Row: {
+          company_name_en: string
+          company_name_id: string
+          created_at: string | null
+          description_en: string
+          description_id: string
+          id: string
+          logo: string | null
+          order: number
+          updated_at: string | null
+          updated_by: string | null
+          year: string
+        }
+        Insert: {
+          company_name_en?: string
+          company_name_id?: string
+          created_at?: string | null
+          description_en?: string
+          description_id?: string
+          id?: string
+          logo?: string | null
+          order?: number
+          updated_at?: string | null
+          updated_by?: string | null
+          year: string
+        }
+        Update: {
+          company_name_en?: string
+          company_name_id?: string
+          created_at?: string | null
+          description_en?: string
+          description_id?: string
+          id?: string
+          logo?: string | null
+          order?: number
+          updated_at?: string | null
+          updated_by?: string | null
+          year?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "journey_milestones_updated_by_fkey"
             columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "users"
@@ -803,39 +836,56 @@ export type Database = {
       }
       users: {
         Row: {
+          allowed_features: Json | null
           allowed_menus: string[] | null
           created_at: string | null
+          created_by: string | null
           email: string
           id: string
           is_active: boolean | null
+          last_login_at: string | null
           name: string
           password_hash: string
           role: string
           updated_at: string | null
         }
         Insert: {
+          allowed_features?: Json | null
           allowed_menus?: string[] | null
           created_at?: string | null
+          created_by?: string | null
           email: string
           id?: string
           is_active?: boolean | null
+          last_login_at?: string | null
           name: string
           password_hash: string
           role?: string
           updated_at?: string | null
         }
         Update: {
+          allowed_features?: Json | null
           allowed_menus?: string[] | null
           created_at?: string | null
+          created_by?: string | null
           email?: string
           id?: string
           is_active?: boolean | null
+          last_login_at?: string | null
           name?: string
           password_hash?: string
           role?: string
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "users_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       visit_locations: {
         Row: {

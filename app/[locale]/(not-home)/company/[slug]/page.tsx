@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 
 import ImageCover from "@/components/cover-images";
 
-export const revalidate = 600; // 10 minutes
+export const revalidate = 30; // 10 minutes
 import MoreCompanies from "@/components/MoreCompanies";
 import VisitLocationsSection from "@/components/visit-locations-section";
 import type { Locale } from "@/i18n/routing";
@@ -200,7 +200,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
         <div
           className={[
             "relative",
-            "pointer-events-none max-w-[40rem] aspect-[3/2.2] flex items-end",
+            "pointer-events-none max-w-[36rem] border border-dashed border-yellow-300 flex items-end",
           ].join(" ")}
         >
           <img

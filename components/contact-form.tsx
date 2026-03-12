@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useTranslations } from "next-intl";
 
 import ButtonBrand from "@/components/button-brand";
+import RecaptchaProvider from "@/components/recaptcha-provider";
 
 type FormFields = {
   name: string;
@@ -30,8 +32,10 @@ const requiredMark = (
 const inputClass =
   "w-full bg-white text-black placeholder:text-gray-400 border border-primary-blue px-4 py-3 outline-none focus:ring-2 focus:ring-primary-blue/40 transition-shadow font-body text-sm focus:ring-4 focus:ring-primary-blue/10";
 
-export default function ContactForm() {
+function ContactFormInner() {
   const t = useTranslations("ContactForm");
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [fields, setFields] = useState<FormFields>(INITIAL_FIELDS);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -44,27 +48,50 @@ export default function ContactForm() {
     setFields((prev) => ({ ...prev, [name]: value }));
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError(null);
-    setSubmitting(true);
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setError(null);
+      setSubmitting(true);
 
-    try {
-      // TODO: integrate reCAPTCHA token verification before sending
-      // const captchaToken = await executeRecaptcha("contact_form");
+      try {
+        // 1. Check reCAPTCHA is ready
+        if (!executeRecaptcha) {
+          setError(t("captchaUnavailable"));
+          return;
+        }
 
-      // TODO: replace with actual API call (e.g. Supabase or server action)
-      await new Promise((resolve) => setTimeout(resolve, 800));
+        // 2. Generate token
+        const captchaToken = await executeRecaptcha("contact_form_submit");
 
-      setSubmitted(true);
-      setFields(INITIAL_FIELDS);
-    } catch (err) {
-      console.error("[ContactForm] submission error:", err);
-      setError(t("errorMessage"));
-    } finally {
-      setSubmitting(false);
-    }
-  }
+        if (!captchaToken) {
+          setError(t("captchaFailed"));
+          return;
+        }
+
+        // 3. POST to API route
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...fields, captchaToken }),
+        });
+
+        if (!response.ok) {
+          const data = (await response.json()) as { message?: string };
+          throw new Error(data.message ?? "Submission failed");
+        }
+
+        setSubmitted(true);
+        setFields(INITIAL_FIELDS);
+      } catch (err) {
+        console.error("[ContactForm] submission error:", err);
+        setError(t("errorMessage"));
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    [executeRecaptcha, fields, t],
+  );
 
   if (submitted) {
     return (
@@ -173,9 +200,6 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* reCAPTCHA placeholder — mount widget here when integrated */}
-      {/* <div id="recaptcha-container" className="mt-2" /> */}
-
       {error && (
         <p role="alert" className="text-primary-red text-sm font-body">
           {error}
@@ -188,5 +212,17 @@ export default function ContactForm() {
         </ButtonBrand>
       </div>
     </form>
+  );
+}
+
+/**
+ * ContactForm — wraps the inner form with GoogleReCaptchaProvider.
+ * Default export used by the /contact page.
+ */
+export default function ContactForm() {
+  return (
+    <RecaptchaProvider>
+      <ContactFormInner />
+    </RecaptchaProvider>
   );
 }

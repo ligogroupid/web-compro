@@ -64,6 +64,8 @@
     "messagePlaceholder": "Tell us how we can help you\u2026",
     "submit": "Submit",
     "sending": "Sending\u2026",
+    "captchaUnavailable": "Security verification unavailable. Please try again.",
+    "captchaFailed": "Security verification failed. Please try again.",
     "errorMessage": "Something went wrong. Please try again later.",
     "successTitle": "Thank you for reaching out!",
     "successBody": "We\u2019ve received your message and will get back to you as soon as possible.",
