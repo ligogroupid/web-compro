@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { getContacts } from "@/service/contact";
 import ContactAction from "./contact-action";
 import Icon__LogoLigo from "./icon-logo-ligo";
+import Link from "next/link";
 
 type Props = {
   locale: Locale;
@@ -33,7 +34,7 @@ export default async function Footer({ locale }: Props) {
                   {contacts.address.label[locale]}
                 </div>
                 <div
-                  className="set-text-bodytext w-[366px] mt-[22px]"
+                  className="set-text-bodytext md:w-[366px] mt-[22px]"
                   dangerouslySetInnerHTML={{
                     __html: contacts.address.value,
                   }}
@@ -86,7 +87,14 @@ export function BrandLine() {
   const year = new Date().getFullYear();
   return (
     <div className="font-body font-medium text-[9px] tracking-[0.2em]">
-      COPYRIGHT {year} &copy; ALL RIGHTS RESERVED • DESIGNED BY DESIGNATA STUDIO
+      COPYRIGHT {year} &copy; ALL RIGHTS RESERVED • DESIGNED BY&nbsp;
+      <Link
+        href="https://designatastudio.com"
+        className="hover:underline"
+        target="_blank"
+      >
+        DESIGNATA STUDIO
+      </Link>
     </div>
   );
 }

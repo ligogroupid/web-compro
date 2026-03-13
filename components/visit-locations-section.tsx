@@ -81,7 +81,7 @@ export default function VisitLocationsSection({
         : locations;
 
   return (
-    <section className="relative bg-primary-blue overflow-hidden">
+    <section className="relative md:sticky top-0   bg-primary-blue ">
       {/* Diagonal accent line — subtle geometric detail */}
       {/* <div
         className="absolute top-0 right-0 w-px opacity-[0.07]"
@@ -94,7 +94,7 @@ export default function VisitLocationsSection({
         }}
       /> */}
 
-      <div className="relative px-4 py-20 md:py-28">
+      <div className="relative px-4 py-20 md:py-28 border">
         <div className="max-w-7xl mx-auto">
           {/* ━━━ Section Header ━━━ */}
           <div className="flex flex-col lg:flex-row lg:gap-20">
@@ -246,7 +246,7 @@ export default function VisitLocationsSection({
                         </div>
 
                         {/* Location name — below the map */}
-                        <div className="py-4 transition-all duration-300 border border-white/50 border-l-0 border-r-0 mt-8  max-w-[300px]">
+                        <div className="py-4 transition-all duration-300 border border-white/50 border-l-0 border-r-0 mt-8  max-w-none md:max-w-[300px]">
                           <div className="flex items-center gap-3">
                             <p
                               className="font-heading text-sm font-bold tracking-wide transition-colors duration-300"

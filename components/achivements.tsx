@@ -51,7 +51,11 @@ function LightSection({ labels }: { labels: AchievementLabels }) {
     <div className="overflow-x-hidden">
       <div className="bg-gray-light py-4 px-4 md:py-8 md:px-11 border-b border-b-[#7689C3] relative">
         <div className="w-[130px] h-[150px] md:w-[190px] md:h-[213px] absolute top-4 right-0 -rotate-[25deg] scale-[130%] z-[1]">
-          <img alt="Plastic Cup" src="/plastic-cup.webp" />
+          <img
+            alt="Plastic Cup"
+            src="/plastic-cup.webp"
+            className="pointer-events-none"
+          />
         </div>
         <div className="text-[2.35rem] md:text-[3.125rem]">
           <CountUpNumber end={113500} suffix="+" />
@@ -103,7 +107,7 @@ export default async function Achivements() {
   };
 
   return (
-    <section className="px-4 py-20">
+    <section className="px-4 py-20 relative bg-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="set-text-headline2">{t("headline")}</h2>
         <div className="mt-14">

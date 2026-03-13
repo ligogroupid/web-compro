@@ -57,12 +57,14 @@ export default async function Home({ params }: Props) {
     <>
       <Header variant="home" />
       <main>
-        <ImageCover
-          images={heroImages.map((src) => ({
-            src,
-            alt: "Hero",
-          }))}
-        />
+        <div className="sticky top-0">
+          <ImageCover
+            images={heroImages.map((src) => ({
+              src,
+              alt: "Hero",
+            }))}
+          />
+        </div>
         <Separator />
         <AboutUsHook />
         <CompanyList locale={locale as Locale} />

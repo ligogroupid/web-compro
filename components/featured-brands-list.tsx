@@ -9,7 +9,7 @@ export default async function FeaturedBrandList() {
   ]);
 
   return (
-    <section className="bg-gray-light px-4 py-14">
+    <section className="bg-gray-light px-4 py-14 relative">
       <div className="max-w-7xl mx-auto">
         <div className="md:max-w-[50%]">
           <h2 className="set-text-caption1">{t("label")}</h2>

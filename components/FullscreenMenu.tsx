@@ -69,12 +69,23 @@ export default function FullscreenMenu({
         isOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       }`}
     >
-      <div className="relative h-full flex flex-col justify-end">
+      <div className="relative h-full flex flex-col justify-start md:justify-end">
+        {/* BG BAR */}
+        <div className="bg-primary-red h-[25%] absolute left-0 bottom-0 w-full">
+          <div
+            className={`h-4 bg-primary-blue ${isOpen ? "w-[65%]" : "w-0"} transition-all duration-1000 delay-200 ml-auto`}
+          />
+          {/* BrandLine — mobile only, sits inside the red zone */}
+          <div className="md:hidden absolute bottom-0 left-0 right-0 px-10 pb-8 flex items-end">
+            <BrandLine />
+          </div>
+        </div>
+
         {/* Menu set container */}
-        <div className="p-10 w-full h-full max-w-7xl mx-auto">
+        <div className="relative pb-0 md:pb-10 p-10 w-full h-[75%] md:h-full max-w-7xl mx-auto overflow-hidden md:overflow-y-auto md:max-h-none hide-scrollbar flex flex-col md:block">
           {/* Close button */}
           {closeOverlay && (
-            <div className="flex justify-end">
+            <div className="absolute top-2 right-2 md:relative flex justify-end">
               <button
                 type="button"
                 onClick={onClose}
@@ -83,14 +94,13 @@ export default function FullscreenMenu({
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className="size-9"
                 >
                   <line x1="18" y1="6" x2="6" y2="18" />
                   <line x1="6" y1="6" x2="18" y2="18" />
@@ -100,12 +110,15 @@ export default function FullscreenMenu({
           )}
 
           {/* CONTENT AREA */}
-          <div className="mt-10 md:mt-[53px] flex flex-col md:flex-row md:justify-between gap-10 overflow-y-auto md:overflow-visible hide-scrollbar">
+          <div className="mt-3 md:mt-[53px] flex flex-col md:flex-row md:justify-between gap-10 overflow-y-auto md:overflow-visible hide-scrollbar flex-1 md:flex-none">
             <div className="flex order-2 gap-10 md:gap-16">
               {/* Nav links */}
               <nav className="flex flex-col justify-center gap-6">
                 {NAV_ITEMS.map((item) => (
-                  <div key={item.label} className="relative group">
+                  <div
+                    key={item.label}
+                    className="relative group last:pb-4 md:last:pb-0"
+                  >
                     {item.href ? (
                       <Link
                         href={item.href}
@@ -193,7 +206,7 @@ export default function FullscreenMenu({
                                 transition: `opacity 0.3s ease-out ${index * 60}ms, transform 0.3s ease-out ${index * 60}ms`,
                               }}
                             >
-                              <div className="aspect-[118/83] w-[105px] bg-white p-3">
+                              <div className="aspect-[118/83] w-[90px] bg-white p-3">
                                 {company.logo && (
                                   <img
                                     src={company.logo}
@@ -248,18 +261,13 @@ export default function FullscreenMenu({
             </div>
           </div>
 
-          {/* BRAND LINE */}
-          <div className="mt-[62px] md:mt-[113px]">
+          {/* BRAND LINE — desktop only; mobile version lives inside the red BG BAR */}
+          <div className="hidden md:block mt-[62px] md:mt-[113px]">
             <BrandLine />
           </div>
         </div>
 
-        {/* BG BAR */}
-        <div className="bg-primary-red h-[25%]">
-          <div
-            className={`h-4 bg-primary-blue ${isOpen ? "w-[65%]" : "w-0"} transition-all duration-1000 delay-200 ml-auto`}
-          />
-        </div>
+        {/* OLD BG BAR */}
       </div>
     </div>,
     document.body,

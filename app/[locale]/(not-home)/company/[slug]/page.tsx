@@ -7,6 +7,7 @@ import ImageCover from "@/components/cover-images";
 
 export const revalidate = 30; // 10 minutes
 import MoreCompanies from "@/components/MoreCompanies";
+import ProductItem from "./ProductItem";
 import VisitLocationsSection from "@/components/visit-locations-section";
 import type { Locale } from "@/i18n/routing";
 import { getCompanyBySlug, getOtherCompanies } from "@/service/company";
@@ -223,7 +224,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
                 </h2>
               </div>
               <div className="mt-14 flex-1">
-                <div className="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+                <div className="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-10">
                   {company.brands.map((brand, i) => (
                     <div
                       key={i}
@@ -258,20 +259,11 @@ export default async function Page__CompanyDetails({ params }: Props) {
             <div className="mt-14 flex-1">
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-10">
                 {company.products.map((product) => (
-                  <div key={product.id}>
-                    <div className="max-w-[240px] max-h-[240px] flex items-center justify-center">
-                      {product.image ? (
-                        <img
-                          src={product.image}
-                          alt={product.name[loc]}
-                          className="size-full object-contain"
-                        />
-                      ) : (
-                        <div className="bg-gray-light size-full" />
-                      )}
-                    </div>
-                    <div className="mt-6 text-sm">{product.name[loc]}</div>
-                  </div>
+                  <ProductItem
+                    key={product.id}
+                    image={product.image}
+                    name={product.name[loc]}
+                  />
                 ))}
               </div>
             </div>
