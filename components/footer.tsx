@@ -23,7 +23,7 @@ export default async function Footer({ locale }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/*LEFT SECTION*/}
             <div className="flex flex-col justify-between">
-              <div className="w-[364px]">
+              <div className="md:w-[364px]">
                 <Icon__LogoLigo />
               </div>
               <div className="mt-6 md:mt-[94px]">

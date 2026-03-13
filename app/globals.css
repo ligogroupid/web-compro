@@ -216,10 +216,33 @@ body {
   }
 }
 
+/* ─── Recycle Process: Hexagon Badge Pop-in ─── */
+
+@keyframes recycle-badge-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.recycle-badge-pop {
+  opacity: 0;
+  animation: recycle-badge-pop 0.4s ease-out forwards;
+  animation-delay: var(--badge-delay, 0ms);
+}
+
 /* ─── Recycle Process: Mobile Swiper ─── */
 
 .recycle-swiper .swiper-slide {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 
 .recycle-swiper .swiper-slide:not(.swiper-slide-active) {
@@ -264,21 +287,25 @@ body {
   --tw-prose-quote-borders: var(--color-primary-red);
 }
 
-.article-prose :where(h2, h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+.article-prose
+  :where(h2, h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   font-family: var(--font-merriweather-sans);
 }
 
-.article-prose :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+.article-prose
+  :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   background-color: var(--color-gray-light);
   padding: 1.25rem 1.5rem;
 }
 
-.article-prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+.article-prose
+  :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   text-underline-offset: 2px;
   transition: color 0.2s ease;
 }
 
-.article-prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+.article-prose
+  :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
   color: var(--color-orange);
 }
 

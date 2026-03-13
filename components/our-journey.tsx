@@ -126,7 +126,8 @@ export default function OurJourney({ locale, milestones }: Props) {
   const isTransitioningRef = useRef(false);
 
   // Use CMS data if available, otherwise fallback
-  const data = milestones && milestones.length > 0 ? milestones : FALLBACK_MILESTONES;
+  const data =
+    milestones && milestones.length > 0 ? milestones : FALLBACK_MILESTONES;
 
   const handleScroll = useCallback(() => {
     const section = sectionRef.current;
@@ -186,8 +187,7 @@ export default function OurJourney({ locale, milestones }: Props) {
   };
 
   const navigateDown = () => {
-    if (activeIndex < data.length - 1)
-      navigateToMilestone(activeIndex + 1);
+    if (activeIndex < data.length - 1) navigateToMilestone(activeIndex + 1);
   };
 
   const activeMilestone = data[activeIndex];
@@ -261,17 +261,14 @@ export default function OurJourney({ locale, milestones }: Props) {
             <div className="flex-1 flex flex-col md:flex-row pl-10 md:pl-0 md:items-center gap-10 md:gap-16 lg:gap-24">
               {/* Sub-column Left: Logo */}
               <div
-                className={`
-                  transition-all duration-500 ease-out
-                  ${contentTransition ? "opacity-0 translate-y-6 scale-95" : "opacity-100 translate-y-0 scale-100"}
-                `}
+                className={`transition-all duration-500 ease-out ${contentTransition ? "opacity-0 translate-y-6 scale-95" : "opacity-100 translate-y-0 scale-100"}`}
               >
-                <div className="w-[280px] lg:w-[304px] relative">
+                <div className="w-[240px] lg:w-[304px] h-32 md:h- relative overflow-hidden">
                   {activeMilestone.logo && (
                     <img
                       alt={`Logo ${activeMilestone.companyName[locale]}`}
                       src={activeMilestone.logo}
-                      className="h-full w-full object-contain"
+                      className="h-full md:h-auto md:w-full"
                     />
                   )}
                 </div>
@@ -279,19 +276,16 @@ export default function OurJourney({ locale, milestones }: Props) {
 
               {/* Sub-column Right: Year & Description */}
               <div
-                className={`
-                  flex-1 transition-all duration-500 ease-out delay-100
-                  ${contentTransition ? "opacity-0 translate-y-8" : "opacity-100 translate-y-0"}
-                `}
+                className={`flex-1 transition-all duration-500 ease-out delay-100 ${contentTransition ? "opacity-0 translate-y-8" : "opacity-100 translate-y-0"}`}
               >
                 {/* Year display */}
-                <div className="relative text-[3.25rem] leading-[1em]">
+                <div className="relative text-[3rem] md:text-[3.25rem] leading-[1em]">
                   {activeMilestone.year}
                 </div>
 
                 {/* Description */}
                 <p
-                  className="set-text-bodytext mt-8 md:mt-12 max-w-md"
+                  className="text-sm md:set-text-bodytext mt-8 md:mt-12 max-w-md"
                   dangerouslySetInnerHTML={{
                     __html: activeMilestone.description[locale],
                   }}

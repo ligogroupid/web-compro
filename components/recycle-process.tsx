@@ -1,13 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { EffectFade, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/pagination";
+import { useInView } from "@/hooks/useInView";
 
 // ─── Step Data ─────────────────────────────────────────────────────────────────
 
@@ -15,7 +10,6 @@ type StepData = {
   number: number;
   title: string;
   items?: string[];
-  image: string;
 };
 
 // ─── Desktop Step Components (preserved original layout) ───────────────────────
@@ -171,180 +165,74 @@ function DesktopLayout({ steps }: DesktopLayoutProps) {
   );
 }
 
-// ─── Mobile/Tablet Slide Card ──────────────────────────────────────────────────
+// ─── Hexagon Number Badge Positions (clockwise from top-left) ────────────────
 
-function SlideCard({
-  step,
-  isActive,
-  stepBadge,
-}: {
-  step: StepData;
-  isActive: boolean;
-  stepBadge: string;
-}) {
+const HEXAGON_POSITIONS: { top: string; left: string }[] = [
+  { top: "5%", left: "25%" }, // 1 — top-left
+  { top: "5%", left: "68%" }, // 2 — top-right
+  { top: "46%", left: "95%" }, // 3 — mid-right
+  { top: "87%", left: "68%" }, // 4 — bottom-right
+  { top: "87%", left: "25%" }, // 5 — bottom-left
+  { top: "46%", left: "-4%" }, // 6 — mid-left
+];
+
+// ─── Mobile/Tablet Layout ──────────────────────────────────────────────────────
+
+function MobileLayout({ steps }: { steps: StepData[] }) {
+  const { ref, isInView } = useInView<HTMLDivElement>({ threshold: 0.4 });
+
   return (
-    <div className="relative overflow-hidden rounded-lg bg-white h-full">
-      {/* Image area */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+    <div className="flex flex-col gap-6">
+      {/* Recycle process image with number badges */}
+      <div ref={ref} className="relative mx-auto max-w-[260px]">
         <img
-          src={step.image}
-          alt={step.title}
-          className={`
-            size-full object-cover transition-transform duration-700 ease-out
-            ${isActive ? "scale-100" : "scale-110"}
-          `}
+          src="/recycle-process.webp"
+          alt="LIGO Group Recycle Process"
+          className="w-full object-contain"
         />
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary-blue/90 via-primary-blue/30 to-transparent" />
-
-        {/* Step number badge */}
-        <div className="absolute top-4 left-4 flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-primary-red flex items-center justify-center">
-            <span className="text-white font-heading text-sm font-bold">
-              {step.number}
-            </span>
-          </div>
-          <div className="h-px w-6 bg-white/40" />
-          <span className="text-white/60 text-[10px] font-body tracking-[0.2em] uppercase">
-            {stepBadge}
-          </span>
-        </div>
-
-        {/* Title overlay on image */}
-        <div className="absolute bottom-0 left-0 right-0 p-5">
-          <h3 className="font-heading text-xl font-bold text-white leading-tight">
-            {step.title}
-          </h3>
-        </div>
-      </div>
-
-      {/* Content area */}
-      {step.items && step.items.length > 0 && (
-        <div className="p-5 pt-4">
-          <ul className="space-y-2">
-            {step.items.map((item, idx) => (
-              <li key={idx} className="flex items-center gap-3 group">
-                <div className="w-1 h-1 rounded-full bg-primary-red shrink-0" />
-                <span className="text-sm font-body text-primary-blue/80">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ─── Mobile/Tablet Slider ──────────────────────────────────────────────────────
-
-function MobileSlider({
-  steps,
-  stepBadge,
-  cycleRepeats,
-}: {
-  steps: StepData[];
-  stepBadge: string;
-  cycleRepeats: string;
-}) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const progressRef = useRef<HTMLDivElement>(null);
-
-  return (
-    <div className="relative">
-      {/* Loop indicator — shows circular nature */}
-      <div className="flex items-center gap-3 mb-6">
-        <div className="relative flex items-center gap-1.5">
-          {steps.map((_, idx) => (
-            <div
-              key={idx}
-              className={`
-                h-1 rounded-full transition-all duration-500 ease-out
-                ${
-                  idx === activeIndex
-                    ? "w-7 bg-primary-red"
-                    : idx < activeIndex
-                      ? "w-2 bg-primary-blue/30"
-                      : "w-2 bg-primary-blue/10"
-                }
-              `}
-            />
-          ))}
-        </div>
-        <span className="text-[11px] font-body text-primary-blue/40 tracking-wider">
-          {String(activeIndex + 1).padStart(2, "0")}/
-          {String(steps.length).padStart(2, "0")}
-        </span>
-      </div>
-
-      {/* Swiper */}
-      <div className="-mx-4">
-        <Swiper
-          modules={[Pagination, EffectFade]}
-          spaceBetween={16}
-          slidesPerView={1.15}
-          centeredSlides={false}
-          slidesOffsetBefore={16}
-          slidesOffsetAfter={16}
-          breakpoints={{
-            480: { slidesPerView: 1.4, spaceBetween: 20 },
-            640: { slidesPerView: 2, spaceBetween: 20 },
-            768: { slidesPerView: 2.3, spaceBetween: 24 },
-          }}
-          onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-          className="recycle-swiper !overflow-visible"
-        >
-          {steps.map((step, idx) => (
-            <SwiperSlide key={step.number} className="!h-auto">
-              <SlideCard
-                step={step}
-                isActive={idx === activeIndex}
-                stepBadge={stepBadge}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-
-      {/* Progress bar */}
-      <div className="mt-6 h-[2px] bg-primary-blue/5 rounded-full overflow-hidden">
-        <div
-          ref={progressRef}
-          className="h-full bg-primary-red rounded-full transition-all duration-500 ease-out"
-          style={{ width: `${((activeIndex + 1) / steps.length) * 100}%` }}
-        />
-      </div>
-
-      {/* Recycle loop hint on last slide */}
-      {activeIndex === steps.length - 1 && (
-        <div className="mt-4 flex items-center gap-2 animate-pulse">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            className="text-primary-red"
+        {HEXAGON_POSITIONS.map((pos, i) => (
+          <span
+            key={i}
+            className="absolute flex items-center justify-center size-6 rounded-full bg-white text-primary-red text-xs font-bold shadow-sm transition-all duration-300"
+            style={{
+              top: pos.top,
+              left: pos.left,
+              opacity: isInView ? 1 : 0,
+              transform: isInView ? "scale(1)" : "scale(0.5)",
+              transitionDelay: isInView ? `${i * 300}ms` : "0ms",
+            }}
           >
-            <path
-              d="M8 1C4.13 1 1 4.13 1 8s3.13 7 7 7 7-3.13 7-7"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-            <path
-              d="M12 1L15 4L12 7"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span className="text-[11px] text-primary-red/70 font-body tracking-wider uppercase">
-            {cycleRepeats}
+            {i + 1}
           </span>
-        </div>
-      )}
+        ))}
+      </div>
+      {/* Steps */}
+      <div className="flex flex-col">
+        {steps.map((step) => (
+          <div
+            key={step.number}
+            className="flex items-start gap-3 border-t border-primary-blue py-5 last:border-b last:border-b-primary-blue"
+          >
+            <div className="text-[11px] text-primary-red font-bold">
+              {step.number}
+            </div>
+            <div>
+              <div className="text-lg font-body leading-[1em] font-bold">
+                {step.title}
+              </div>
+              {step.items && step.items.length > 0 && (
+                <ul className="text-sm mt-[22px]">
+                  {step.items.map((item) => (
+                    <li key={item}>
+                      <span className="text-primary-red">-</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -365,7 +253,12 @@ export default function RecycledProcess() {
     },
     step3: {
       title: t("step3Title"),
-      items: [t("step3Item1"), t("step3Item2"), t("step3Item3"), t("step3Item4")],
+      items: [
+        t("step3Item1"),
+        t("step3Item2"),
+        t("step3Item3"),
+        t("step3Item4"),
+      ],
     },
     step4: { title: t("step4Title") },
     step5: { title: t("step5Title") },
@@ -376,48 +269,12 @@ export default function RecycledProcess() {
   };
 
   const STEPS: StepData[] = [
-    {
-      number: 1,
-      title: stepData.step1.title,
-      items: stepData.step1.items,
-      image:
-        "https://placehold.co/800x600/1C3687/FFFFFF?text=Raw+Materials%0APure+%26+Recycled+Resin",
-    },
-    {
-      number: 2,
-      title: stepData.step2.title,
-      items: stepData.step2.items,
-      image:
-        "https://placehold.co/800x600/2A4494/FFFFFF?text=Manufacturing%0ABlowing+%7C+Weaving+%7C+Thermoforming",
-    },
-    {
-      number: 3,
-      title: stepData.step3.title,
-      items: stepData.step3.items,
-      image:
-        "https://placehold.co/800x600/1C3687/FFFFFF?text=Final+Products%0ABags+%7C+Tarpaulin+%7C+Cups",
-    },
-    {
-      number: 4,
-      title: stepData.step4.title,
-      items: undefined,
-      image:
-        "https://placehold.co/800x600/EC6626/FFFFFF?text=Consumption%0AEnd+Users",
-    },
-    {
-      number: 5,
-      title: stepData.step5.title,
-      items: undefined,
-      image:
-        "https://placehold.co/800x600/D71920/FFFFFF?text=Plastic+Waste%0ACollection+%26+Sorting",
-    },
-    {
-      number: 6,
-      title: stepData.step6.title,
-      items: stepData.step6.items,
-      image:
-        "https://placehold.co/800x600/1C3687/FFFFFF?text=Recycling+Process%0ARecycled+Resin",
-    },
+    { number: 1, title: stepData.step1.title, items: stepData.step1.items },
+    { number: 2, title: stepData.step2.title, items: stepData.step2.items },
+    { number: 3, title: stepData.step3.title, items: stepData.step3.items },
+    { number: 4, title: stepData.step4.title },
+    { number: 5, title: stepData.step5.title },
+    { number: 6, title: stepData.step6.title, items: stepData.step6.items },
   ];
 
   return (
@@ -427,13 +284,9 @@ export default function RecycledProcess() {
         <DesktopLayout steps={stepData} />
       </div>
 
-      {/* Mobile/Tablet: swiper slider */}
-      <div className="lg:hidden overflow-x-hidden">
-        <MobileSlider
-          steps={STEPS}
-          stepBadge={t("stepBadge")}
-          cycleRepeats={t("cycleRepeats")}
-        />
+      {/* Mobile/Tablet: vertical cards */}
+      <div className="lg:hidden">
+        <MobileLayout steps={STEPS} />
       </div>
     </>
   );

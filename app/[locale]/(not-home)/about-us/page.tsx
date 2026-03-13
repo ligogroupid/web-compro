@@ -108,7 +108,7 @@ export default async function Page__AboutUs({ params }: Props) {
           <div>
             <h2 className="set-text-caption1">{t("valuesLabel")}</h2>
             <div className="set-text-headline1 mt-9">{t("valuesHeadline")}</div>
-            <div className="mt-[105px] overflow-x-hidden">
+            <div className="mt-14 md:mt-[105px] overflow-x-hidden">
               <LigoLetterValues />
             </div>
           </div>
