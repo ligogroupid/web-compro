@@ -155,8 +155,9 @@ export default async function Page__CompanyDetails({ params }: Props) {
 
       {/* COMPANY STRENGTHS */}
       {company.provens.length > 0 && (
+        // {/* sticky content */}
         <section
-          className="sticky top-0"
+          className="sticky top-0 z-0"
           style={{
             backgroundColor: company.strengths_bg_color ?? "#e0e0e0",
             backgroundImage: company.strengths_bg_image
@@ -164,9 +165,10 @@ export default async function Page__CompanyDetails({ params }: Props) {
               : "none",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            backgroundAttachment: "fixed",
           }}
         >
-          <div className="px-4 py-20 md:pb-[220px]">
+          <div className="px-4 py-20 pb-[220px]">
             <div className="max-w-7xl mx-auto">
               <div className="space-y-4 text-white">
                 <h2 className="set-text-caption1">
@@ -174,7 +176,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
                 </h2>
                 <div className="set-text-headline1">{t("provenStrengths")}</div>
               </div>
-              <div className="overflow-x-auto overflow-y-hidden hide-scrollbar mt-16 -mx-4 md:mx-0 px-4 md:px-0">
+              <div className="overflow-x-auto overflow-y-hidden hide-scrollbar mt-10 md:mt-16 -mx-4 md:mx-0 px-4 md:px-0">
                 <div className="w-fit flex gap-9 md:ml-auto">
                   {company.provens.map((n, i) => (
                     <div key={i} className="w-[270px] relative">
@@ -182,7 +184,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
                         <div className="font-heading text-[1.375rem] leading-[1.36em] tracking-[0.02em] h-[60px]">
                           {n.title[loc]}
                         </div>
-                        <div className="mt-8 text-[0.9375rem]">
+                        <div className="mt-4 md:mt-8 text-[0.9375rem]">
                           {n.description[loc]}
                         </div>
                       </div>
@@ -196,80 +198,79 @@ export default async function Page__CompanyDetails({ params }: Props) {
         </section>
       )}
 
-      {/* IMAGE COMPANY STRENGTH */}
-      {company.strengths_image && (
-        <div
-          className={[
-            "relative",
-            "pointer-events-none max-w-[36rem] border border-dashed border-yellow-300 flex items-end",
-          ].join(" ")}
-        >
-          <img
-            className="w-full object-contain"
-            alt={`${company.name[loc]} strength`}
-            src={company.strengths_image}
-          />
-        </div>
-      )}
-
       {/* BRANDS and PRODUCTS OF COMPANY */}
-      <section className="bg-white px-4 relative">
-        {/* BRANDS */}
-        {company.brands.length > 0 && (
-          <>
+      <div className="relative">
+        {/* IMAGE COMPANY STRENGTH — inside wrapper so it stays on colored bg, scrolls naturally */}
+        {company.strengths_image && (
+          <div className="absolute left-0 top-0  border border-dashed border-green-300 -translate-y-full pointer-events-none">
+            <div className="pointer-events-none relative z-1 max-w-lg">
+              <img
+                className="w-full object-contain"
+                alt={`${company.name[loc]} strength`}
+                src={company.strengths_image}
+              />
+            </div>
+          </div>
+        )}
+
+        <section className="bg-white px-4 relative">
+          {/* BRANDS */}
+          {company.brands.length > 0 && (
+            <>
+              <div className="py-16 flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
+                <div className="lg:w-1/5">
+                  <h2 className="set-text-headline2">
+                    {t("brandsOf")} {company.initial_name[loc]}
+                  </h2>
+                </div>
+                <div className="mt-14 flex-1">
+                  <div className="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-10">
+                    {company.brands.map((brand, i) => (
+                      <div
+                        key={i}
+                        className="size-[100px] flex items-center justify-center"
+                      >
+                        {brand.image ? (
+                          <img
+                            src={brand.image}
+                            alt={brand.name}
+                            className="size-full object-contain"
+                          />
+                        ) : (
+                          <div className="bg-gray-light size-full" />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="bg-primary-blue/20 h-px w-full" />
+            </>
+          )}
+
+          {/* PRODUCTS */}
+          {company.products.length > 0 && (
             <div className="py-16 flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
               <div className="lg:w-1/5">
                 <h2 className="set-text-headline2">
-                  {t("brandsOf")} {company.initial_name[loc]}
+                  {t("productsOf")} {company.initial_name[loc]}
                 </h2>
               </div>
               <div className="mt-14 flex-1">
-                <div className="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-10">
-                  {company.brands.map((brand, i) => (
-                    <div
-                      key={i}
-                      className="size-[100px] flex items-center justify-center"
-                    >
-                      {brand.image ? (
-                        <img
-                          src={brand.image}
-                          alt={brand.name}
-                          className="size-full object-contain"
-                        />
-                      ) : (
-                        <div className="bg-gray-light size-full" />
-                      )}
-                    </div>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-10">
+                  {company.products.map((product) => (
+                    <ProductItem
+                      key={product.id}
+                      image={product.image}
+                      name={product.name[loc]}
+                    />
                   ))}
                 </div>
               </div>
             </div>
-            <div className="bg-primary-blue/20 h-px w-full" />
-          </>
-        )}
-
-        {/* PRODUCTS */}
-        {company.products.length > 0 && (
-          <div className="py-16 flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
-            <div className="lg:w-1/5">
-              <h2 className="set-text-headline2">
-                {t("productsOf")} {company.initial_name[loc]}
-              </h2>
-            </div>
-            <div className="mt-14 flex-1">
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-10">
-                {company.products.map((product) => (
-                  <ProductItem
-                    key={product.id}
-                    image={product.image}
-                    name={product.name[loc]}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
+          )}
+        </section>
+      </div>
 
       {/* MOBILE: CERTIFICATES (shown below on mobile) */}
       {company.certifications.length > 0 && (
