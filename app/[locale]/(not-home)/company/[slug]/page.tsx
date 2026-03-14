@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 import ImageCover from "@/components/cover-images";
 
 export const revalidate = 30; // 10 minutes
+import CompanyInfo from "./CompanyInfo";
 import MoreCompanies from "@/components/MoreCompanies";
 import ProductItem from "./ProductItem";
 import VisitLocationsSection from "@/components/visit-locations-section";
@@ -115,43 +116,13 @@ export default async function Page__CompanyDetails({ params }: Props) {
       </div>
 
       {/* COMPANY INFO */}
-      <section className="bg-white py-14">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col gap-20 md:flex-row md:justify-between">
-            {/* LEFT PART */}
-            <div className="max-w-xs">
-              {/* LOGO */}
-              {company.logo ? (
-                <div className="aspect-[260/157]">
-                  <img
-                    src={company.logo}
-                    alt={`${company.name[loc]} logo`}
-                    className="size-full object-contain"
-                  />
-                </div>
-              ) : (
-                <div className="aspect-[260/157] bg-gray-light" />
-              )}
-              <div className="hidden md:block mt-[200px]">
-                <Certificates company={company} label={t("certifications")} />
-              </div>
-            </div>
-
-            {/* RIGHT PART */}
-            <div className="w-full max-w-[600px]">
-              {/* NAME */}
-              <h2 className="set-text-headline1">{company.name[loc]}</h2>
-              {/* FULL DESCRIPTION */}
-              <div
-                className="mt-16 set-text-bodytext prose [&>p]:my-10"
-                dangerouslySetInnerHTML={{
-                  __html: company.full_description[loc],
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <CompanyInfo
+        logo={company.logo}
+        name={company.name[loc]}
+        fullDescription={company.full_description[loc]}
+        certifications={company.certifications}
+        certificationsLabel={t("certifications")}
+      />
 
       {/* COMPANY STRENGTHS */}
       {company.provens.length > 0 && (

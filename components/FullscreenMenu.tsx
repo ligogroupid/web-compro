@@ -262,7 +262,7 @@ export default function FullscreenMenu({
           </div>
 
           {/* BRAND LINE — desktop only; mobile version lives inside the red BG BAR */}
-          <div className="hidden md:block mt-[62px] md:mt-[113px]">
+          <div className="hidden md:block mt-[62px] md:mt-[86px]">
             <BrandLine />
           </div>
         </div>

@@ -7,6 +7,7 @@ export const revalidate = 600; // 10 minutes
 import LigoLetterValues from "@/components/ligo-letter-values";
 import OurJourney from "@/components/our-journey";
 import RecycledProcess from "@/components/recycle-process";
+import VisionMission from "@/components/vision-mission";
 import { Locale } from "@/i18n/routing";
 import { getAllAboutPageImages, getJourneyMilestones } from "@/service/about";
 import { getPageMetadata } from "@/service/seo";
@@ -56,7 +57,7 @@ export default async function Page__AboutUs({ params }: Props) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <div>
                 <h2 className="set-text-caption1">{t("heroLabel")}</h2>
-                <div className="set-text-headline1 mt-14 max-w-[75%] md:max-w-full">
+                <div className="set-text-headline2 md:set-text-headline1 mt-8 md:mt-14 md:max-w-full">
                   {t("heroHeadline")}
                 </div>
               </div>
@@ -79,29 +80,13 @@ export default async function Page__AboutUs({ params }: Props) {
         </div>
       </section>
 
-      <section className="bg-gray-light px-4 py-20 relative">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-7">
-            <div>
-              <h2 className="set-text-caption1">{t("visionLabel")}</h2>
-              <div className="set-text-headline1">{t("visionText")}</div>
-            </div>
-            <div>
-              <h2 className="set-text-caption1">{t("missionLabel")}</h2>
-              <div className="mt-12 space-y-7">
-                {(
-                  [t("mission1"), t("mission2"), t("mission3")] as string[]
-                ).map((text, index) => (
-                  <div key={index} className="flex items-start gap-7">
-                    <div className="h-0.5 w-5 bg-primary-red" />
-                    <div className="set-text-bodytext flex-1">{text}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/*VISION AND MISSION*/}
+      <VisionMission
+        visionLabel={t("visionLabel")}
+        visionText={t("visionText")}
+        missionLabel={t("missionLabel")}
+        missions={[t("mission1"), t("mission2"), t("mission3")]}
+      />
 
       <section className="sticky top-0  bg-primary-blue text-white px-4 pt-[68px] pb-[182px]">
         <div className="max-w-7xl mx-auto">
