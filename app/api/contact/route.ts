@@ -103,5 +103,21 @@ export async function POST(request: Request) {
     );
   }
 
+  // 7. Forward to Google Sheet (fire and forget)
+  fetch(process.env.GOOGLE_SHEET_WEBHOOK_URL!, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      created_at: new Date().toISOString(),
+      name,
+      email,
+      phone,
+      company,
+      message,
+    }),
+  }).catch((err) => {
+    console.warn("[contact/route] Google Sheet webhook failed:", err);
+  });
+
   return Response.json({ message: "Message received. Thank you!" });
 }
