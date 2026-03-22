@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import type { TCompanyListItem } from "@/service/company";
@@ -10,6 +10,7 @@ import type { Locale } from "@/i18n/routing";
 
 import { Link } from "@/i18n/navigation";
 import { BrandLine } from "./footer";
+import { trackNavClick } from "@/lib/analytics";
 import Icon__LogoLigoOffWhite from "./icon-logo-ligo-off-white";
 import Icon__ArrowRight from "./icon-arrow-right";
 
@@ -30,6 +31,7 @@ export default function FullscreenMenu({
 }: Props) {
   const params = useParams();
   const locale = params.locale as Locale;
+  const pathname = usePathname();
   const t = useTranslations("Nav");
 
   const [companyMenuOpen, setCompanyMenuOpen] = useState(false);
@@ -123,7 +125,10 @@ export default function FullscreenMenu({
                       <Link
                         href={item.href}
                         locale={locale as Locale}
-                        onClick={onClose}
+                        onClick={() => {
+                          trackNavClick(item.label, pathname);
+                          onClose();
+                        }}
                         className="group/navitem font-heading set-text-headline1 leading-tight tracking-wide text-white transition-all duration-200 w-fit flex items-center gap-4 relative"
                       >
                         <span>{item.label}</span>
@@ -195,7 +200,10 @@ export default function FullscreenMenu({
                               key={company.slug}
                               href={`/company/${company.slug}`}
                               locale={locale as Locale}
-                              onClick={onClose}
+                              onClick={() => {
+                                trackNavClick(`${t("companies")} > ${company.name[locale]}`, pathname);
+                                onClose();
+                              }}
                               className="block relative group/logo"
                               style={{
                                 opacity: isCompanyMenuOpen ? 1 : 0,
@@ -230,7 +238,10 @@ export default function FullscreenMenu({
                             key={company.slug}
                             href={`/company/${company.slug}`}
                             locale={locale as Locale}
-                            onClick={onClose}
+                            onClick={() => {
+                              trackNavClick(`${t("companies")} > ${company.name[locale]}`, pathname);
+                              onClose();
+                            }}
                             className="block opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out relative group/logo"
                             style={{ transitionDelay: `${index * 60}ms` }}
                           >

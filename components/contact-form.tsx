@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 
 import ButtonBrand from "@/components/button-brand";
 import RecaptchaProvider from "@/components/recaptcha-provider";
+import { trackFormSubmit } from "@/lib/analytics";
 
 type FormFields = {
   name: string;
@@ -81,10 +82,12 @@ function ContactFormInner() {
           throw new Error(data.message ?? "Submission failed");
         }
 
+        trackFormSubmit("contact", true);
         setSubmitted(true);
         setFields(INITIAL_FIELDS);
       } catch (err) {
         console.error("[ContactForm] submission error:", err);
+        trackFormSubmit("contact", false);
         setError(t("errorMessage"));
       } finally {
         setSubmitting(false);

@@ -11,6 +11,7 @@ import { formatArticleDate } from "@/lib/format-date";
 import ArticleCard from "@/components/ArticleCard";
 import ButtonBrandLink from "@/components/ButtonBrandLink";
 import Separator from "@/components/separator";
+import TrackContentView from "@/components/track-content-view";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -61,6 +62,11 @@ export default async function Page__ArticleDetail({ params }: Props) {
 
   return (
     <>
+      <TrackContentView
+        contentType="article"
+        contentId={article.slug}
+        contentTitle={article.title[loc]}
+      />
       {/* ────────────────────────────────────────────────
           SECTION 1 — Article Content
           ──────────────────────────────────────────────── */}

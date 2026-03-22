@@ -1,6 +1,9 @@
+"use client";
+
 import { Link } from "@/i18n/navigation";
 
 import Icon__ArrowRight from "./icon-arrow-right";
+import { trackCTA } from "@/lib/analytics";
 
 type Props = {
   href: string;
@@ -17,6 +20,9 @@ export default function ButtonBrandLink({
     <Link
       href={href}
       scroll={scroll}
+      onClick={() =>
+        trackCTA(typeof children === "string" ? children : href, href)
+      }
       className="relative cursor-pointer flex justify-between gap-2 min-w-[230px] border-b border-b-primary-blue group text-lg font-bold active:scale-90 transition-all hover:[&>svg]:-rotate-45 [&>svg]:transition-all [&>svg]:duration-500"
     >
       {children}

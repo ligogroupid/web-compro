@@ -1,5 +1,8 @@
+"use client";
+
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { trackEvent } from "@/lib/analytics";
 import { formatArticleDate } from "@/lib/format-date";
 
 import type { Article as ArticleFromService } from "@/service/article";
@@ -104,6 +107,13 @@ export default function ArticleCard({
         {
           "--reveal-delay": `${styles.revealDelay(index)}ms`,
         } as React.CSSProperties
+      }
+      onClick={() =>
+        trackEvent("article_card_click", {
+          article_slug: article.slug,
+          article_title: titleText,
+          position: index,
+        })
       }
     >
       {/* Thumbnail */}

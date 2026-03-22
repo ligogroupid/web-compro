@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { trackExternalLink } from "@/lib/analytics";
+
 type Props = {
   type: "phone" | "email";
   label: string;
@@ -73,6 +75,7 @@ export default function ContactAction({ type, label, prefix, value }: Props) {
   }
 
   function handleContact() {
+    trackExternalLink(deriveLink(type, value), type, "footer");
     window.location.href = deriveLink(type, value);
     closePopup();
   }

@@ -1,6 +1,7 @@
 "use client";
 
 import { Link, usePathname } from "@/i18n/navigation";
+import { trackEvent } from "@/lib/analytics";
 
 type Props = {
   currentPage: number;
@@ -68,6 +69,7 @@ export default function ArticlePagination({ currentPage, totalPages }: Props) {
           className="flex size-10 items-center justify-center text-primary-blue transition-colors duration-200 hover:bg-gray-light"
           aria-label="Previous page"
           scroll={true}
+          onClick={() => trackEvent("article_pagination", { page_number: currentPage - 1 })}
         >
           <svg
             width="10"
@@ -130,6 +132,7 @@ export default function ArticlePagination({ currentPage, totalPages }: Props) {
                 : "text-primary-blue hover:bg-gray-light"
             }`}
             aria-current={isActive ? "page" : undefined}
+            onClick={() => trackEvent("article_pagination", { page_number: page })}
           >
             {page}
           </Link>
@@ -143,6 +146,7 @@ export default function ArticlePagination({ currentPage, totalPages }: Props) {
           className="flex size-10 items-center justify-center text-primary-blue transition-colors duration-200 hover:bg-gray-light"
           aria-label="Next page"
           scroll={true}
+          onClick={() => trackEvent("article_pagination", { page_number: currentPage + 1 })}
         >
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
             <path
