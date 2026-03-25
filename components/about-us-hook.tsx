@@ -5,7 +5,7 @@ import { useInView } from "@/hooks/useInView";
 import ButtonBrand from "./button-brand";
 import { Link } from "@/i18n/navigation";
 
-const BASE = "transition-all duration-700 ease-out";
+const BASE = "transition-[opacity,transform] duration-700 ease-out";
 const HIDDEN = "opacity-0 translate-y-10";
 const VISIBLE = "opacity-100 translate-y-0";
 

@@ -19,7 +19,7 @@ export default function CompanyItemList({ locale, ...company }: Props) {
       href={`/company/${company.slug}`}
       className={[
         "flex flex-col xl:flex-row gap-6 lg:gap-10 xl:gap-20 xl:items-end group",
-        "transition-all duration-700 ease-out",
+        "transition-[opacity,transform] duration-700 ease-out",
         isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20",
       ].join(" ")}
     >
