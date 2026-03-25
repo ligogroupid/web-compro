@@ -26,11 +26,11 @@ export default function CompanyItemList({ locale, ...company }: Props) {
       {/*LEFT SECTION*/}
       <div className="flex-1 flex flex-col items-start md:items-end xl:items-start md:flex-row xl:flex-col gap-4 md:gap-10 xl:gap-20">
         <div
-          className={`max-w-[180px] lg:max-w-[204px] relative ${company.logo ? "" : "bg-gray-light"}`}
+          className={`max-w-[180px] lg:w-[204px] relative ${company.logo ? "" : "bg-gray-light"}`}
         >
           {company.logo && (
             <img
-              className="w-auto h-full block"
+              className="w-full block"
               alt={`Logo ${company.name[locale]}`}
               src={company.logo}
             />

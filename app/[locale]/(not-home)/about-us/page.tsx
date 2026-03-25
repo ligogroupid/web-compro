@@ -57,13 +57,17 @@ export default async function Page__AboutUs({ params }: Props) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <div>
                 <h2 className="set-text-caption1">{t("heroLabel")}</h2>
-                <div className="set-text-headline2 md:set-text-headline1 mt-8 md:mt-14 md:max-w-full">
+                <div className="set-text-headline1 md:set-text-headline1 mt-8 md:mt-14 md:max-w-full">
                   {t("heroHeadline")}
                 </div>
               </div>
               <div className="space-y-14">
-                <p className="max-w-[615px]">{t("heroParagraph1")}</p>
-                <p className="max-w-[615px]">{t("heroParagraph2")}</p>
+                <p className="max-w-[615px] text-bodytext">
+                  {t("heroParagraph1")}
+                </p>
+                <p className="max-w-[615px] text-bodytext">
+                  {t("heroParagraph2")}
+                </p>
               </div>
             </div>
           </div>

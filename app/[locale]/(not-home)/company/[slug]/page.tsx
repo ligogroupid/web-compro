@@ -176,7 +176,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
           <div className="absolute left-0 top-0  border border-dashed border-green-300 -translate-y-full pointer-events-none">
             <div className="pointer-events-none relative z-1 max-w-lg">
               <img
-                className="w-full object-contain"
+                className="w-full object-contain border-dotted border-4 border-fuchsia-600 pointer-events-none"
                 alt={`${company.name[loc]} strength`}
                 src={company.strengths_image}
               />

@@ -31,7 +31,7 @@ export default function VisionMission({
   return (
     <section className="bg-gray-light px-4 py-20 relative">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-7">
+        <div className="grid md:grid-cols-2 gap-7 lg:gap-14">
           <div>
             <h2
               ref={visionLabelRef}
@@ -41,7 +41,7 @@ export default function VisionMission({
             </h2>
             <div
               ref={visionTextRef}
-              className={`set-text-headline2 md:set-text-headline1 ${BASE} ${visionTextInView ? VISIBLE : HIDDEN}`}
+              className={`set-text-headline1 md:set-text-headline1 ${BASE} ${visionTextInView ? VISIBLE : HIDDEN} max-w-xl`}
               style={{ transitionDelay: visionTextInView ? "300ms" : "0ms" }}
             >
               {visionText}

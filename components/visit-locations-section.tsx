@@ -81,7 +81,8 @@ export default function VisitLocationsSection({
         : locations;
 
   return (
-    <section className="relative md:sticky top-0   bg-primary-blue ">
+    // <section className="relative md:sticky top-0   bg-primary-blue ">
+    <section className="relative   bg-primary-blue ">
       {/* Diagonal accent line — subtle geometric detail */}
       {/* <div
         className="absolute top-0 right-0 w-px opacity-[0.07]"
@@ -280,6 +281,8 @@ export default function VisitLocationsSection({
               {!isGmaps && (
                 <div
                   className={[
+                    // `grid grid-cols-1 ${displayLocations.length > 9 ? "md:grid-cols-3 lg:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3"}`,
+                    // displayLocations.length > 9 ? "md:gap-8 lg:gap-10" : "gap-6 md:gap-10 lg:gap-14",
                     "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
                     "gap-6 md:gap-10 lg:gap-14",
                     isProjection || isGmaps ? "mt-10" : "",
