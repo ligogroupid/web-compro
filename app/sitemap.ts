@@ -8,9 +8,13 @@ export const revalidate = 3600; // Revalidate every hour
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ligogroup.com";
-  
+
   const sitemap: MetadataRoute.Sitemap = [];
-  
+
+  function getDate(date: string | number | null) {
+    return date ? new Date(date) : new Date();
+  }
+
   // Add static pages for each locale
   const staticPages = [
     "", // homepage
@@ -43,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         companies.forEach((company) => {
           sitemap.push({
             url: `${baseUrl}/${locale}/company/${company.slug}`,
-            lastModified: new Date(company.updated_at),
+            lastModified: getDate(company.updated_at),
             changeFrequency: "monthly",
             priority: 0.7,
           });
@@ -62,7 +66,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         articles.forEach((article) => {
           sitemap.push({
             url: `${baseUrl}/${locale}/article/${article.slug}`,
-            lastModified: new Date(article.updated_at),
+            lastModified: getDate(article.updated_at),
             changeFrequency: "monthly",
             priority: 0.6,
           });
