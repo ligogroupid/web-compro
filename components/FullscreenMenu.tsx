@@ -73,7 +73,7 @@ export default function FullscreenMenu({
     >
       <div className="relative h-full flex flex-col justify-start md:justify-end">
         {/* BG BAR */}
-        <div className="bg-primary-red h-[20%] sm:h-[25%] absolute left-0 bottom-0 w-full">
+        <div className="bg-primary-red h-[17%] sm:h-[25%] absolute left-0 bottom-0 w-full">
           <div
             className={`h-4 bg-primary-blue ${isOpen ? "w-[65%]" : "w-0"} transition-all duration-1000 delay-200 ml-auto`}
           />
@@ -84,7 +84,7 @@ export default function FullscreenMenu({
         </div>
 
         {/* Menu set container */}
-        <div className="relative pb-0 md:pb-10 p-10 w-full h-[78%] sm:h-[75%] md:h-full max-w-7xl mx-auto overflow-hidden md:overflow-y-auto md:max-h-none hide-scrollbar flex flex-col md:block">
+        <div className="relative pb-0 md:pb-10 p-10 w-full h-[83%] sm:h-[75%] md:h-full max-w-7xl mx-auto overflow-hidden md:overflow-y-auto md:max-h-none hide-scrollbar flex flex-col md:block">
           {/* Close button */}
           {closeOverlay && (
             <div className="absolute top-2 right-2 md:relative flex justify-end">
