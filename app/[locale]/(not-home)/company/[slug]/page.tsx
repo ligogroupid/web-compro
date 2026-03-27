@@ -171,7 +171,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
       )}
 
       {/* BRANDS and PRODUCTS OF COMPANY */}
-      <div className="relative">
+      <div className="relative z-[1]"> {/*Fixing glitch issue*/}
         {/* IMAGE COMPANY STRENGTH — inside wrapper so it stays on colored bg, scrolls naturally */}
         {company.strengths_image && (
           <div className="absolute left-0 top-0  border border-dashed border-green-300 -translate-y-full pointer-events-none">
