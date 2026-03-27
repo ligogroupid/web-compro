@@ -15,6 +15,7 @@ export default function CompanyItemList({ locale, ...company }: Props) {
 
   return (
     <Link
+      prefetch={false}
       ref={ref}
       href={`/company/${company.slug}`}
       className={[

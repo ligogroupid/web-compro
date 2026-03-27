@@ -40,6 +40,7 @@ export default function MoreCompanies({ companies, title, locale }: Props) {
         >
           {companies.map((company, index) => (
             <Link
+              prefetch={false}
               key={company.slug}
               href={`/company/${company.slug}`}
               className={`group relative block ${

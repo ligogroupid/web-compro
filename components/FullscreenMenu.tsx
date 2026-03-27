@@ -123,6 +123,7 @@ export default function FullscreenMenu({
                   >
                     {item.href ? (
                       <Link
+                        prefetch={false}
                         href={item.href}
                         locale={locale as Locale}
                         onClick={() => {
@@ -197,6 +198,7 @@ export default function FullscreenMenu({
                         <div className="flex flex-wrap gap-3 pt-5">
                           {sortedCompanies.map((company, index) => (
                             <Link
+                              prefetch={false}
                               key={company.slug}
                               href={`/company/${company.slug}`}
                               locale={locale as Locale}
@@ -238,6 +240,7 @@ export default function FullscreenMenu({
                       <div className="hidden md:flex pointer-events-none group-hover:pointer-events-auto flex-wrap gap-3 w-[210%] lg:w-[230%] absolute left-full pl-6 xl:pl-10 top-[50%] translate-y-[-50%]">
                         {sortedCompanies.map((company, index) => (
                           <Link
+                            prefetch={false}
                             key={company.slug}
                             href={`/company/${company.slug}`}
                             locale={locale as Locale}

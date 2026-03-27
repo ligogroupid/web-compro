@@ -14,12 +14,15 @@ export default function AboutUsHook() {
 
   const { ref: headlineRef, isInView: headlineInView } =
     useInView<HTMLDivElement>({ threshold: 0.1 });
-  const { ref: labelRef, isInView: labelInView } =
-    useInView<HTMLDivElement>({ threshold: 0.1 });
-  const { ref: descRef, isInView: descInView } =
-    useInView<HTMLDivElement>({ threshold: 0.1 });
-  const { ref: btnRef, isInView: btnInView } =
-    useInView<HTMLDivElement>({ threshold: 0.1 });
+  const { ref: labelRef, isInView: labelInView } = useInView<HTMLDivElement>({
+    threshold: 0.1,
+  });
+  const { ref: descRef, isInView: descInView } = useInView<HTMLDivElement>({
+    threshold: 0.1,
+  });
+  const { ref: btnRef, isInView: btnInView } = useInView<HTMLDivElement>({
+    threshold: 0.1,
+  });
 
   return (
     <section className="bg-gray-light px-4 py-[96px] relative">
@@ -51,7 +54,7 @@ export default function AboutUsHook() {
             className={`mt-14 ${BASE} ${btnInView ? VISIBLE : HIDDEN}`}
             style={{ transitionDelay: btnInView ? "600ms" : "0ms" }}
           >
-            <Link href="about-us">
+            <Link prefetch={false} href="about-us">
               <ButtonBrand>{t("readMore")}</ButtonBrand>
             </Link>
           </div>

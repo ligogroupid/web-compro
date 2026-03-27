@@ -24,7 +24,7 @@ export default async function Header({ variant = "general" }: Props) {
         }
       >
         <div className="flex items-center max-w-7xl mx-auto">
-          <Link href="/">
+          <Link prefetch={false} href="/">
             {isHome ? (
               <div className="relative">
                 <div className="bg-white p-8">

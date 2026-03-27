@@ -89,6 +89,7 @@ export function BrandLine() {
     <div className="font-body font-medium text-[9px] tracking-[0.2em]">
       COPYRIGHT {year} &copy; ALL RIGHTS RESERVED • DESIGNED BY&nbsp;
       <Link
+        prefetch={false}
         href="https://designatastudio.com"
         className="hover:underline"
         target="_blank"

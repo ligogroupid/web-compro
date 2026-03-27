@@ -18,6 +18,7 @@ export default function ButtonBrandLink({
 }: Props) {
   return (
     <Link
+      prefetch={false}
       href={href}
       scroll={scroll}
       onClick={() =>

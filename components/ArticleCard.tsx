@@ -100,6 +100,7 @@ export default function ArticleCard({
 
   return (
     <Link
+      prefetch={false}
       href={`/article/${article.slug}`}
       scroll={true}
       className={styles.link}
