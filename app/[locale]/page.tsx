@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 import type { Locale } from "@/i18n/routing";
 
-export const revalidate = 600; // 10 minutes
+// LOW THROTTLING UPDATE
+export const revalidate = 1800; // 30 minutes
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import ImageCover from "@/components/cover-images";
@@ -57,7 +58,7 @@ export default async function Home({ params }: Props) {
     <>
       <Header variant="home" />
       <main>
-        <div className="sticky top-0">
+        <div className="sticky top-0 z-0"> {/*Fixing glitch issue*/}
           <ImageCover
             images={heroImages.map((src) => ({
               src,
@@ -65,12 +66,14 @@ export default async function Home({ params }: Props) {
             }))}
           />
         </div>
-        <Separator />
-        <AboutUsHook />
-        <CompanyList locale={locale as Locale} />
-        <FeaturedBrandList />
-        <Achivements />
-        <div className="sticky top-0">
+        <div className="relative z-[1]"> {/*Fixing glitch issue*/}
+          <Separator />
+          <AboutUsHook />
+          <CompanyList locale={locale as Locale} />
+          <FeaturedBrandList />
+          <Achivements />
+        </div>
+        <div className="sticky top-0 z-0"> {/*Fixing glitch issue*/}
           {/*COVER DISTRIBUTION HOMEPAGE*/}
           <ImageCover
             images={distributionImages.map((src) => ({
@@ -79,7 +82,7 @@ export default async function Home({ params }: Props) {
             }))}
           />
         </div>
-        <section className="relative">
+        <section className="relative z-[1]"> {/*Fixing glitch issue*/}
           <div className="bg-primary-blue text-white pt-20 pb-[100px] md:pb-[180px] px-6">
             <div className="max-w-7xl mx-auto  grid md:grid-cols-2 gap-8">
               <div>
@@ -101,7 +104,7 @@ export default async function Home({ params }: Props) {
           </div>
         </section>
         <ClientsList locale={locale as Locale} />
-        <section className="relative bg-[#E8E8E8] pt-12 pb-32 px-4">
+        <section className="relative z-[1] bg-[#E8E8E8] pt-12 pb-32 px-4"> {/*Fixing glitch issue*/}
           <div className="max-w-7xl mx-auto">
             <h2 className="set-text-caption1">{t("exploreLabel")}</h2>
             <div className="set-text-headline1 mt-8">

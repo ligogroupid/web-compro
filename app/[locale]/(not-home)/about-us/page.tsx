@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import ImageCover from "@/components/cover-images";
 
-export const revalidate = 600; // 10 minutes
+// LOW THROTTLING UPDATE
+export const revalidate = 1800; // 30 minutes
 import LigoLetterValues from "@/components/ligo-letter-values";
 import OurJourney from "@/components/our-journey";
 import RecycledProcess from "@/components/recycle-process";

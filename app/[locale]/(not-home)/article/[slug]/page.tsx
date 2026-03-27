@@ -5,7 +5,8 @@ import { getTranslations } from "next-intl/server";
 
 import type { Locale } from "@/i18n/routing";
 
-export const revalidate = 600; // 10 minutes
+// LOW THROTTLING UPDATE
+export const revalidate = 1800; // 30 minutes
 import { getArticleBySlug, getOtherArticles } from "@/service/article";
 import { formatArticleDate } from "@/lib/format-date";
 import ArticleCard from "@/components/ArticleCard";

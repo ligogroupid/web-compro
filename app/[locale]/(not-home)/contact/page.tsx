@@ -4,7 +4,8 @@ import type { Locale } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import ContactForm from "@/components/contact-form";
 
-export const revalidate = 600; // 10 minutes
+// LOW THROTTLING UPDATE
+export const revalidate = 1800; // 30 minutes
 import { getContacts } from "@/service/contact";
 import { getPageMetadata } from "@/service/seo";
 

@@ -4,7 +4,8 @@ import type { Locale } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import { getArticlesPaginated } from "@/service/article";
 
-export const revalidate = 600; // 10 minutes
+// LOW THROTTLING UPDATE
+export const revalidate = 1800; // 30 minutes
 import ArticleCard from "@/components/ArticleCard";
 import ArticlePagination from "@/components/article-pagination";
 import { getPageMetadata } from "@/service/seo";

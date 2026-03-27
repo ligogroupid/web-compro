@@ -5,7 +5,8 @@ import { getTranslations } from "next-intl/server";
 
 import ImageCover from "@/components/cover-images";
 
-export const revalidate = 30; // 10 minutes
+// LOW THROTTLING UPDATE
+export const revalidate = 1800; // 30 minutes
 import CompanyInfo from "./CompanyInfo";
 import MoreCompanies from "@/components/MoreCompanies";
 import ProductItem from "./ProductItem";
