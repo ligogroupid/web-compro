@@ -26,7 +26,7 @@ export default function ImageCover({ images }: Props) {
   }
 
   return (
-    <div className="relative w-full aspect-[3/1.75] md:aspect-[4/1.15] transform-gpu">
+    <div className="relative w-full aspect-[3/1.75] md:aspect-[4/1.15]">
       {images.length > 1 ? (
         <Swiper modules={[Autoplay]} autoplay={{ delay: 5000 }} loop>
           {images.map((n, i) => (

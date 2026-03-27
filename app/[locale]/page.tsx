@@ -57,7 +57,7 @@ export default async function Home({ params }: Props) {
     <>
       <Header variant="home" />
       <main>
-        <div className="sticky top-0 z-0">
+        <div className="sticky top-0">
           <ImageCover
             images={heroImages.map((src) => ({
               src,
@@ -65,14 +65,12 @@ export default async function Home({ params }: Props) {
             }))}
           />
         </div>
-        <div className="relative z-10">
-          <Separator />
-          <AboutUsHook />
-          <CompanyList locale={locale as Locale} />
-          <FeaturedBrandList />
-          <Achivements />
-        </div>
-        <div className="sticky top-0 z-0">
+        <Separator />
+        <AboutUsHook />
+        <CompanyList locale={locale as Locale} />
+        <FeaturedBrandList />
+        <Achivements />
+        <div className="sticky top-0">
           {/*COVER DISTRIBUTION HOMEPAGE*/}
           <ImageCover
             images={distributionImages.map((src) => ({
@@ -81,7 +79,7 @@ export default async function Home({ params }: Props) {
             }))}
           />
         </div>
-        <section className="relative z-10">
+        <section className="relative">
           <div className="bg-primary-blue text-white pt-20 pb-[100px] md:pb-[180px] px-6">
             <div className="max-w-7xl mx-auto  grid md:grid-cols-2 gap-8">
               <div>
