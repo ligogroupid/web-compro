@@ -82,42 +82,48 @@ export default async function Home({ params }: Props) {
             }))}
           />
         </div>
-        <section className="relative z-[1]"> {/*Fixing glitch issue*/}
-          <div className="bg-primary-blue text-white pt-20 pb-[100px] md:pb-[180px] px-6">
-            <div className="max-w-7xl mx-auto  grid md:grid-cols-2 gap-8">
-              <div>
-                <h2 className="set-text-caption1">{t("distributionLabel")}</h2>
-                <div className="mt-8 set-text-headline1">
-                  {t("distributionHeadline")}
+        {/* FIX: Single stacking context wrapper for all content after sticky-2.
+            Without this, Safari iOS lets the sticky-2 layer (distribution cover)
+            bleed over subsequent sections — ClientsList had no z-index at all,
+            and even z-[1] siblings lost their stacking on iOS Safari. */}
+        <div className="relative z-[1]">
+          <section>
+            <div className="bg-primary-blue text-white pt-20 pb-[100px] md:pb-[180px] px-6">
+              <div className="max-w-7xl mx-auto  grid md:grid-cols-2 gap-8">
+                <div>
+                  <h2 className="set-text-caption1">{t("distributionLabel")}</h2>
+                  <div className="mt-8 set-text-headline1">
+                    {t("distributionHeadline")}
+                  </div>
+                  <div className="mt-16 set-text-bodytext">
+                    {t("distributionBody")}
+                  </div>
                 </div>
-                <div className="mt-16 set-text-bodytext">
-                  {t("distributionBody")}
+                <div className="flex items-end">
+                  <IndonesiaMap />
                 </div>
               </div>
-              <div className="flex items-end">
-                <IndonesiaMap />
+            </div>
+            <div className="bg-white">
+              <div className="h-4 bg-primary-blue w-2/5" />
+            </div>
+          </section>
+          <ClientsList locale={locale as Locale} />
+          <section className="bg-[#E8E8E8] pt-12 pb-32 px-4">
+            <div className="max-w-7xl mx-auto">
+              <h2 className="set-text-caption1">{t("exploreLabel")}</h2>
+              <div className="set-text-headline1 mt-8">
+                {t("exploreHeadline")}
+              </div>
+              <div className="mt-20">
+                <HomepageArticles locale={locale as Locale} />
+              </div>
+              <div className="mt-24 flex">
+                <ButtonBrandLink href="/article">{t("allNews")}</ButtonBrandLink>
               </div>
             </div>
-          </div>
-          <div className="bg-white">
-            <div className="h-4 bg-primary-blue w-2/5" />
-          </div>
-        </section>
-        <ClientsList locale={locale as Locale} />
-        <section className="relative z-[1] bg-[#E8E8E8] pt-12 pb-32 px-4"> {/*Fixing glitch issue*/}
-          <div className="max-w-7xl mx-auto">
-            <h2 className="set-text-caption1">{t("exploreLabel")}</h2>
-            <div className="set-text-headline1 mt-8">
-              {t("exploreHeadline")}
-            </div>
-            <div className="mt-20">
-              <HomepageArticles locale={locale as Locale} />
-            </div>
-            <div className="mt-24 flex">
-              <ButtonBrandLink href="/article">{t("allNews")}</ButtonBrandLink>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
     </>
   );
