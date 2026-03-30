@@ -4,6 +4,8 @@ import type { Locale } from "@/i18n/routing";
 import type { TClient } from "@/service/client";
 
 import { getClientsByGroup } from "@/service/client";
+// PRD: prd-remove-dummy-fallback — Show notice instead of hiding empty sections
+import SectionNotice from "@/components/section-notice";
 
 type Props = {
   locale: Locale;
@@ -16,7 +18,8 @@ function ClientGrid({
   clients: TClient[];
   locale: Locale;
 }) {
-  if (clients.length === 0) return null;
+  // PRD: prd-remove-dummy-fallback — Show notice instead of returning null
+  if (clients.length === 0) return <SectionNotice sectionName="Clients" />;
 
   return (
     <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-6 md:gap-8 mt-8">

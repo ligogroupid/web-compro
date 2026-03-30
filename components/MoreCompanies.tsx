@@ -5,6 +5,8 @@ import { useInView } from "@/hooks/useInView";
 import { useTranslations } from "next-intl";
 import type { Locale } from "@/i18n/routing";
 import type { TCompanyListItem } from "@/service/company";
+// PRD: prd-remove-dummy-fallback — Show notice instead of hiding empty sections
+import SectionNotice from "@/components/section-notice";
 
 type Props = {
   companies: TCompanyListItem[];
@@ -18,7 +20,8 @@ export default function MoreCompanies({ companies, title, locale }: Props) {
     threshold: 0.15,
   });
 
-  if (companies.length === 0) return null;
+  // PRD: prd-remove-dummy-fallback — Show notice instead of returning null
+  if (companies.length === 0) return <SectionNotice sectionName="More Companies" />;
 
   return (
     <section className="relative bg-white">

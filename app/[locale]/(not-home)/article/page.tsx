@@ -8,6 +8,8 @@ import { getArticlesPaginated } from "@/service/article";
 export const revalidate = 1800; // 30 minutes
 import ArticleCard from "@/components/ArticleCard";
 import ArticlePagination from "@/components/article-pagination";
+// PRD: prd-remove-dummy-fallback — Show notice instead of hiding empty sections
+import SectionNotice from "@/components/section-notice";
 import { getPageMetadata } from "@/service/seo";
 
 const ITEMS_PER_PAGE = 4;
@@ -66,8 +68,8 @@ export default async function Page__Article({ params, searchParams }: Props) {
           <h2 className="set-text-headline1">{t("headline")}</h2>
         </div>
 
-        {/* Article grid — hero left, compact stack right */}
-        {heroArticle && (
+        {/* Article grid — hero left, compact stack right — PRD: prd-remove-dummy-fallback */}
+        {heroArticle ? (
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
             {/* Left column — featured / hero card */}
             <ArticleCard
@@ -90,6 +92,8 @@ export default async function Page__Article({ params, searchParams }: Props) {
               ))}
             </div>
           </div>
+        ) : (
+          <SectionNotice sectionName="Articles" />
         )}
 
         {/* Divider + Pagination */}

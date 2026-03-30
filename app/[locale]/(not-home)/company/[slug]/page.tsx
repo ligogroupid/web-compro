@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import ImageCover from "@/components/cover-images";
+// PRD: prd-remove-dummy-fallback — Show notice instead of hiding empty sections
+import SectionNotice from "@/components/section-notice";
 
 // LOW THROTTLING UPDATE
 export const revalidate = 1800; // 30 minutes
@@ -108,7 +110,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
                 }))
               : [
                   {
-                    src: "https://placehold.co/900x400?text=No+Hero+Image",
+                    // PRD: prd-remove-dummy-fallback — Same bg & text color for solid placeholder
+                    src: "https://placehold.co/900x400/e0e0e0/e0e0e0",
                   },
                 ]
           }
@@ -127,9 +130,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
         ctaUrl={company.cta_url}
       />
 
-      {/* COMPANY STRENGTHS */}
-      {company.provens.length > 0 && (
-        // {/* sticky content */}
+      {/* COMPANY STRENGTHS — PRD: prd-remove-dummy-fallback */}
+      {company.provens.length > 0 ? (
         <section
           className="sticky top-0 z-0"
           style={{
@@ -170,6 +172,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
             </div>
           </div>
         </section>
+      ) : (
+        <SectionNotice sectionName="Company Strengths" />
       )}
 
       {/* BRANDS and PRODUCTS OF COMPANY */}
@@ -188,8 +192,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
         )}
 
         <section className="bg-white px-4 relative">
-          {/* BRANDS */}
-          {company.brands.length > 0 && (
+          {/* BRANDS — PRD: prd-remove-dummy-fallback */}
+          {company.brands.length > 0 ? (
             <>
               <div className="py-16 flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
                 <div className="lg:w-1/5">
@@ -220,10 +224,12 @@ export default async function Page__CompanyDetails({ params }: Props) {
               </div>
               <div className="bg-primary-blue/20 h-px w-full" />
             </>
+          ) : (
+            <SectionNotice sectionName="Brands" />
           )}
 
-          {/* PRODUCTS */}
-          {company.products.length > 0 && (
+          {/* PRODUCTS — PRD: prd-remove-dummy-fallback */}
+          {company.products.length > 0 ? (
             <div className="py-16 flex flex-col md:flex-row gap-12 max-w-7xl mx-auto">
               <div className="lg:w-1/5">
                 <h2 className="set-text-headline2">
@@ -242,6 +248,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
                 </div>
               </div>
             </div>
+          ) : (
+            <SectionNotice sectionName="Products" />
           )}
         </section>
       </div>
@@ -255,8 +263,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
         </section>
       )}
 
-      {/* COVER SECTIONS */}
-      {company.cover_image.length > 0 && (
+      {/* COVER SECTIONS — PRD: prd-remove-dummy-fallback */}
+      {company.cover_image.length > 0 ? (
         <div className="relative">
           <ImageCover
             images={company.cover_image.map((c, i) => {
@@ -267,10 +275,12 @@ export default async function Page__CompanyDetails({ params }: Props) {
             })}
           />
         </div>
+      ) : (
+        <SectionNotice sectionName="Cover Images" />
       )}
 
-      {/* VISIT LOCATIONS */}
-      {company.locations.length > 0 && (
+      {/* VISIT LOCATIONS — PRD: prd-remove-dummy-fallback */}
+      {company.locations.length > 0 ? (
         <VisitLocationsSection
           locations={company.locations.map((location) => ({
             name: location.name[loc],
@@ -286,15 +296,19 @@ export default async function Page__CompanyDetails({ params }: Props) {
           title={t("visitLocations")}
           subtitle={t("visitLocationsSubtitle")}
         />
+      ) : (
+        <SectionNotice sectionName="Visit Locations" />
       )}
 
-      {/* MORE COMPANIES */}
-      {otherCompanies.length > 0 && (
+      {/* MORE COMPANIES — PRD: prd-remove-dummy-fallback */}
+      {otherCompanies.length > 0 ? (
         <MoreCompanies
           companies={otherCompanies}
           title={t("otherCompanies")}
           locale={loc}
         />
+      ) : (
+        <SectionNotice sectionName="Other Companies" />
       )}
     </>
   );

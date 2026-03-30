@@ -6,109 +6,8 @@ import { useTranslations } from "next-intl";
 import type { Locale } from "@/i18n/routing";
 import type { JourneyMilestoneData } from "@/service/about";
 import Icon__ArrowRight from "./icon-arrow-right";
-
-// ─── Fallback hardcoded data (used when CMS returns empty) ────────────────────
-
-const FALLBACK_MILESTONES: JourneyMilestoneData[] = [
-  {
-    id: "fallback-1",
-    year: "1986",
-    companyName: {
-      id: "LIGOKRIYASA MANDIRI",
-      en: "LIGOKRIYASA MANDIRI",
-    },
-    description: {
-      id: "Ligo Group journey began with the establishment of PT. Ligokriyasa Mandiri (LKM) in 1986, focusing on the production of plastic bags for household and industrial needs in various sizes and material types. From the outset, the company specialized in meeting the demand for plastic bags across a wide range of businesses, building a strong reputation as a trusted partner in the plastic packaging industry.",
-      en: "Ligo Group journey began with the establishment of PT. Ligokriyasa Mandiri (LKM) in 1986, focusing on the production of plastic bags for household and industrial needs in various sizes and material types. From the outset, the company specialized in meeting the demand for plastic bags across a wide range of businesses, building a strong reputation as a trusted partner in the plastic packaging industry.",
-    },
-    logo: "/journey/logo-ligokriyasa-mandiri.webp",
-    order: 0,
-  },
-  {
-    id: "fallback-2",
-    year: "1998",
-    companyName: {
-      id: "DOLPIN",
-      en: "DOLPIN",
-    },
-    description: {
-      id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
-      en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
-    },
-    logo: "/journey/logo-dolpin.webp",
-    order: 1,
-  },
-  {
-    id: "fallback-3",
-    year: "2000",
-    companyName: {
-      id: "UKS",
-      en: "UKS",
-    },
-    description: {
-      id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
-      en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
-    },
-    logo: "/journey/logo-uks.webp",
-    order: 2,
-  },
-  {
-    id: "fallback-4",
-    year: "2001",
-    companyName: {
-      id: "UKS",
-      en: "UKS",
-    },
-    description: {
-      id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
-      en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
-    },
-    logo: "/journey/imaging-2001.jpg",
-    order: 3,
-  },
-  {
-    id: "fallback-5",
-    year: "2001",
-    companyName: {
-      id: "UKS",
-      en: "UKS",
-    },
-    description: {
-      id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
-      en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
-    },
-    logo: "/journey/imaging-2001.jpg",
-    order: 4,
-  },
-  {
-    id: "fallback-6",
-    year: "2001",
-    companyName: {
-      id: "UKS",
-      en: "UKS",
-    },
-    description: {
-      id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
-      en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
-    },
-    logo: "/journey/imaging-2001.jpg",
-    order: 5,
-  },
-  {
-    id: "fallback-7",
-    year: "2001",
-    companyName: {
-      id: "UKS",
-      en: "UKS",
-    },
-    description: {
-      id: "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
-      en: "LIGO's journey began with the establishment of Ligokriyasa Mandiri (LKM), laying the foundation for what would grow into a multi-business plastic group.",
-    },
-    logo: "/journey/imaging-2001.jpg",
-    order: 6,
-  },
-];
+// PRD: prd-remove-dummy-fallback — Show notice instead of hiding empty sections
+import SectionNotice from "@/components/section-notice";
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -125,9 +24,11 @@ export default function OurJourney({ locale, milestones }: Props) {
   const prevIndexRef = useRef(0);
   const isTransitioningRef = useRef(false);
 
-  // Use CMS data if available, otherwise fallback
-  const data =
-    milestones && milestones.length > 0 ? milestones : FALLBACK_MILESTONES;
+  // PRD: prd-remove-dummy-fallback — Removed FALLBACK_MILESTONES, use CMS data only
+  const data = milestones ?? [];
+
+  // PRD: prd-remove-dummy-fallback — Show notice when no milestones from CMS
+  if (data.length === 0) return <SectionNotice sectionName="Our Journey" />;
 
   const handleScroll = useCallback(() => {
     const section = sectionRef.current;

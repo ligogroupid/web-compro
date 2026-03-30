@@ -5,16 +5,9 @@ import type { Locale } from "@/i18n/routing";
 import { trackEvent } from "@/lib/analytics";
 import { formatArticleDate } from "@/lib/format-date";
 
-import type { Article as ArticleFromService } from "@/service/article";
-import type { Article as ArticleFromDummy } from "@/dummy/articles";
+// PRD: prd-remove-dummy-fallback — Simplified to service-only type (dummy format removed)
+import type { Article } from "@/service/article";
 import Icon__ArrowRight from "./icon-arrow-right";
-
-/**
- * Union type supporting both:
- * - Database format (createdAt)
- * - Dummy data format (created_date)
- */
-type Article = ArticleFromService | ArticleFromDummy;
 
 type Props = {
   article: Article;
@@ -22,28 +15,6 @@ type Props = {
   index: number;
   variant?: "hero" | "compact" | "other-news";
 };
-
-/**
- * Get the created date from either format.
- */
-function getCreatedDate(article: Article): string {
-  // Check for database format (createdAt)
-  if ("createdAt" in article) {
-    return article.createdAt;
-  }
-  // Dummy format uses created_date
-  return (article as ArticleFromDummy).created_date;
-}
-
-/**
- * Get title from either format.
- */
-function getTitle(article: Article, locale: Locale): string {
-  if ("createdAt" in article) {
-    return article.title[locale];
-  }
-  return (article as ArticleFromDummy).title[locale];
-}
 
 const VARIANT_STYLES = {
   hero: {
@@ -94,9 +65,7 @@ export default function ArticleCard({
   const styles = VARIANT_STYLES[variant];
   const TitleTag = styles.titleTag;
 
-  const createdDate = getCreatedDate(article);
-  const titleText = getTitle(article, locale);
-  const thumbnail = article.thumbnail;
+  const titleText = article.title[locale];
 
   return (
     <Link
@@ -119,11 +88,11 @@ export default function ArticleCard({
     >
       {/* Thumbnail */}
       <div className={styles.thumbnail}>
-        {thumbnail && (
+        {article.thumbnail && (
           <img
             className={`${styles.imgHover} pointer-events-none`}
             alt={titleText}
-            src={thumbnail}
+            src={article.thumbnail}
           />
         )}
       </div>
@@ -132,7 +101,7 @@ export default function ArticleCard({
       <div className={styles.textWrapper}>
         {/* Date — editorial dateline */}
         <span className="text-xs tracking-[0.02em] block uppercase">
-          {formatArticleDate(createdDate, locale)}
+          {formatArticleDate(article.createdAt, locale)}
         </span>
 
         {/* Title */}

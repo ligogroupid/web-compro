@@ -2,6 +2,8 @@ import type { Locale } from "@/i18n/routing";
 
 import { getRecentArticles } from "@/service/article";
 import ArticleCard from "@/components/ArticleCard";
+// PRD: prd-remove-dummy-fallback — Show notice instead of hiding empty sections
+import SectionNotice from "@/components/section-notice";
 
 type Props = {
   locale: Locale;
@@ -10,7 +12,8 @@ type Props = {
 export default async function HomepageArticles({ locale }: Props) {
   const articles = await getRecentArticles(4);
 
-  if (articles.length === 0) return null;
+  // PRD: prd-remove-dummy-fallback — Show notice instead of returning null
+  if (articles.length === 0) return <SectionNotice sectionName="Articles" />;
 
   const heroArticle = articles[0];
   const compactArticles = articles.slice(1);

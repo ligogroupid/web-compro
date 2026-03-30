@@ -114,7 +114,8 @@ export default async function Page__AboutUs({ params }: Props) {
               ? bannerMiddle.map((src) => ({ src, alt: "Banner About Us" }))
               : [
                   {
-                    src: "https://placehold.co/1920x600?text=BANNER+MIDDLE%0AAbout%20Us",
+                    // PRD: prd-remove-dummy-fallback — Same bg & text color for solid placeholder
+                    src: "https://placehold.co/1920x600/e0e0e0/e0e0e0",
                     alt: "Banner About Us",
                   },
                 ]
@@ -151,7 +152,8 @@ export default async function Page__AboutUs({ params }: Props) {
               ? bannerBottom.map((src) => ({ src, alt: "Banner About Us" }))
               : [
                   {
-                    src: "https://placehold.co/1920x600?text=BANNER+BOTTOM%0AAbout%20Us",
+                    // PRD: prd-remove-dummy-fallback — Same bg & text color for solid placeholder
+                    src: "https://placehold.co/1920x600/e0e0e0/e0e0e0",
                     alt: "Banner About Us",
                   },
                 ]
