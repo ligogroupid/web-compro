@@ -209,7 +209,7 @@ export default function OurJourney({ locale, milestones }: Props) {
             {/* ── Left Column: Vertical Timeline Bar ── */}
             <div className="flex flex-col items-center h-full py-4 relative shrink-0">
               {/* Vertical line with notches */}
-              <div className="absolute left-0 top-0  h-full pl-1 py-14  flex flex-col justify-center gap-11 border-l border-l-primary-blue">
+              <div className="absolute left-0 top-0  h-full pl-1 py-14  flex flex-col justify-between border-l border-l-primary-blue">
                 {/* Arrow Up */}
                 <button
                   onClick={navigateUp}
@@ -263,7 +263,7 @@ export default function OurJourney({ locale, milestones }: Props) {
               <div
                 className={`transition-all duration-500 ease-out ${contentTransition ? "opacity-0 translate-y-6 scale-95" : "opacity-100 translate-y-0 scale-100"}`}
               >
-                <div className="w-[240px] lg:w-[304px] h-32 md:h- relative overflow-hidden">
+                <div className="w-[240px] lg:w-[304px] h-32 md:h-auto relative overflow-hidden">
                   {activeMilestone.logo && (
                     <img
                       alt={`Logo ${activeMilestone.companyName[locale]}`}
