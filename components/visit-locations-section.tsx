@@ -12,6 +12,8 @@ type LocationData = {
   embedUrl?: string;
   latitude?: number;
   longitude?: number;
+  imageUrl?: string;
+  linkUrl?: string;
 };
 
 type VisitLocationsSectionProps = {
@@ -49,10 +51,13 @@ export default function VisitLocationsSection({
       ? "gmaps_embed"
       : locations.some((loc) => loc.displayType === "maps_projection")
         ? "maps_projection"
-        : undefined);
+        : locations.some((loc) => loc.displayType === "maps_screenshot")
+          ? "maps_screenshot"
+          : undefined);
 
   const isProjection = resolvedDisplayType === "maps_projection";
   const isGmaps = resolvedDisplayType === "gmaps_embed";
+  const isScreenshot = resolvedDisplayType === "maps_screenshot";
 
   // Filter locations by display type
   const projectionLocations = locations.filter(
@@ -66,6 +71,10 @@ export default function VisitLocationsSection({
     (loc) => loc.displayType === "gmaps_embed" && loc.embedUrl,
   );
 
+  const screenshotLocations = locations.filter(
+    (loc) => loc.displayType === "maps_screenshot" && loc.imageUrl,
+  );
+
   // Legacy locations (fallback)
   const legacyLocations = locations.filter(
     (loc) => loc.displayType === "legacy" || loc.displayType === undefined,
@@ -76,9 +85,11 @@ export default function VisitLocationsSection({
     ? projectionLocations
     : isGmaps
       ? gmapsLocations
-      : legacyLocations.length > 0
-        ? legacyLocations
-        : locations;
+      : isScreenshot
+        ? screenshotLocations
+        : legacyLocations.length > 0
+          ? legacyLocations
+          : locations;
 
   return (
     // <section className="relative md:sticky top-0   bg-primary-blue ">
@@ -275,10 +286,94 @@ export default function VisitLocationsSection({
               )}
 
               {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                  MODE 3: Screenshot Maps — clickable image grid
+                  Each card: screenshot image + location name below
+                  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+              {isScreenshot && screenshotLocations.length > 0 && (
+                <div
+                  className={[
+                    gmapsGridClass(screenshotLocations.length),
+                    "gap-5 md:gap-6",
+                  ].join(" ")}
+                >
+                  {screenshotLocations.map((loc, idx) => {
+                    const isHovered_ = hoveredIndex === idx;
+
+                    return (
+                      <div
+                        key={idx}
+                        className="location-card-reveal group relative overflow-hidden"
+                        style={
+                          {
+                            "--card-delay": `${idx * 80}ms`,
+                          } as React.CSSProperties
+                        }
+                        onMouseEnter={() => setHoveredIndex(idx)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                      >
+                        {/* Screenshot image */}
+                        <a
+                          href={loc.linkUrl ?? "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block relative overflow-hidden transition-shadow duration-500"
+                          style={{
+                            boxShadow: isHovered_
+                              ? "0 8px 32px rgba(0,0,0,0.25)"
+                              : "0 2px 8px rgba(0,0,0,0.1)",
+                          }}
+                        >
+                          {/* Top accent line */}
+                          <div
+                            className="absolute top-0 left-0 right-0 h-[3px] z-10 transition-transform duration-500 origin-left"
+                            style={{
+                              background:
+                                "linear-gradient(90deg, #d71920, #ec6626)",
+                              transform: isHovered_ ? "scaleX(1)" : "scaleX(0)",
+                            }}
+                          />
+
+                          <div className="w-full aspect-[4/3] overflow-hidden">
+                            <img
+                              src={loc.imageUrl}
+                              alt={loc.name}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                          </div>
+                        </a>
+
+                        {/* Location name — below the image */}
+                        <div className="py-4 transition-all duration-300 border border-white/50 border-l-0 border-r-0 mt-8 max-w-none md:max-w-[300px]">
+                          <div className="flex items-center gap-3">
+                            <p
+                              className="font-heading text-sm font-bold tracking-wide transition-colors duration-300"
+                              style={{
+                                color: isHovered_
+                                  ? "#ffffff"
+                                  : "rgba(255,255,255,0.8)",
+                              }}
+                            >
+                              {loc.name}
+                            </p>
+                          </div>
+
+                          {loc.location && (
+                            <p className="mt-1 ml-[26px] text-xs text-white/30 leading-relaxed transition-colors duration-300 group-hover:text-white/50">
+                              {loc.location}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
                   Text-only Location Grid (both modes + legacy)
                   Shown below map/embeds as a supplementary list
                   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-              {!isGmaps && (
+              {!isGmaps && !isScreenshot && (
                 <div
                   className={[
                     // `grid grid-cols-1 ${displayLocations.length > 9 ? "md:grid-cols-3 lg:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3"}`,

@@ -39,6 +39,8 @@ type VisitLocation = {
   embedUrl?: string;
   latitude?: number;
   longitude?: number;
+  imageUrl?: string;
+  linkUrl?: string;
 };
 
 type Company = {
@@ -66,6 +68,8 @@ type Company = {
   meta_title: LocaleText;
   meta_description: LocaleText;
   meta_image: string | null;
+  cta_label?: string;
+  cta_url?: string;
 };
 
 export type TCompany = Company;
@@ -218,6 +222,8 @@ export async function getCompanyBySlug(slug: string): Promise<Company | null> {
     embedUrl: row.embed_url ?? undefined,
     latitude: row.latitude ?? undefined,
     longitude: row.longitude ?? undefined,
+    imageUrl: row.image_url ?? undefined,
+    linkUrl: row.link_url ?? undefined,
   }));
 
   return {
@@ -260,6 +266,8 @@ export async function getCompanyBySlug(slug: string): Promise<Company | null> {
       en: companyRow.meta_description_en ?? "",
     },
     meta_image: companyRow.meta_image ?? null,
+    cta_label: companyRow.cta_label ?? undefined,
+    cta_url: companyRow.cta_url ?? undefined,
   };
 }
 

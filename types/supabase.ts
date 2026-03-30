@@ -273,6 +273,8 @@ export type Database = {
           cover_image: string[] | null
           created_at: string | null
           created_by: string | null
+          cta_label: string | null
+          cta_url: string | null
           description_en: string | null
           description_id: string | null
           full_description_en: string | null
@@ -303,6 +305,8 @@ export type Database = {
           cover_image?: string[] | null
           created_at?: string | null
           created_by?: string | null
+          cta_label?: string | null
+          cta_url?: string | null
           description_en?: string | null
           description_id?: string | null
           full_description_en?: string | null
@@ -333,6 +337,8 @@ export type Database = {
           cover_image?: string[] | null
           created_at?: string | null
           created_by?: string | null
+          cta_label?: string | null
+          cta_url?: string | null
           description_en?: string | null
           description_id?: string | null
           full_description_en?: string | null
@@ -894,7 +900,9 @@ export type Database = {
           display_type: string
           embed_url: string | null
           id: string
+          image_url: string | null
           latitude: number | null
+          link_url: string | null
           location_en: string | null
           location_id: string | null
           longitude: number | null
@@ -908,7 +916,9 @@ export type Database = {
           display_type?: string
           embed_url?: string | null
           id?: string
+          image_url?: string | null
           latitude?: number | null
+          link_url?: string | null
           location_en?: string | null
           location_id?: string | null
           longitude?: number | null
@@ -922,7 +932,9 @@ export type Database = {
           display_type?: string
           embed_url?: string | null
           id?: string
+          image_url?: string | null
           latitude?: number | null
+          link_url?: string | null
           location_en?: string | null
           location_id?: string | null
           longitude?: number | null

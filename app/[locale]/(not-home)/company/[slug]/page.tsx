@@ -123,6 +123,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
         fullDescription={company.full_description[loc]}
         certifications={company.certifications}
         certificationsLabel={t("certifications")}
+        ctaLabel={company.cta_label}
+        ctaUrl={company.cta_url}
       />
 
       {/* COMPANY STRENGTHS */}
@@ -277,6 +279,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
             embedUrl: location.embedUrl,
             latitude: location.latitude,
             longitude: location.longitude,
+            imageUrl: location.imageUrl,
+            linkUrl: location.linkUrl,
           }))}
           locationDisplayType={company.location_display_type}
           title={t("visitLocations")}
