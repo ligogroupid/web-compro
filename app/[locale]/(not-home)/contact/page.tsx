@@ -4,8 +4,8 @@ import type { Locale } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import ContactForm from "@/components/contact-form";
 
-// LOW THROTTLING UPDATE
-export const revalidate = 1800; // 30 minutes
+// EDGE REQUEST OPTIMIZATION: 1 day for static pages (rarely changes)
+export const revalidate = 86400;
 import { getContacts } from "@/service/contact";
 import { getPageMetadata } from "@/service/seo";
 

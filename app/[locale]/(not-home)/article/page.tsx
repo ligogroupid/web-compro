@@ -4,8 +4,8 @@ import type { Locale } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import { getArticlesPaginated } from "@/service/article";
 
-// LOW THROTTLING UPDATE
-export const revalidate = 1800; // 30 minutes
+// EDGE REQUEST OPTIMIZATION: 1 hour for listing pages (new items can be added anytime)
+export const revalidate = 3600;
 import ArticleCard from "@/components/ArticleCard";
 import ArticlePagination from "@/components/article-pagination";
 // PRD: prd-remove-dummy-fallback — Show notice instead of hiding empty sections

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 import type { Locale } from "@/i18n/routing";
 
-// LOW THROTTLING UPDATE
-export const revalidate = 1800; // 30 minutes
+// EDGE REQUEST OPTIMIZATION: 1 hour for homepage
+export const revalidate = 3600;
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import ImageCover from "@/components/cover-images";

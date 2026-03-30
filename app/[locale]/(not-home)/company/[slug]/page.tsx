@@ -7,8 +7,17 @@ import ImageCover from "@/components/cover-images";
 // PRD: prd-remove-dummy-fallback — Show notice instead of hiding empty sections
 import SectionNotice from "@/components/section-notice";
 
-// LOW THROTTLING UPDATE
-export const revalidate = 1800; // 30 minutes
+// EDGE REQUEST OPTIMIZATION: 1 hour for detail pages (content rarely edited after publish)
+export const revalidate = 3600;
+
+import { getCompanyList } from "@/service/company";
+
+/* ─── Pre-render all company slugs at build time ─── */
+export async function generateStaticParams() {
+  const companies = await getCompanyList();
+  return companies.map((c) => ({ slug: c.slug }));
+}
+
 import CompanyInfo from "./CompanyInfo";
 import MoreCompanies from "@/components/MoreCompanies";
 import ProductItem from "./ProductItem";

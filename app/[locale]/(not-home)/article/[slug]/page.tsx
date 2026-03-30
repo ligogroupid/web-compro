@@ -5,9 +5,15 @@ import { getTranslations } from "next-intl/server";
 
 import type { Locale } from "@/i18n/routing";
 
-// LOW THROTTLING UPDATE
-export const revalidate = 1800; // 30 minutes
-import { getArticleBySlug, getOtherArticles } from "@/service/article";
+// EDGE REQUEST OPTIMIZATION: 1 hour for detail pages (content rarely edited after publish)
+export const revalidate = 3600;
+import { getArticles, getArticleBySlug, getOtherArticles } from "@/service/article";
+
+/* ─── Pre-render all article slugs at build time ─── */
+export async function generateStaticParams() {
+  const articles = await getArticles();
+  return articles.map((a) => ({ slug: a.slug }));
+}
 import { formatArticleDate } from "@/lib/format-date";
 import ArticleCard from "@/components/ArticleCard";
 import ButtonBrandLink from "@/components/ButtonBrandLink";

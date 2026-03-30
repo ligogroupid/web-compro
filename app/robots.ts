@@ -8,14 +8,19 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: [
-          "/api/",
-          "/_next/",
-          "/admin/",
-          "*.pdf",
-          "*.doc",
-          "*.docx"
+        disallow: ["/api/", "/_next/", "/admin/", "*.pdf", "*.doc", "*.docx"],
+      },
+      {
+        userAgent: [
+          "AhrefsBot",
+          "SemrushBot",
+          "MJ12bot",
+          "DotBot",
+          "BLEXBot",
+          "PetalBot",
+          "Bytespider",
         ],
+        disallow: "/",
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
