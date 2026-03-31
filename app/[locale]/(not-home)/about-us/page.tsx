@@ -93,7 +93,9 @@ export default async function Page__AboutUs({ params }: Props) {
         missions={[t("mission1"), t("mission2"), t("mission3")]}
       />
 
-      <section className="sticky top-0 z-0 bg-primary-blue text-white px-4 pt-[68px] pb-[182px]"> {/*Fixing glitch issue*/}
+      <section className="sticky top-0 z-0 bg-primary-blue text-white px-4 pt-[68px] pb-[182px]">
+        {" "}
+        {/* [iOS-safari-glitch] sticky base layer*/}
         <div className="max-w-7xl mx-auto">
           <div>
             <h2 className="set-text-caption1">{t("valuesLabel")}</h2>
@@ -107,7 +109,9 @@ export default async function Page__AboutUs({ params }: Props) {
 
       {/* BANNER MIDDLE - Managed by CMS */}
       {/*<div className="sticky top-0">*/}
-      <div className="relative z-[1]"> {/*Fixing glitch issue*/}
+      <div className="relative z-[1] [transform:translate3d(0,0,0)]">
+        {" "}
+        {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
         <ImageCover
           images={
             bannerMiddle.length > 0
@@ -121,12 +125,13 @@ export default async function Page__AboutUs({ params }: Props) {
                 ]
           }
         />
-
         <div className="absolute right-0 bottom-0 w-[50%] h-4 bg-gray-light" />
       </div>
       {/*</div>*/}
 
-      <section className="bg-gray-light px-4 py-16 relative z-[1]"> {/*Fixing glitch issue*/}
+      <section className="bg-gray-light px-4 py-16 relative z-[1] [transform:translate3d(0,0,0)]">
+        {" "}
+        {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
         <div className="max-w-7xl mx-auto">
           <div className="space-y-9 md:max-w-1/2">
             <h2 className="set-text-caption1">{t("businessModelLabel")}</h2>

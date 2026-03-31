@@ -186,7 +186,9 @@ export default async function Page__CompanyDetails({ params }: Props) {
       )}
 
       {/* BRANDS and PRODUCTS OF COMPANY */}
-      <div className="relative z-[1]"> {/*Fixing glitch issue*/}
+      <div className="relative z-[1] [transform:translate3d(0,0,0)]">
+        {" "}
+        {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
         {/* IMAGE COMPANY STRENGTH — inside wrapper so it stays on colored bg, scrolls naturally */}
         {company.strengths_image && (
           <div className="absolute left-0 top-0  border border-dashed border-green-300 -translate-y-full pointer-events-none">
@@ -199,7 +201,6 @@ export default async function Page__CompanyDetails({ params }: Props) {
             </div>
           </div>
         )}
-
         <section className="bg-white px-4 relative">
           {/* BRANDS — PRD: prd-remove-dummy-fallback */}
           {company.brands.length > 0 ? (

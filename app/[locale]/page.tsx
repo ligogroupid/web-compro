@@ -58,7 +58,9 @@ export default async function Home({ params }: Props) {
     <>
       <Header variant="home" />
       <main>
-        <div className="sticky top-0 z-0"> {/*Fixing glitch issue*/}
+        <div className="sticky top-0 z-0">
+          {" "}
+          {/* [iOS-safari-glitch] sticky base layer*/}
           <ImageCover
             images={heroImages.map((src) => ({
               src,
@@ -66,14 +68,18 @@ export default async function Home({ params }: Props) {
             }))}
           />
         </div>
-        <div className="relative z-[1]"> {/*Fixing glitch issue*/}
+        <div className="relative z-[1] [transform:translate3d(0,0,0)]">
+          {" "}
+          {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
           <Separator />
           <AboutUsHook />
           <CompanyList locale={locale as Locale} />
           <FeaturedBrandList />
           <Achivements />
         </div>
-        <div className="sticky top-0 z-0"> {/*Fixing glitch issue*/}
+        <div className="sticky top-0 z-0">
+          {" "}
+          {/* [iOS-safari-glitch] sticky base layer*/}
           {/*COVER DISTRIBUTION HOMEPAGE*/}
           <ImageCover
             images={distributionImages.map((src) => ({
@@ -82,16 +88,16 @@ export default async function Home({ params }: Props) {
             }))}
           />
         </div>
-        {/* FIX: Single stacking context wrapper for all content after sticky-2.
-            Without this, Safari iOS lets the sticky-2 layer (distribution cover)
-            bleed over subsequent sections — ClientsList had no z-index at all,
-            and even z-[1] siblings lost their stacking on iOS Safari. */}
-        <div className="relative z-[1]">
+        <div className="relative z-[1] [transform:translate3d(0,0,0)]">
+          {" "}
+          {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
           <section>
             <div className="bg-primary-blue text-white pt-20 pb-[100px] md:pb-[180px] px-6">
               <div className="max-w-7xl mx-auto  grid md:grid-cols-2 gap-8">
                 <div>
-                  <h2 className="set-text-caption1">{t("distributionLabel")}</h2>
+                  <h2 className="set-text-caption1">
+                    {t("distributionLabel")}
+                  </h2>
                   <div className="mt-8 set-text-headline1">
                     {t("distributionHeadline")}
                   </div>
@@ -119,7 +125,9 @@ export default async function Home({ params }: Props) {
                 <HomepageArticles locale={locale as Locale} />
               </div>
               <div className="mt-24 flex">
-                <ButtonBrandLink href="/article">{t("allNews")}</ButtonBrandLink>
+                <ButtonBrandLink href="/article">
+                  {t("allNews")}
+                </ButtonBrandLink>
               </div>
             </div>
           </section>
