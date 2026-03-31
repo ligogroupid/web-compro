@@ -275,7 +275,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
 
       {/* COVER SECTIONS — PRD: prd-remove-dummy-fallback */}
       {company.cover_image.length > 0 ? (
-        <div className="relative z-[1] [transform:translate3d(0,0,0)]">
+        <div className="sticky top-0 relative z-0 [transform:translate3d(0,0,0)]">
           <ImageCover
             images={company.cover_image.map((c, i) => {
               return {
@@ -289,37 +289,39 @@ export default async function Page__CompanyDetails({ params }: Props) {
         <SectionNotice sectionName="Cover Images" />
       )}
 
-      {/* VISIT LOCATIONS — PRD: prd-remove-dummy-fallback */}
-      {company.locations.length > 0 ? (
-        <VisitLocationsSection
-          locations={company.locations.map((location) => ({
-            name: location.name[loc],
-            location: location.location[loc],
-            displayType: location.displayType,
-            embedUrl: location.embedUrl,
-            latitude: location.latitude,
-            longitude: location.longitude,
-            imageUrl: location.imageUrl,
-            linkUrl: location.linkUrl,
-          }))}
-          locationDisplayType={company.location_display_type}
-          title={t("visitLocations")}
-          subtitle={t("visitLocationsSubtitle")}
-        />
-      ) : (
-        <SectionNotice sectionName="Visit Locations" />
-      )}
+      <div className="relative z-[1] [transform:translate3d(0,0,0)]">
+        {/* VISIT LOCATIONS — PRD: prd-remove-dummy-fallback */}
+        {company.locations.length > 0 ? (
+          <VisitLocationsSection
+            locations={company.locations.map((location) => ({
+              name: location.name[loc],
+              location: location.location[loc],
+              displayType: location.displayType,
+              embedUrl: location.embedUrl,
+              latitude: location.latitude,
+              longitude: location.longitude,
+              imageUrl: location.imageUrl,
+              linkUrl: location.linkUrl,
+            }))}
+            locationDisplayType={company.location_display_type}
+            title={t("visitLocations")}
+            subtitle={t("visitLocationsSubtitle")}
+          />
+        ) : (
+          <SectionNotice sectionName="Visit Locations" />
+        )}
 
-      {/* MORE COMPANIES — PRD: prd-remove-dummy-fallback */}
-      {otherCompanies.length > 0 ? (
-        <MoreCompanies
-          companies={otherCompanies}
-          title={t("otherCompanies")}
-          locale={loc}
-        />
-      ) : (
-        <SectionNotice sectionName="Other Companies" />
-      )}
+        {/* MORE COMPANIES — PRD: prd-remove-dummy-fallback */}
+        {otherCompanies.length > 0 ? (
+          <MoreCompanies
+            companies={otherCompanies}
+            title={t("otherCompanies")}
+            locale={loc}
+          />
+        ) : (
+          <SectionNotice sectionName="Other Companies" />
+        )}
+      </div>
     </>
   );
 }

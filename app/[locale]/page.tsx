@@ -59,7 +59,6 @@ export default async function Home({ params }: Props) {
       <Header variant="home" />
       <main>
         <div className="sticky top-0 z-0">
-          {" "}
           {/* [iOS-safari-glitch] sticky base layer*/}
           <ImageCover
             images={heroImages.map((src) => ({
@@ -69,7 +68,6 @@ export default async function Home({ params }: Props) {
           />
         </div>
         <div className="relative z-[1] [transform:translate3d(0,0,0)]">
-          {" "}
           {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
           <Separator />
           <AboutUsHook />
@@ -78,7 +76,6 @@ export default async function Home({ params }: Props) {
           <Achivements />
         </div>
         <div className="sticky top-0 z-0">
-          {" "}
           {/* [iOS-safari-glitch] sticky base layer*/}
           {/*COVER DISTRIBUTION HOMEPAGE*/}
           <ImageCover
@@ -89,7 +86,6 @@ export default async function Home({ params }: Props) {
           />
         </div>
         <div className="relative z-[1] [transform:translate3d(0,0,0)]">
-          {" "}
           {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
           <section>
             <div className="bg-primary-blue text-white pt-20 pb-[100px] md:pb-[180px] px-6">
