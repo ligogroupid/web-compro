@@ -135,7 +135,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
         fullDescription={company.full_description[loc]}
         certifications={company.certifications}
         certificationsLabel={t("certifications")}
-        ctaLabel={company.cta_label}
+        ctaLabel={company.cta_label[loc]}
         ctaUrl={company.cta_url}
       />
 

@@ -273,7 +273,8 @@ export type Database = {
           cover_image: string[] | null
           created_at: string | null
           created_by: string | null
-          cta_label: string | null
+          cta_label_en: string | null
+          cta_label_id: string | null
           cta_url: string | null
           description_en: string | null
           description_id: string | null
@@ -305,7 +306,8 @@ export type Database = {
           cover_image?: string[] | null
           created_at?: string | null
           created_by?: string | null
-          cta_label?: string | null
+          cta_label_en?: string | null
+          cta_label_id?: string | null
           cta_url?: string | null
           description_en?: string | null
           description_id?: string | null
@@ -337,7 +339,8 @@ export type Database = {
           cover_image?: string[] | null
           created_at?: string | null
           created_by?: string | null
-          cta_label?: string | null
+          cta_label_en?: string | null
+          cta_label_id?: string | null
           cta_url?: string | null
           description_en?: string | null
           description_id?: string | null

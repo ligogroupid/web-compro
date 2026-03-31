@@ -68,7 +68,8 @@ type Company = {
   meta_title: LocaleText;
   meta_description: LocaleText;
   meta_image: string | null;
-  cta_label?: string;
+  // Feature: bilingual-cta-label
+  cta_label: LocaleText;
   cta_url?: string;
 };
 
@@ -266,7 +267,11 @@ export async function getCompanyBySlug(slug: string): Promise<Company | null> {
       en: companyRow.meta_description_en ?? "",
     },
     meta_image: companyRow.meta_image ?? null,
-    cta_label: companyRow.cta_label ?? undefined,
+    // Feature: bilingual-cta-label
+    cta_label: {
+      id: companyRow.cta_label_id ?? '',
+      en: companyRow.cta_label_en ?? '',
+    },
     cta_url: companyRow.cta_url ?? undefined,
   };
 }
