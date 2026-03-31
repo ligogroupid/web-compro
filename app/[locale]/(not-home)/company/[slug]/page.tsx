@@ -266,7 +266,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
 
       {/* MOBILE: CERTIFICATES (shown below on mobile) */}
       {company.certifications.length > 0 && (
-        <section className="bg-white px-4 pb-14 md:hidden">
+        <section className="bg-white px-4 pb-14 md:hidden relative z-[1] [transform:translate3d(0,0,0)]">
           <div className="max-w-7xl mx-auto">
             <Certificates company={company} label={t("certifications")} />
           </div>
@@ -275,7 +275,7 @@ export default async function Page__CompanyDetails({ params }: Props) {
 
       {/* COVER SECTIONS — PRD: prd-remove-dummy-fallback */}
       {company.cover_image.length > 0 ? (
-        <div className="relative">
+        <div className="relative z-[1] [transform:translate3d(0,0,0)]">
           <ImageCover
             images={company.cover_image.map((c, i) => {
               return {

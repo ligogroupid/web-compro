@@ -150,7 +150,7 @@ export default async function Page__AboutUs({ params }: Props) {
       <OurJourney locale={locale as Locale} milestones={journeyMilestones} />
 
       {/* BANNER BOTTOM - Managed by CMS */}
-      <div>
+      <div className="relative z-[1] [transform:translate3d(0,0,0)]">
         <ImageCover
           images={
             bannerBottom.length > 0
