@@ -465,3 +465,8 @@ body {
     display: none; /* Chrome, Safari, Opera */
   }
 }
+
+@utility sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
