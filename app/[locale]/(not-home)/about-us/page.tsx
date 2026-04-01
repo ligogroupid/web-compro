@@ -12,6 +12,7 @@ import VisionMission from "@/components/vision-mission";
 import { Locale } from "@/i18n/routing";
 import { getAllAboutPageImages, getJourneyMilestones } from "@/service/about";
 import { getPageMetadata } from "@/service/seo";
+import StickyWrapper from "@/components/sticky-wrapper";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -53,26 +54,30 @@ export default async function Page__AboutUs({ params }: Props) {
   return (
     <>
       <section className=" bg-sky-image text-white">
-        <div className="px-4 xl:sticky lg:top-0">
-          <div className="max-w-7xl mx-auto relative pt-[102px]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              <div>
-                <h2 className="set-text-caption1">{t("heroLabel")}</h2>
-                <div className="set-text-headline1 md:set-text-headline1 mt-8 md:mt-14 md:max-w-full">
-                  {t("heroHeadline")}
+        {/*<div className="px-4 xl:sticky lg:top-0">*/}
+        <StickyWrapper onScreen="xl">
+          <div className="px-4">
+            <div className="max-w-7xl mx-auto relative pt-[102px]">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div>
+                  <h2 className="set-text-caption1">{t("heroLabel")}</h2>
+                  <div className="set-text-headline1 md:set-text-headline1 mt-8 md:mt-14 md:max-w-full">
+                    {t("heroHeadline")}
+                  </div>
                 </div>
-              </div>
-              <div className="space-y-14">
-                <p className="max-w-[615px] text-bodytext">
-                  {t("heroParagraph1")}
-                </p>
-                <p className="max-w-[615px] text-bodytext">
-                  {t("heroParagraph2")}
-                </p>
+                <div className="space-y-14">
+                  <p className="max-w-[615px] text-bodytext">
+                    {t("heroParagraph1")}
+                  </p>
+                  <p className="max-w-[615px] text-bodytext">
+                    {t("heroParagraph2")}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </StickyWrapper>
+        {/*</div>*/}
 
         <div className="size-full flex items-end justify-start relative">
           <img
@@ -93,24 +98,26 @@ export default async function Page__AboutUs({ params }: Props) {
         missions={[t("mission1"), t("mission2"), t("mission3")]}
       />
 
-      <section className="sticky top-0 z-0 bg-primary-blue text-white px-4 pt-[68px] pb-[182px]">
-        {" "}
-        {/* [iOS-safari-glitch] sticky base layer*/}
-        <div className="max-w-7xl mx-auto">
-          <div>
-            <h2 className="set-text-caption1">{t("valuesLabel")}</h2>
-            <div className="set-text-headline1 mt-9">{t("valuesHeadline")}</div>
-            <div className="mt-14 md:mt-[105px] overflow-x-hidden">
-              <LigoLetterValues />
+      <StickyWrapper>
+        <section className="bg-primary-blue text-white px-4 pt-[68px] pb-[60px] lg:pb-[182px]">
+          {/* [iOS-safari-glitch] sticky base layer*/}
+          <div className="max-w-7xl mx-auto">
+            <div>
+              <h2 className="set-text-caption1">{t("valuesLabel")}</h2>
+              <div className="set-text-headline1 mt-9">
+                {t("valuesHeadline")}
+              </div>
+              <div className="mt-14 md:mt-[105px] overflow-x-hidden">
+                <LigoLetterValues />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </StickyWrapper>
 
       {/* BANNER MIDDLE - Managed by CMS */}
       {/*<div className="sticky top-0">*/}
       <div className="relative z-[1] [transform:translate3d(0,0,0)]">
-        {" "}
         {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
         <ImageCover
           images={

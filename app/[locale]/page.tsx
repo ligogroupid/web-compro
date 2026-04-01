@@ -19,6 +19,7 @@ import ClientsList from "@/components/clients-list";
 import ButtonBrandLink from "@/components/ButtonBrandLink";
 import HomepageArticles from "@/components/homepage-articles";
 import { getPageMetadata } from "@/service/seo";
+import StickyWrapper from "@/components/sticky-wrapper";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -58,15 +59,15 @@ export default async function Home({ params }: Props) {
     <>
       <Header variant="home" />
       <main>
-        <div className="sticky top-0 z-0">
-          {/* [iOS-safari-glitch] sticky base layer*/}
+        <StickyWrapper>
+          {/*<div className="sticky top-0 z-0">
+           [iOS-safari-glitch] sticky base layer*/}
           <ImageCover
-            images={heroImages.map((src) => ({
-              src,
-              alt: "Hero",
-            }))}
+            images={heroImages.map((src) => ({ src, alt: "Hero" }))}
           />
-        </div>
+          {/*</div>*/}
+        </StickyWrapper>
+
         <div className="relative z-[1] [transform:translate3d(0,0,0)]">
           {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
           <Separator />
@@ -75,7 +76,8 @@ export default async function Home({ params }: Props) {
           <FeaturedBrandList />
           <Achivements />
         </div>
-        <div className="sticky top-0 z-0">
+        {/*<div className="sticky top-0 z-0">*/}
+        <StickyWrapper>
           {/* [iOS-safari-glitch] sticky base layer*/}
           {/*COVER DISTRIBUTION HOMEPAGE*/}
           <ImageCover
@@ -84,7 +86,9 @@ export default async function Home({ params }: Props) {
               alt: "Distribution",
             }))}
           />
-        </div>
+        </StickyWrapper>
+
+        {/*</div>*/}
         <div className="relative z-[1] [transform:translate3d(0,0,0)]">
           {/* [iOS-safari-glitch] translate3d forces GPU compositing layer so Safari respects z-index on older iOS*/}
           <section>

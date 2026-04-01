@@ -25,6 +25,7 @@ import VisitLocationsSection from "@/components/visit-locations-section";
 import type { Locale } from "@/i18n/routing";
 import { getCompanyBySlug, getOtherCompanies } from "@/service/company";
 import type { TCompany } from "@/service/company";
+import StickyWrapper from "@/components/sticky-wrapper";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -141,46 +142,50 @@ export default async function Page__CompanyDetails({ params }: Props) {
 
       {/* COMPANY STRENGTHS — PRD: prd-remove-dummy-fallback */}
       {company.provens.length > 0 ? (
-        <section
-          className="sticky top-0 z-0"
-          style={{
-            backgroundColor: company.strengths_bg_color ?? "#e0e0e0",
-            backgroundImage: company.strengths_bg_image
-              ? `url(${company.strengths_bg_image})`
-              : "none",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-          }}
-        >
-          <div className="px-4 py-20 pb-[220px]">
-            <div className="max-w-7xl mx-auto">
-              <div className="space-y-4 text-white">
-                <h2 className="set-text-caption1">
-                  {t("whyChoose")} {company.initial_name[loc].toUpperCase()}
-                </h2>
-                <div className="set-text-headline1">{t("provenStrengths")}</div>
-              </div>
-              <div className="overflow-x-auto overflow-y-hidden hide-scrollbar mt-10 md:mt-16 -mx-4 md:mx-0 px-4 md:px-0">
-                <div className="w-fit flex gap-9 md:ml-auto">
-                  {company.provens.map((n, i) => (
-                    <div key={i} className="w-[270px] relative">
-                      <div className="bg-white px-5 py-6 h-[calc(100%-0.75rem)]">
-                        <div className="font-heading text-[1.375rem] leading-[1.36em] tracking-[0.02em] h-[60px]">
-                          {n.title[loc]}
+        <StickyWrapper>
+          <section
+            // className="sticky top-0 z-0"
+            style={{
+              backgroundColor: company.strengths_bg_color ?? "#e0e0e0",
+              backgroundImage: company.strengths_bg_image
+                ? `url(${company.strengths_bg_image})`
+                : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundAttachment: "fixed",
+            }}
+          >
+            <div className="px-4 py-20 pb-[220px]">
+              <div className="max-w-7xl mx-auto">
+                <div className="space-y-4 text-white">
+                  <h2 className="set-text-caption1">
+                    {t("whyChoose")} {company.initial_name[loc].toUpperCase()}
+                  </h2>
+                  <div className="set-text-headline1">
+                    {t("provenStrengths")}
+                  </div>
+                </div>
+                <div className="overflow-x-auto overflow-y-hidden hide-scrollbar mt-10 md:mt-16 -mx-4 md:mx-0 px-4 md:px-0">
+                  <div className="w-fit flex gap-9 md:ml-auto">
+                    {company.provens.map((n, i) => (
+                      <div key={i} className="w-[270px] relative">
+                        <div className="bg-white px-5 py-6 h-[calc(100%-0.75rem)]">
+                          <div className="font-heading text-[1.375rem] leading-[1.36em] tracking-[0.02em] h-[60px]">
+                            {n.title[loc]}
+                          </div>
+                          <div className="mt-4 md:mt-8 text-[0.9375rem]">
+                            {n.description[loc]}
+                          </div>
                         </div>
-                        <div className="mt-4 md:mt-8 text-[0.9375rem]">
-                          {n.description[loc]}
-                        </div>
+                        <div className="h-3 w-1/2 bg-white" />
                       </div>
-                      <div className="h-3 w-1/2 bg-white" />
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </StickyWrapper>
       ) : (
         <SectionNotice sectionName="Company Strengths" />
       )}
@@ -275,7 +280,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
 
       {/* COVER SECTIONS — PRD: prd-remove-dummy-fallback */}
       {company.cover_image.length > 0 ? (
-        <div className="sticky top-0 relative z-0 [transform:translate3d(0,0,0)]">
+        // <div className="sticky top-0 relative z-0 [transform:translate3d(0,0,0)]">
+        <StickyWrapper>
           <ImageCover
             images={company.cover_image.map((c, i) => {
               return {
@@ -284,8 +290,9 @@ export default async function Page__CompanyDetails({ params }: Props) {
               };
             })}
           />
-        </div>
+        </StickyWrapper>
       ) : (
+        // </div>
         <SectionNotice sectionName="Cover Images" />
       )}
 
