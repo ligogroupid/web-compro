@@ -1,10 +1,10 @@
 {
   "AboutUsHook": {
     "headline": "Mitra Terpercaya untuk",
-    "headlineAccent": "Solusi Kemasan yang Handal.",
+    "headlineAccent": "Solusi Kemasan Plastik Berkualitas",
     "label": "TENTANG KAMI",
-    "description": "Seiring meningkatnya permintaan berbagai produk plastik dan semakin ketatnya persaingan industri, Ligo Group berkomitmen untuk menjaga dan meningkatkan kualitas produk sebagai wujud dedikasi kami kepada pelanggan. Ligo Group juga terus berinovasi dan memberikan nilai terbaik bagi pelanggan serta seluruh pemangku kepentingan, kini dan di masa mendatang.",
-    "readMore": "Selengkapnya"
+    "description": "Seiring meningkatnya permintaan terhadap berbagai produk plastik serta semakin ketatnya persaingan industri, Ligo Group berkomitmen untuk terus menjaga dan meningkatkan kualitas produk sebagai bentuk dedikasi kami kepada pelanggan. Ligo Group juga senantiasa berinovasi dan memberikan nilai terbaik bagi pelanggan serta seluruh pemangku kepentingan, baik saat ini maupun di masa depan.",
+    "readMore": "Read More"
   },
   "CompanyDetail": {
     "metaTitleSuffix": " — Ligo Group",
@@ -28,10 +28,10 @@
   },
   "Homepage": {
     "distributionLabel": "DISTRIBUSI",
-    "distributionHeadline": "Solusi plastik terintegrasi dengan jaringan distribusi nasional.",
-    "distributionBody": "Dengan kemampuan distribusi nasional, Ligo Group memasok produk terpercaya dan solusi inovatif kepada pelanggan di seluruh Indonesia untuk memenuhi permintaan pasar yang terus meningkat.",
+    "distributionHeadline": "Solusi plastik terintegrasi dengan jaringan distribusi yang menjangkau seluruh Indonesia.",
+    "distributionBody": "Didukung jaringan distribusi nasional, Ligo Group menghadirkan produk terpercaya dan solusi inovatif bagi pelanggan di seluruh Indonesia untuk menjawab kebutuhan pasar yang terus meningkat.",
     "exploreLabel": "JELAJAHI",
-    "exploreHeadline": "Berita Terkini untuk Anda",
+    "exploreHeadline": "Kabar Terkini untuk Anda!",
     "allNews": "Semua Berita"
   },
   "AboutUs": {
@@ -40,7 +40,7 @@
     "heroParagraph1": "Ligo Group memulai perjalanannya dengan berdirinya PT. Ligokriyasa Mandiri (LKM) pada tahun 1986. Di awal operasinya, Ligo Group berfokus pada jasa cetak dan potong kantong plastik. Seiring berjalannya waktu, Grup memperluas kapasitas produksinya dengan menambah berbagai mesin untuk memproduksi kantong plastik PP.",
     "heroParagraph2": "Selama lebih dari dua dekade, Ligo Group telah berkembang menjadi perusahaan yang terus bertumbuh pesat dan menjadi tolok ukur keberhasilan dalam industri kemasan plastik. Didorong oleh komitmen terhadap pertumbuhan berkelanjutan, Ligo Group terus berdedikasi memberikan nilai terbaik bagi pelanggan dan seluruh pemangku kepentingan, kini dan di masa mendatang.",
     "visionLabel": "VISI",
-    "visionText": "Menjadi perusahaan terbaik di industrinya dengan modal manusia yang unggul.",
+    "visionText": "Menjadi perusahaan terbaik dibidangnya, dengan membangun sumberdaya manusia yang seutuhnya.",
     "missionLabel": "MISI",
     "mission1": "Perusahaan tempat orang bekerja dan berkembang, menawarkan peluang kerja bagi yang berbakat dan kompeten, serta memberikan lebih banyak kesempatan karier dan kehidupan yang lebih baik di masa depan.",
     "mission2": "Perusahaan tempat orang bekerja dan menghasilkan produk berkualitas terbaik untuk memberikan kepuasan kepada seluruh pelanggan.",
@@ -101,17 +101,17 @@
   },
   "ClientsList": {
     "label": "KLIEN KAMI",
-    "headline": "Kenali klien-klien kami yang berharga",
+    "headline": "Kenali klien-klien unggulan yang telah mempercayai kami",
     "industrial": "INDUSTRIAL",
     "horeka": "HOREKA"
   },
   "CompaniesList": {
     "label": "PERUSAHAAN KAMI",
-    "headline": "Temukan perusahaan kami yang mengutamakan kinerja dan inovasi terbaik."
+    "headline": "Jelajahi perusahaan kami yang mengutamakan kinerja dan inovasi terbaik."
   },
   "FeaturedBrands": {
     "label": "MEREK KAMI",
-    "headline": "Intip merek-merek populer kami yang menawarkan produk terbaik mereka."
+    "headline": "Jelajahi merek-merek unggulan kami dengan berbagai produk terbaik yang ditawarkan."
   },
   "ArticleDetail": {
     "backToArticles": "Kembali ke Artikel",

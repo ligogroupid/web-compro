@@ -312,9 +312,10 @@ body {
 /* ─── Article Detail: Date sidebar sticky ─── */
 
 .article-date-sidebar {
-  position: sticky;
+  /**/
+  /*position: sticky;
   top: calc(var(--spacing-header) + 16px + 40px);
-  align-self: start;
+  align-self: start;*/
 }
 
 /* ─── Article Skeleton: Shimmer Loading ─── */
@@ -465,8 +466,8 @@ body {
     display: none; /* Chrome, Safari, Opera */
   }
 }
-
+/*
 @utility sticky {
   position: -webkit-sticky;
   position: sticky;
-}
+}*/

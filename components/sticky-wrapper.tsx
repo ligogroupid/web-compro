@@ -47,10 +47,12 @@ export default function StickyWrapper({
   onScreen?: "md" | "lg" | "xl" | "2xl";
 }) {
   if (onScreen === "md")
-    return <div className="md:sticky md:top-0 md:z-0">{children}</div>;
+    return <div className="static md:sticky md:top-0 md:z-0">{children}</div>;
   else if (onScreen === "xl")
-    return <div className="xl:sticky xl:top-0 xl:z-0">{children}</div>;
+    return <div className="static xl:sticky xl:top-0 xl:z-0">{children}</div>;
   else if (onScreen === "2xl")
-    return <div className="2xl:sticky 2xl:top-0 2xl:z-0">{children}</div>;
-  return <div className="lg:sticky lg:top-0 lg:z-0">{children}</div>;
+    return (
+      <div className="static 2xl:sticky 2xl:top-0 2xl:z-0">{children}</div>
+    );
+  return <div className="static lg:sticky lg:top-0 lg:z-0">{children}</div>;
 }

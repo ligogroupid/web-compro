@@ -6,6 +6,7 @@ type Props = {
 };
 
 export default function SectionNotice({ sectionName, className = "" }: Props) {
+  return null;
   return (
     <div
       className={`w-full py-12 flex items-center justify-center ${className}`}

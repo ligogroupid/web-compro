@@ -46,7 +46,7 @@ export default function CompanyInfo({
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col gap-10 md:gap-20 md:flex-row md:justify-between">
           {/* LEFT PART */}
-          <div className="max-w-xs">
+          <div className="w-full max-w-xs">
             {/* LOGO */}
             <div
               ref={logoRef}
