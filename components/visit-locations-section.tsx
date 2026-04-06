@@ -311,51 +311,35 @@ export default function VisitLocationsSection({
                         onMouseEnter={() => setHoveredIndex(idx)}
                         onMouseLeave={() => setHoveredIndex(null)}
                       >
-                        {/* Screenshot image */}
-                        {(() => {
-                          const Wrapper = loc.linkUrl ? "a" : "div";
-                          const linkProps = loc.linkUrl
-                            ? {
-                                href: loc.linkUrl,
-                                target: "_blank" as const,
-                                rel: "noopener noreferrer",
-                              }
-                            : {};
-                          return (
-                            <Wrapper
-                              {...linkProps}
-                              className={[
-                                "block relative overflow-hidden transition-shadow duration-500",
-                                loc.linkUrl ? "cursor-pointer" : "cursor-default",
-                              ].join(" ")}
-                              style={{
-                                boxShadow: isHovered_
-                                  ? "0 8px 32px rgba(0,0,0,0.25)"
-                                  : "0 2px 8px rgba(0,0,0,0.1)",
-                              }}
-                            >
-                              {/* Top accent line */}
-                              <div
-                                className="absolute top-0 left-0 right-0 h-[3px] z-10 transition-transform duration-500 origin-left"
-                                style={{
-                                  background:
-                                    "linear-gradient(90deg, #d71920, #ec6626)",
-                                  transform: isHovered_
-                                    ? "scaleX(1)"
-                                    : "scaleX(0)",
-                                }}
-                              />
+                        {/* Screenshot image — link removed: screenshot mode doesn't need clickable items */}
+                        <div
+                          className="block relative overflow-hidden transition-shadow duration-500 cursor-default"
+                          style={{
+                            boxShadow: isHovered_
+                              ? "0 8px 32px rgba(0,0,0,0.25)"
+                              : "0 2px 8px rgba(0,0,0,0.1)",
+                          }}
+                        >
+                          {/* Top accent line */}
+                          <div
+                            className="absolute top-0 left-0 right-0 h-[3px] z-10 transition-transform duration-500 origin-left"
+                            style={{
+                              background:
+                                "linear-gradient(90deg, #d71920, #ec6626)",
+                              transform: isHovered_
+                                ? "scaleX(1)"
+                                : "scaleX(0)",
+                            }}
+                          />
 
-                              <div className="w-full aspect-[4/3] overflow-hidden">
-                                <img
-                                  src={loc.imageUrl}
-                                  alt={loc.name}
-                                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                              </div>
-                            </Wrapper>
-                          );
-                        })()}
+                          <div className="w-full aspect-[4/3] overflow-hidden">
+                            <img
+                              src={loc.imageUrl}
+                              alt={loc.name}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                          </div>
+                        </div>
 
                         {/* Location name — below the image */}
                         <div className="py-4 transition-all duration-300 border border-white/50 border-l-0 border-r-0 mt-8 max-w-none md:max-w-[300px]">
