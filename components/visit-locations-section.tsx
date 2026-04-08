@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
+import ButtonBrand from "@/components/button-brand";
 import IndonesiaMap from "@/components/indonesia-map";
 import { latLongToXY } from "@/lib/map-utils";
 
@@ -21,6 +23,8 @@ type VisitLocationsSectionProps = {
   locationDisplayType?: string;
   title: string;
   subtitle: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
 };
 
 /**
@@ -40,6 +44,8 @@ export default function VisitLocationsSection({
   locationDisplayType,
   title,
   subtitle,
+  ctaLabel,
+  ctaUrl,
 }: VisitLocationsSectionProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -113,6 +119,13 @@ export default function VisitLocationsSection({
             <div className="lg:w-1/4 mb-14 md:mb-20 space-y-3 text-white">
               <div className="set-text-caption1">{title.toUpperCase()}</div>
               <p className="set-text-headline1 max-w-lg">{subtitle}</p>
+              {ctaLabel && ctaUrl && (
+                <div className="w-full flex justify-start pt-16">
+                  <Link href={ctaUrl} target="_blank" rel="noopener noreferrer">
+                    <ButtonBrand variant="onDark">{ctaLabel}</ButtonBrand>
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className="lg:w-3/4">
@@ -326,9 +339,7 @@ export default function VisitLocationsSection({
                             style={{
                               background:
                                 "linear-gradient(90deg, #d71920, #ec6626)",
-                              transform: isHovered_
-                                ? "scaleX(1)"
-                                : "scaleX(0)",
+                              transform: isHovered_ ? "scaleX(1)" : "scaleX(0)",
                             }}
                           />
 

@@ -136,8 +136,6 @@ export default async function Page__CompanyDetails({ params }: Props) {
         fullDescription={company.full_description[loc]}
         certifications={company.certifications}
         certificationsLabel={t("certifications")}
-        ctaLabel={company.cta_label[loc]}
-        ctaUrl={company.cta_url}
       />
 
       {/* COMPANY STRENGTHS — PRD: prd-remove-dummy-fallback */}
@@ -313,6 +311,8 @@ export default async function Page__CompanyDetails({ params }: Props) {
             locationDisplayType={company.location_display_type}
             title={t("visitLocations")}
             subtitle={t("visitLocationsSubtitle")}
+            ctaLabel={company.cta_label[loc]}
+            ctaUrl={company.cta_url}
           />
         ) : (
           <SectionNotice sectionName="Visit Locations" />

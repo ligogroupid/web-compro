@@ -2,8 +2,6 @@
 
 import { useInView } from "@/hooks/useInView";
 import type { TCompany } from "@/service/company";
-import ButtonBrand from "@/components/button-brand";
-import Link from "next/link";
 
 type Props = {
   logo: string | null;
@@ -11,8 +9,6 @@ type Props = {
   fullDescription: string;
   certifications: TCompany["certifications"];
   certificationsLabel: string;
-  ctaLabel?: string;
-  ctaUrl?: string;
 };
 
 const BASE = "transition-all duration-700 ease-out";
@@ -25,8 +21,6 @@ export default function CompanyInfo({
   fullDescription,
   certifications,
   certificationsLabel,
-  ctaLabel,
-  ctaUrl,
 }: Props) {
   const { ref: logoRef, isInView: logoInView } = useInView<HTMLDivElement>({
     threshold: 0.1,
@@ -116,15 +110,6 @@ export default function CompanyInfo({
               style={{ transitionDelay: descInView ? "600ms" : "0ms" }}
               dangerouslySetInnerHTML={{ __html: fullDescription }}
             />
-
-            {/* CTA BUTTON */}
-            {ctaLabel && ctaUrl && (
-              <div className="w-full flex justify-start mt-10 lg:mt-24">
-                <Link href={ctaUrl} target="_blank" rel="noopener noreferrer">
-                  <ButtonBrand>{ctaLabel}</ButtonBrand>
-                </Link>
-              </div>
-            )}
           </div>
         </div>
       </div>
