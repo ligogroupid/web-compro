@@ -37,7 +37,11 @@ export async function POST(request: Request) {
   }
 
   // 3. Verify token with Google reCAPTCHA
-  let verifyData: { success: boolean; score?: number; "error-codes"?: string[] };
+  let verifyData: {
+    success: boolean;
+    score?: number;
+    "error-codes"?: string[];
+  };
 
   try {
     const verifyResponse = await fetch(
@@ -104,7 +108,7 @@ export async function POST(request: Request) {
   }
 
   // 7. Forward to Google Sheet (fire and forget)
-  fetch(process.env.GOOGLE_SHEET_WEBHOOK_URL!, {
+  await fetch(process.env.GOOGLE_SHEET_WEBHOOK_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
